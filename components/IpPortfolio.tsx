@@ -16,6 +16,10 @@ import { ArchiveBoxIcon } from './icons/ArchiveBoxIcon';
 import { ArrowDownTrayIcon } from './icons/ArrowDownTrayIcon';
 import IpPortfolioSkeleton from './IpPortfolioSkeleton';
 import { FunnelIcon } from './icons/FunnelIcon';
+import { CheckBadgeIcon } from './icons/CheckBadgeIcon';
+import { ShieldCheckIcon } from './icons/ShieldCheckIcon';
+import { ClockIcon } from './icons/ClockIcon';
+import { ShieldExclamationIcon } from './icons/ShieldExclamationIcon';
 
 const livingBookOfRecordContent = `
 ERIC DANIEL MALLEY and Radest Publishing Co. Brings you. RADEST ATTORNEY EXPORT:
@@ -870,7 +874,18 @@ const getIconForType = (type: IpAsset['type']) => {
   }
 };
 
-const IpPortfolio: React.FC = () => {
+const getIconForStatus = (status: IpAsset['status']) => {
+    switch (status) {
+        case 'SOVEREIGN': return { icon: <ShieldCheckIcon className="w-4 h-4" />, classes: 'bg-green-500/20 text-green-300' };
+        case 'FILED': return { icon: <CheckBadgeIcon className="w-4 h-4" />, classes: 'bg-blue-500/20 text-blue-300' };
+        case 'PENDING': return { icon: <ClockIcon className="w-4 h-4" />, classes: 'bg-yellow-500/20 text-yellow-300' };
+        case 'QUARANTINED': return { icon: <ShieldExclamationIcon className="w-4 h-4" />, classes: 'bg-orange-500/20 text-orange-300' };
+        default: return { icon: null, classes: 'bg-gray-500/20 text-gray-300' };
+    }
+};
+
+
+const IpPortfolio: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [assets, setAssets] = useState<IpAsset[]>([]);
   const [selectedAsset, setSelectedAsset] = useState<IpAsset | null>(null);
@@ -896,7 +911,7 @@ const IpPortfolio: React.FC = () => {
         const typeMatch = filterType === 'ALL' || asset.type === filterType;
         const statusMatch = filterStatus === 'ALL' || asset.status === filterStatus;
         return typeMatch && statusMatch;
-    });
+    }).sort((a, b) => new Date(b.metadata.timestamp).getTime() - new Date(a.metadata.timestamp).getTime());
   }, [assets, filterType, filterStatus]);
 
   const handleAssetClick = (asset: IpAsset) => {
@@ -988,11 +1003,24 @@ const IpPortfolio: React.FC = () => {
     setSelectedAssetIds(new Set());
   };
 
+  const handleDownloadSingleAsset = (asset: IpAsset) => {
+    const sanitizedName = asset.name.replace(/[^a-z0-9_.-]/gi, '_');
+    const blob = new Blob([asset.content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${sanitizedName}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   const isSelectAllChecked = filteredAssets.length > 0 && filteredAssets.every(a => selectedAssetIds.has(a.id));
 
   return (
     <>
-      <WidgetCard title="IP Portfolio" icon={<FolderIcon className="w-6 h-6" />}>
+      <WidgetCard title="IP Portfolio" icon={<FolderIcon className="w-6 h-6" />} color={color}>
         {isLoading ? (
           <IpPortfolioSkeleton />
         ) : (
@@ -1000,14 +1028,14 @@ const IpPortfolio: React.FC = () => {
             <div className="mb-4">
                 <button
                   onClick={() => setIsCreateModalOpen(true)}
-                  className="w-full bg-cyan-900/50 border border-cyan-700 hover:bg-cyan-800/50 transition-colors duration-300 text-cyan-300 font-bold py-3 px-4 rounded-md flex items-center justify-center space-x-2"
+                  className="w-full bg-cyan-600/20 border border-cyan-500 hover:bg-cyan-500/30 transition-colors duration-300 text-cyan-300 font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2"
                 >
                   <PlusCircleIcon className="w-5 h-5" />
                   <span>Create New IP Asset</span>
                 </button>
             </div>
 
-            <div className="p-3 mb-4 bg-gray-800/50 border border-gray-700 rounded-md flex items-center space-x-4">
+            <div className="p-3 mb-4 bg-black/30 border border-gray-700/50 rounded-lg flex items-center space-x-4">
               <FunnelIcon className="w-5 h-5 text-cyan-400 flex-shrink-0" />
               <div className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -1026,7 +1054,7 @@ const IpPortfolio: React.FC = () => {
             </div>
 
             {selectedAssetIds.size > 0 && (
-              <div className="p-3 mb-4 bg-cyan-900/30 border border-cyan-700 rounded-md flex items-center justify-between animate-fade-in">
+              <div className="p-3 mb-4 bg-cyan-900/30 border border-cyan-700 rounded-lg flex items-center justify-between animate-fade-in">
                 <div className="flex items-center space-x-4">
                   <input
                     type="checkbox"
@@ -1038,7 +1066,7 @@ const IpPortfolio: React.FC = () => {
                   <span className="font-semibold text-sm">{selectedAssetIds.size} selected</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <button onClick={handleArchiveSelected} className="flex items-center space-x-1 px-3 py-1 text-xs bg-yellow-600/50 hover:bg-yellow-500/50 text-yellow-200 rounded-md transition-colors">
+                  <button onClick={handleArchiveSelected} className="flex items-center space-x-1 px-3 py-1 text-xs bg-amber-600/50 hover:bg-amber-500/50 text-amber-200 rounded-md transition-colors">
                     <ArchiveBoxIcon className="w-4 h-4" />
                     <span>Archive</span>
                   </button>
@@ -1050,12 +1078,14 @@ const IpPortfolio: React.FC = () => {
               </div>
             )}
 
-            <div className="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
+            <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-2">
               {filteredAssets.length > 0 ? (
-                filteredAssets.map((asset) => (
+                filteredAssets.map((asset) => {
+                  const statusInfo = getIconForStatus(asset.status);
+                  return (
                   <div 
                     key={asset.id}
-                    className={`w-full p-3 bg-gray-900 rounded-lg border transition-all duration-200 flex items-center gap-4 ${selectedAssetIds.has(asset.id) ? 'border-cyan-600' : 'border-gray-800 hover:border-cyan-700/50'}`}
+                    className={`group w-full p-3 bg-gray-900/50 rounded-lg border transition-all duration-200 flex items-center gap-4 ${selectedAssetIds.has(asset.id) ? 'border-cyan-600' : 'border-gray-800 hover:border-cyan-700/50'}`}
                   >
                     <input
                       type="checkbox"
@@ -1073,35 +1103,47 @@ const IpPortfolio: React.FC = () => {
                           <div className="flex items-center gap-3">
                               <div className="text-cyan-400">{getIconForType(asset.type)}</div>
                               <div>
-                                  <p className="font-semibold text-base text-gray-100">{asset.name}</p>
+                                  <p className="font-semibold text-base text-gray-100 group-hover:text-cyan-300 transition-colors">{asset.name}</p>
                                   <p className="text-xs text-gray-400">Source: {asset.source}</p>
                               </div>
                           </div>
                           <div className="flex items-center gap-3">
-                            <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                                asset.status === 'SOVEREIGN' || asset.status === 'FILED' ? 'bg-green-500/20 text-green-300' : 'bg-yellow-500/20 text-yellow-300'
-                              }`}>
+                            <span className={`px-2 py-1 text-xs font-semibold rounded-full flex items-center gap-1.5 ${statusInfo.classes}`}>
+                                {statusInfo.icon}
                                 {asset.status}
-                              </span>
+                            </span>
                             <span className="text-sm font-bold text-cyan-400 bg-cyan-900/50 px-2 py-1 rounded-md">
                                 {asset.metadata.pi_score.toFixed(1)}%
                             </span>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleArchiveSingleAsset(asset.id);
-                              }}
-                              className="p-1 text-gray-500 hover:text-yellow-400 transition-colors rounded-full"
-                              aria-label={`Archive asset ${asset.name}`}
-                              title="Archive Asset"
-                            >
-                              <ArchiveBoxIcon className="w-5 h-5" />
-                            </button>
+                            <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDownloadSingleAsset(asset);
+                                }}
+                                className="p-2 text-gray-500 hover:text-green-400 transition-colors rounded-full"
+                                aria-label={`Download asset ${asset.name}`}
+                                title="Download Asset"
+                              >
+                                <ArrowDownTrayIcon className="w-5 h-5" />
+                              </button>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleArchiveSingleAsset(asset.id);
+                                }}
+                                className="p-2 text-gray-500 hover:text-amber-400 transition-colors rounded-full"
+                                aria-label={`Archive asset ${asset.name}`}
+                                title="Archive Asset"
+                              >
+                                <ArchiveBoxIcon className="w-5 h-5" />
+                              </button>
+                            </div>
                           </div>
                       </div>
                     </div>
                   </div>
-                ))
+                )})
               ) : (
                 <div className="text-center py-10 text-gray-500">
                   <p>No assets match the current filters.</p>

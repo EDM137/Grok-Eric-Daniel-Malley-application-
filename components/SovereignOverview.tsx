@@ -14,15 +14,15 @@ const accounts: Account[] = [
   { name: 'Vercel (Deployments)', provider: 'Vercel', email: 'mybusinesspartnereric@gmail.com', synced: true },
 ];
 
-const SovereignOverview: React.FC = () => {
+const SovereignOverview: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
   return (
-    <WidgetCard title="Sovereign Overview" icon={<ShieldCheckIcon className="w-6 h-6" />}>
+    <WidgetCard title="Sovereign Overview" icon={<ShieldCheckIcon className="w-6 h-6" />} color={color}>
       <div className="space-y-4">
         <div>
             <h3 className="text-sm font-semibold text-gray-400 mb-2">Synced Accounts</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {accounts.map((account) => (
-              <div key={account.name} className="bg-cyan-900/20 p-3 rounded-md flex items-center justify-between">
+              <div key={account.name} className="bg-cyan-900/20 p-3 rounded-lg flex items-center justify-between border border-cyan-500/20">
                 <div>
                   <p className="font-semibold text-sm">{account.name}</p>
                   <p className="text-xs text-gray-400">{account.email}</p>
@@ -41,7 +41,7 @@ const SovereignOverview: React.FC = () => {
         <div>
             <h3 className="text-sm font-semibold text-gray-400 mb-2">System Peripherals</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="bg-cyan-900/20 p-3 rounded-md flex items-center justify-between">
+                <div className="bg-cyan-900/20 p-3 rounded-lg flex items-center justify-between border border-cyan-500/20">
                     <div className="flex items-center space-x-2">
                         <CameraIcon className="w-5 h-5" />
                         <p className="font-semibold text-sm">Camera</p>
@@ -51,7 +51,7 @@ const SovereignOverview: React.FC = () => {
                         <span className="text-xs">READY</span>
                     </div>
                 </div>
-                <div className="bg-cyan-900/20 p-3 rounded-md flex items-center justify-between">
+                <div className="bg-cyan-900/20 p-3 rounded-lg flex items-center justify-between border border-cyan-500/20">
                     <div className="flex items-center space-x-2">
                         <MicrophoneIcon className="w-5 h-5" />
                         <p className="font-semibold text-sm">Microphone</p>

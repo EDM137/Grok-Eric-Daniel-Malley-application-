@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import WidgetCard from './WidgetCard';
 import { ServerStackIcon } from './icons/ServerStackIcon';
@@ -13,7 +12,7 @@ const services = [
     { name: 'RadestPay Gateway', status: 'ONLINE' },
 ];
 
-const BackendGuru: React.FC = () => {
+const BackendGuru: React.FC<{color?: 'indigo'}> = ({ color = 'indigo' }) => {
     const [deployStatus, setDeployStatus] = useState<'IDLE' | 'DEPLOYING' | 'SUCCESS'>('IDLE');
 
     const handleDeploy = () => {
@@ -33,14 +32,14 @@ const BackendGuru: React.FC = () => {
     };
 
   return (
-    <WidgetCard title="Backend Guru Portal" icon={<ServerStackIcon className="w-6 h-6" />}>
+    <WidgetCard title="Backend Guru Portal" icon={<ServerStackIcon className="w-6 h-6" />} color={color}>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Live Services */}
         <div className="lg:col-span-1">
           <h3 className="text-sm font-semibold text-gray-400 mb-3">Live Microservices</h3>
           <div className="space-y-2">
             {services.map(service => (
-              <div key={service.name} className="flex items-center justify-between text-sm bg-cyan-900/10 p-2 rounded-md">
+              <div key={service.name} className="flex items-center justify-between text-sm bg-indigo-900/10 p-2 rounded-md">
                 <p className="text-gray-300">{service.name}</p>
                 <span className={`text-xs font-bold flex items-center space-x-1 ${service.status === 'ONLINE' ? 'text-green-400' : 'text-yellow-400 animate-pulse'}`}>
                   <span>●</span>
@@ -56,12 +55,12 @@ const BackendGuru: React.FC = () => {
             <div>
                 <h3 className="text-sm font-semibold text-gray-400 mb-3">Core Systems</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-cyan-900/20 p-3 rounded-md">
+                    <div className="bg-indigo-900/20 p-3 rounded-md border border-indigo-500/20">
                         <p className="text-xs text-gray-400">Primary Database</p>
                         <p className="font-semibold">PostgreSQL (Sovereign Cluster)</p>
                         <p className="text-green-400 text-sm font-bold mt-1">HEALTH: OPTIMAL</p>
                     </div>
-                    <div className="bg-cyan-900/20 p-3 rounded-md">
+                    <div className="bg-indigo-900/20 p-3 rounded-md border border-indigo-500/20">
                         <p className="text-xs text-gray-400">Deployment Target</p>
                         <p className="font-semibold">Vercel (Global Edge Network)</p>
                          <p className="text-green-400 text-sm font-bold mt-1">STATUS: SYNCED</p>
@@ -80,7 +79,7 @@ const BackendGuru: React.FC = () => {
                 <button 
                     onClick={handleDeploy}
                     disabled={deployStatus !== 'IDLE'}
-                    className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors duration-300 text-white font-bold py-3 px-4 rounded-md flex items-center justify-center space-x-2"
+                    className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors duration-300 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2"
                 >
                      {deployStatus === 'DEPLOYING' && (
                         <svg className="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

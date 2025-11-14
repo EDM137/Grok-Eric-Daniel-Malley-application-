@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import WidgetCard from './WidgetCard';
 import { ChatBubbleLeftRightIcon } from './icons/ChatBubbleLeftRightIcon';
@@ -62,7 +61,7 @@ const AiChatNexus: React.FC = () => {
         switch (sender) {
             case 'User': return { bubble: 'bg-indigo-600 self-end', label: 'You', iconColor: 'text-indigo-300' };
             case 'Gemini': return { bubble: 'bg-cyan-800/70 self-start', label: 'Gemini', iconColor: 'text-cyan-300' };
-            case 'Copilot': return { bubble: 'bg-gray-700/70 self-start', label: 'Copilot', iconColor: 'text-gray-300' };
+            case 'Copilot': return { bubble: 'bg-gray-700 self-start', label: 'Copilot', iconColor: 'text-gray-300' };
             case 'Grok': return { bubble: 'bg-purple-800/70 self-start', label: 'Grok', iconColor: 'text-purple-300' };
             case 'ChatGPT': return { bubble: 'bg-green-800/70 self-start', label: 'ChatGPT', iconColor: 'text-green-300' };
             default: return { bubble: 'bg-gray-800 self-start', label: 'System', iconColor: 'text-gray-400' };
@@ -71,9 +70,9 @@ const AiChatNexus: React.FC = () => {
 
 
     return (
-        <WidgetCard title="AI Chat Nexus" icon={<ChatBubbleLeftRightIcon className="w-6 h-6" />}>
+        <WidgetCard title="AI Chat Nexus" icon={<ChatBubbleLeftRightIcon className="w-6 h-6" />} color="blue">
             <div className="flex flex-col h-[60vh] max-h-[700px]">
-                <div className="flex-grow p-4 space-y-4 overflow-y-auto bg-black/30 rounded-t-md border border-b-0 border-gray-700">
+                <div className="flex-grow p-4 space-y-4 overflow-y-auto bg-black/50 rounded-t-md border border-b-0 border-gray-700/50">
                     {messages.map((msg, index) => {
                         const styles = getSenderStyles(msg.sender);
                         const isUser = msg.sender === 'User';
@@ -84,7 +83,7 @@ const AiChatNexus: React.FC = () => {
                                      <span className={`text-xs font-semibold ${styles.iconColor}`}>{styles.label}</span>
                                 </div>
                                 <div className={`mt-1 p-3 rounded-lg max-w-lg text-white ${styles.bubble}`}>
-                                    <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
+                                    <p className="text-sm whitespace-pre-wrap font-sans">{msg.text}</p>
                                 </div>
                              </div>
                         );
@@ -102,7 +101,7 @@ const AiChatNexus: React.FC = () => {
                     )}
                     <div ref={messagesEndRef} />
                 </div>
-                <form onSubmit={handleSendMessage} className="p-4 border border-t-0 border-gray-700 rounded-b-md bg-gray-800/50">
+                <form onSubmit={handleSendMessage} className="p-4 border border-t-0 border-gray-700/50 rounded-b-md bg-gray-900/50">
                     <div className="flex items-center space-x-2">
                         <input
                             type="text"
@@ -110,12 +109,12 @@ const AiChatNexus: React.FC = () => {
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Message the AI Collective..."
                             disabled={isLoading}
-                            className="flex-grow bg-gray-900 border border-gray-600 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50"
+                            className="flex-grow bg-gray-800 border border-gray-600 rounded-lg p-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50"
                         />
                         <button
                             type="submit"
                             disabled={isLoading || !input.trim()}
-                            className="bg-cyan-600 hover:bg-cyan-500 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors text-white font-bold p-2 rounded-md"
+                            className="bg-cyan-600 hover:bg-cyan-500 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors text-white font-bold p-2 rounded-lg"
                             aria-label="Send message"
                         >
                            <PaperAirplaneIcon className="w-5 h-5" />

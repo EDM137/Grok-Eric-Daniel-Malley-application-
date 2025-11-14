@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { LegalDoc } from '../types';
 import { XMarkIcon } from './icons/XMarkIcon';
@@ -64,7 +63,7 @@ const LegalModal: React.FC<LegalModalProps> = ({ docType, onClose }) => {
             </button>
         </div>
         <div className="p-6 max-h-[70vh] overflow-y-auto">
-          <p className="whitespace-pre-wrap text-gray-300 text-sm leading-relaxed">{content.trim()}</p>
+          <p className="whitespace-pre-wrap text-gray-300 text-sm leading-relaxed font-sans">{content.trim()}</p>
         </div>
       </div>
       <style>{`

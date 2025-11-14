@@ -1,5 +1,3 @@
-
-
 import React, { useState, useRef, useCallback } from 'react';
 import WidgetCard from './WidgetCard';
 import { SealIcon } from './icons/SealIcon';
@@ -18,7 +16,7 @@ interface NotarizedData {
   status: string;
 }
 
-const FortiFileNotary: React.FC = () => {
+const FortiFileNotary: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -87,7 +85,7 @@ const FortiFileNotary: React.FC = () => {
   }, [file]);
 
   const renderFilePreview = () => (
-    <div className="w-full h-48 bg-black/30 rounded-md border border-gray-700 flex items-center justify-center relative overflow-hidden">
+    <div className="w-full h-48 bg-black/30 rounded-lg border border-gray-700 flex items-center justify-center relative overflow-hidden">
       {previewUrl ? (
         <img src={previewUrl} alt="File preview" className="max-h-full max-w-full object-contain" />
       ) : (
@@ -107,7 +105,7 @@ const FortiFileNotary: React.FC = () => {
   );
 
   return (
-    <WidgetCard title="FortiFile™ Notary" icon={<SealIcon className="w-6 h-6" />}>
+    <WidgetCard title="FortiFile™ Notary" icon={<SealIcon className="w-6 h-6" />} color={color}>
       <div className="flex flex-col h-full space-y-4">
         <input type="file" ref={fileInputRef} onChange={handleFileChange} className="hidden" accept="image/*,.pdf,.doc,.docx,.txt" />
         
@@ -115,7 +113,7 @@ const FortiFileNotary: React.FC = () => {
           <>
             <button
               onClick={triggerFileSelect}
-              className="w-full bg-cyan-900/50 border border-cyan-700 hover:bg-cyan-800/50 transition-colors duration-300 text-cyan-300 font-bold py-3 px-4 rounded-md flex items-center justify-center space-x-2"
+              className="w-full bg-cyan-600/20 border border-cyan-500 hover:bg-cyan-500/30 transition-colors duration-300 text-cyan-300 font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2"
             >
               <UploadIcon className="w-5 h-5" />
               <span>{file ? `Selected: ${file.name}` : 'Select Document or Photo'}</span>
@@ -126,7 +124,7 @@ const FortiFileNotary: React.FC = () => {
             <button
               onClick={handleNotarize}
               disabled={!file || isLoading}
-              className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors duration-300 text-white font-bold py-3 px-4 rounded-md flex items-center justify-center space-x-2 mt-auto"
+              className="w-full bg-cyan-600 hover:bg-cyan-500 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors duration-300 text-black font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2 mt-auto"
             >
               {isLoading ? (
                 <>
@@ -166,11 +164,11 @@ const FortiFileNotary: React.FC = () => {
              <div className="flex space-x-2 pt-2">
                  <button
                     onClick={() => { setFile(null); setNotarizedData(null); setPreviewUrl(null); }}
-                    className="w-full bg-cyan-900/50 border border-cyan-700 hover:bg-cyan-800/50 transition-colors duration-300 text-cyan-300 font-bold py-2 px-4 rounded-md text-sm"
+                    className="w-full bg-gray-600/50 border border-gray-500 hover:bg-gray-500/50 transition-colors duration-300 text-gray-200 font-bold py-2 px-4 rounded-lg text-sm"
                 >
                     Notarize Another
                 </button>
-                <button className="w-full bg-green-600 hover:bg-green-500 transition-colors duration-300 text-white font-bold py-2 px-4 rounded-md flex items-center justify-center space-x-2 text-sm">
+                <button className="w-full bg-green-600 hover:bg-green-500 transition-colors duration-300 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center space-x-2 text-sm">
                     <ArrowDownTrayIcon className="w-4 h-4" />
                     <span>Download Sealed File</span>
                 </button>

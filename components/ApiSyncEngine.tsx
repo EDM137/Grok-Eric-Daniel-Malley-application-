@@ -16,7 +16,7 @@ const initialApiStatuses: ApiStatus[] = [
   { name: 'ChatGPT Connector', version: 'v4.0-turbo', status: 'SYNCED' },
 ];
 
-const ApiSyncEngine: React.FC = () => {
+const ApiSyncEngine: React.FC<{color?: 'indigo'}> = ({ color = 'indigo' }) => {
   const [statuses, setStatuses] = useState<ApiStatus[]>(initialApiStatuses);
   const [isSyncing, setIsSyncing] = useState(false);
 
@@ -63,11 +63,11 @@ const ApiSyncEngine: React.FC = () => {
   };
 
   return (
-    <WidgetCard title="API Sync Engine" icon={<SignalIcon className="w-6 h-6" />}>
+    <WidgetCard title="API Sync Engine" icon={<SignalIcon className="w-6 h-6" />} color={color}>
       <div className="flex flex-col h-full">
         <div className="space-y-3 flex-grow">
           {statuses.map((api) => (
-            <div key={api.name} className="flex items-center justify-between p-3 bg-cyan-900/20 rounded-md">
+            <div key={api.name} className="flex items-center justify-between p-3 bg-indigo-900/20 rounded-md">
               <div>
                 <p className="font-semibold text-sm">{api.name}</p>
                 <p className="text-xs text-gray-400 font-mono">Version: {api.version}</p>
@@ -82,7 +82,7 @@ const ApiSyncEngine: React.FC = () => {
           <button
             onClick={handleSync}
             disabled={isSyncing}
-            className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors duration-300 text-white font-bold py-3 px-4 rounded-md flex items-center justify-center space-x-2"
+            className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors duration-300 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2"
           >
             {isSyncing ? (
               <ArrowPathIcon className="w-5 h-5 animate-spin" />

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import SovereignOverview from './SovereignOverview';
 import IpPortfolio from './IpPortfolio';
@@ -18,56 +17,56 @@ import SecureMedApp from './SecureMedApp';
 const Dashboard: React.FC = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {/* Row 1: High Level */}
+      {/* --- SOVEREIGN & AI CORE --- */}
       <div className="col-span-1 md:col-span-2 lg:col-span-4">
-        <SovereignOverview />
+        <SovereignOverview color="blue" />
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-4">
         <AiChatNexus />
       </div>
       
-      {/* Row 2: IP Core */}
+      {/* --- IP MANAGEMENT --- */}
       <div className="col-span-1 md:col-span-2 lg:col-span-4">
-        <IpPortfolio />
+        <IpPortfolio color="blue" />
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
-        <KindraaiGuardian />
+        <KindraaiGuardian color="blue" />
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
-        <FortiFileNotary />
+        <FortiFileNotary color="blue" />
       </div>
 
-      {/* Row 3: Systems & Infrastructure */}
+      {/* --- SYSTEMS & INFRASTRUCTURE --- */}
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
-        <EcosystemStatus />
+        <EcosystemStatus color="indigo" />
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
-        <ApiSyncEngine />
+        <ApiSyncEngine color="indigo" />
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-4">
-        <BackendGuru />
+        <BackendGuru color="indigo" />
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-4">
-        <FileBridge />
+        <FileBridge color="indigo" />
       </div>
 
-      {/* Row 4: Sovereign Applications */}
+      {/* --- SOVEREIGN APPLICATIONS --- */}
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
-        <OfficeWorksCommand />
+        <OfficeWorksCommand color="green" />
       </div>
        <div className="col-span-1 md:col-span-2 lg:col-span-2">
-        <TreasuryMint />
+        <TreasuryMint color="green" />
       </div>
       
-      {/* Row 5: Personal & Secure Comms */}
+      {/* --- PERSONAL & SECURE COMMS --- */}
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
-        <SecureMedApp />
+        <SecureMedApp color="amber" />
       </div>
       <div className="col-span-1 md:col-span-1 lg:col-span-1">
-        <AllyPortal />
+        <AllyPortal color="amber" />
       </div>
       <div className="col-span-1 md:col-span-1 lg:col-span-1">
-        <SecureVideoChat />
+        <SecureVideoChat color="amber" />
       </div>
     </div>
   );

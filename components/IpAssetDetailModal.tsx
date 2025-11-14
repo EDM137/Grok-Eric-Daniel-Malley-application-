@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import type { IpAsset } from '../types';
 import { XMarkIcon } from './icons/XMarkIcon';
@@ -102,22 +101,22 @@ const IpAssetDetailModal: React.FC<IpAssetDetailModalProps> = ({ asset, onClose 
             </button>
         </div>
 
-        <div className="p-6 space-y-6 overflow-y-auto">
+        <div className="p-6 space-y-6 overflow-y-auto font-sans">
             {/* Metadata */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                <div className="bg-black/20 p-3 rounded-md"><span className="font-semibold text-gray-400 block mb-1">Source:</span> {asset.source}</div>
-                <div className="bg-black/20 p-3 rounded-md"><span className="font-semibold text-gray-400 block mb-1">Status:</span> 
+                <div className="bg-black/20 p-3 rounded-lg"><span className="font-semibold text-gray-400 block mb-1">Source:</span> {asset.source}</div>
+                <div className="bg-black/20 p-3 rounded-lg"><span className="font-semibold text-gray-400 block mb-1">Status:</span> 
                     <span className={`font-bold ${asset.status === 'SOVEREIGN' || asset.status === 'FILED' ? 'text-green-300' : 'text-yellow-300'}`}>
                         {asset.status}
                     </span>
                 </div>
-                <div className="bg-black/20 p-3 rounded-md"><span className="font-semibold text-gray-400 block mb-1">PI Score:</span> {asset.metadata.pi_score}%</div>
-                <div className="bg-black/20 p-3 rounded-md"><span className="font-semibold text-gray-400 block mb-1">FortiFile™:</span> {asset.metadata.fortifile}</div>
+                <div className="bg-black/20 p-3 rounded-lg"><span className="font-semibold text-gray-400 block mb-1">PI Score:</span> {asset.metadata.pi_score}%</div>
+                <div className="bg-black/20 p-3 rounded-lg"><span className="font-semibold text-gray-400 block mb-1">FortiFile™:</span> {asset.metadata.fortifile}</div>
             </div>
 
             {/* Grok Verdict */}
             <div className="p-4 bg-cyan-900/20 rounded-lg border border-cyan-800/50">
-                <p className="text-sm font-semibold text-cyan-400 mb-2">Kindraai-Grok Verdict:</p>
+                <p className="text-sm font-semibold text-cyan-400 mb-2 font-['Orbitron',_sans-serif]">Kindraai-Grok Verdict:</p>
                 <p className="text-sm italic text-gray-300">"{asset.metadata.grok_verdict}"</p>
             </div>
 
@@ -144,10 +143,10 @@ const IpAssetDetailModal: React.FC<IpAssetDetailModalProps> = ({ asset, onClose 
                         </button>
                     </div>
                 </div>
-                <div className="bg-black/30 p-4 rounded-md border border-gray-700 min-h-64 max-h-96 overflow-y-auto relative">
+                <div className="bg-black/30 p-4 rounded-lg border border-gray-700 min-h-64 max-h-96 overflow-y-auto relative">
                     {/* Watermark */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-                        <p className="text-6xl md:text-8xl font-bold text-white opacity-5 rotate-[-30deg] select-none tracking-widest">
+                        <p className="text-6xl md:text-8xl font-bold text-white opacity-5 rotate-[-30deg] select-none tracking-widest font-['Orbitron',_sans-serif]">
                           RADEST
                         </p>
                     </div>

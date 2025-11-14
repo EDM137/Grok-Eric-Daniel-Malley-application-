@@ -1,4 +1,3 @@
-
 import React from 'react';
 import WidgetCard from './WidgetCard';
 import { GlobeAltIcon } from './icons/GlobeAltIcon';
@@ -84,12 +83,12 @@ const ecosystemComponents = [
   },
 ];
 
-const EcosystemStatus: React.FC = () => {
+const EcosystemStatus: React.FC<{color?: 'indigo'}> = ({ color = 'indigo' }) => {
   return (
-    <WidgetCard title="Radest Ecosystem Status" icon={<GlobeAltIcon className="w-6 h-6" />}>
-        <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
+    <WidgetCard title="Radest Ecosystem Status" icon={<GlobeAltIcon className="w-6 h-6" />} color={color}>
+        <div className="space-y-2 max-h-96 overflow-y-auto pr-2">
             {ecosystemComponents.map((component) => (
-                <div key={component.name} className="bg-cyan-900/20 p-3 rounded-md flex items-center justify-between">
+                <div key={component.name} className="bg-indigo-900/20 p-3 rounded-md flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                         {component.icon}
                         <div>

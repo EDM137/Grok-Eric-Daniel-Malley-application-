@@ -1,3 +1,4 @@
+
 import { GoogleGenAI, Type } from "@google/genai";
 
 const API_KEY = process.env.API_KEY;
@@ -17,8 +18,8 @@ const generateContentWithFallback = async (model: string, prompt: string, fallba
             model: model,
             contents: prompt,
         });
-        // Basic check for valid JSON-like response
-        const textResponse = response.text.trim();
+        // FIX: Access the .text property directly for the response text.
+        const textResponse = response.text;
         if (textResponse.startsWith('{') && textResponse.endsWith('}')) {
             return textResponse;
         }
@@ -155,7 +156,7 @@ export const getMultiAiResponse = async (prompt: string): Promise<string> => {
             responseSchema: multiAiResponseSchema,
         },
     });
-    // The response.text is already a guaranteed JSON string due to the config.
+    // FIX: Access the .text property directly for the response text.
     return response.text;
   } catch (error) {
     console.error(`Error with Gemini API (JSON mode) for multi-AI response:`, error);

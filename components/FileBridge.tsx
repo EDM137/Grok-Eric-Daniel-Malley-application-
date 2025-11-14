@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useMemo } from 'react';
 import WidgetCard from './WidgetCard';
 import { ArrowsRightLeftIcon } from './icons/ArrowsRightLeftIcon';
@@ -15,7 +14,7 @@ const fileSources = [
   { id: 'vercel', name: 'Vercel Projects', icon: <ServerStackIcon className="w-6 h-6 text-white" />, status: 'CONNECTED' },
 ];
 
-const FileBridge: React.FC = () => {
+const FileBridge: React.FC<{color?: 'indigo'}> = ({ color = 'indigo' }) => {
   const [selectedSourceId, setSelectedSourceId] = useState<string>(fileSources[0].id);
   const [browseStatus, setBrowseStatus] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -47,9 +46,9 @@ const FileBridge: React.FC = () => {
   };
 
   return (
-    <WidgetCard title="File Bridge" icon={<ArrowsRightLeftIcon className="w-6 h-6" />}>
+    <WidgetCard title="File Bridge" icon={<ArrowsRightLeftIcon className="w-6 h-6" />} color={color}>
       <div className="space-y-4">
-        <p className="text-xs text-gray-400 pb-2 border-b border-cyan-900/50">
+        <p className="text-xs text-gray-400 pb-2 border-b border-indigo-900/50">
           Select a source to transfer assets across sovereign and external networks.
         </p>
         
@@ -60,7 +59,7 @@ const FileBridge: React.FC = () => {
                 id="file-source"
                 value={selectedSourceId}
                 onChange={handleSourceChange}
-                className="w-full bg-gray-800 border border-gray-600 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="w-full bg-gray-800 border border-gray-600 rounded-lg p-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
                 {fileSources.map(source => (
                     <option key={source.id} value={source.id}>{source.name}</option>
@@ -70,8 +69,8 @@ const FileBridge: React.FC = () => {
 
         {/* Selected Source Info & Action */}
         {selectedSource && (
-            <div className="p-4 bg-cyan-900/20 rounded-md flex flex-col items-center text-center space-y-4">
-                <div className="w-16 h-16 bg-black/30 rounded-full flex items-center justify-center border-2 border-cyan-700/50">
+            <div className="p-4 bg-indigo-900/20 rounded-lg flex flex-col items-center text-center space-y-4 border border-indigo-500/20">
+                <div className="w-16 h-16 bg-black/30 rounded-full flex items-center justify-center border-2 border-indigo-700/50">
                     {selectedSource.icon}
                 </div>
                 <div>
@@ -84,7 +83,7 @@ const FileBridge: React.FC = () => {
                 <input type="file" ref={fileInputRef} onChange={handleFileSelected} className="hidden" />
                 <button
                     onClick={handleBrowseClick}
-                    className="w-full bg-indigo-600 hover:bg-indigo-500 transition-colors duration-300 text-white font-bold py-3 px-4 rounded-md flex items-center justify-center space-x-2"
+                    className="w-full bg-indigo-600 hover:bg-indigo-500 transition-colors duration-300 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2"
                 >
                     <FolderOpenIcon className="w-5 h-5" />
                     <span>Browse Files</span>
@@ -94,7 +93,7 @@ const FileBridge: React.FC = () => {
 
         {/* Status Display */}
         {browseStatus && (
-            <div className="text-center text-cyan-300 text-sm p-3 bg-gray-800/50 rounded-md animate-fade-in">
+            <div className="text-center text-indigo-300 text-sm p-3 bg-gray-800/50 rounded-lg animate-fade-in">
                 <p>{browseStatus}</p>
             </div>
         )}

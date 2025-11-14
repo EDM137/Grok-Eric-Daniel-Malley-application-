@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import type { IpAsset } from '../types';
 import { analyzeIpAsset } from '../services/geminiService';
@@ -110,7 +109,7 @@ const CreateIpAssetModal: React.FC<CreateIpAssetModalProps> = ({ onClose, onSave
           <button
             type="button"
             onClick={triggerFileSelect}
-            className="w-full bg-cyan-900/50 border border-cyan-700 hover:bg-cyan-800/50 transition-colors duration-300 text-cyan-300 font-bold py-3 px-4 rounded-md flex items-center justify-center space-x-2"
+            className="w-full bg-cyan-600/20 border border-cyan-500 hover:bg-cyan-500/30 transition-colors duration-300 text-cyan-300 font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2"
           >
             <UploadIcon className="w-5 h-5" />
             <span>Upload File to Autofill</span>
@@ -129,7 +128,7 @@ const CreateIpAssetModal: React.FC<CreateIpAssetModalProps> = ({ onClose, onSave
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full bg-gray-800 border border-gray-600 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="w-full bg-gray-800 border border-gray-600 rounded-lg p-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="e.g., Quantum Entanglement Protocol"
               required
             />
@@ -142,7 +141,7 @@ const CreateIpAssetModal: React.FC<CreateIpAssetModalProps> = ({ onClose, onSave
                     id="asset-type"
                     value={type}
                     onChange={(e) => setType(e.target.value as IpAsset['type'])}
-                    className="w-full bg-gray-800 border border-gray-600 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    className="w-full bg-gray-800 border border-gray-600 rounded-lg p-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 >
                     {assetTypes.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
@@ -154,7 +153,7 @@ const CreateIpAssetModal: React.FC<CreateIpAssetModalProps> = ({ onClose, onSave
                     type="text"
                     value={source}
                     onChange={(e) => setSource(e.target.value)}
-                    className="w-full bg-gray-800 border border-gray-600 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    className="w-full bg-gray-800 border border-gray-600 rounded-lg p-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     placeholder="e.g., GitHub: edm137/quantum"
                     required
                 />
@@ -168,7 +167,7 @@ const CreateIpAssetModal: React.FC<CreateIpAssetModalProps> = ({ onClose, onSave
               value={content}
               onChange={(e) => setContent(e.target.value)}
               rows={8}
-              className="w-full bg-gray-800 border border-gray-600 rounded-md p-2 text-white font-mono text-xs focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="w-full bg-gray-800 border border-gray-600 rounded-lg p-2 text-white font-mono text-xs focus:outline-none focus:ring-2 focus:ring-cyan-500"
               placeholder="Enter the document content, source code, or detailed description..."
               required
             />
@@ -184,7 +183,7 @@ const CreateIpAssetModal: React.FC<CreateIpAssetModalProps> = ({ onClose, onSave
             <button
               type="submit"
               disabled={!isFormValid || isLoading}
-              className="px-4 py-2 text-sm font-medium text-white bg-cyan-600 hover:bg-cyan-500 rounded-md transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed flex items-center"
+              className="px-4 py-2 text-sm font-medium text-black bg-cyan-600 hover:bg-cyan-500 rounded-md transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed flex items-center"
             >
               {isLoading && (
                 <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
