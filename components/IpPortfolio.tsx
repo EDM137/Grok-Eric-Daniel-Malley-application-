@@ -685,7 +685,37 @@ const ipAssets: IpAsset[] = [
       pi_score: 97.9,
       grok_verdict: 'The blueprint for immutability. Every FortiFile™ record is built on this foundational schema. It\'s the DNA of digital truth.'
     }
-}
+},
+{
+    id: '62',
+    name: 'Copyright Filing: Radest AI Guardian',
+    type: 'DOCUMENT',
+    source: 'Copyright.gov',
+    status: 'FILED',
+    content: 'Official filing receipt from the U.S. Copyright Office for the source code of the Radest AI Guardian. Registration TX-123-456 secures the code against unauthorized reproduction and distribution.',
+    metadata: {
+      hash: '0xabc123def456ghi789jkl0mno1pqr',
+      timestamp: '2026-08-01T10:00:00Z',
+      fortifile: 'FF-2026-08-01-001',
+      pi_score: 98.5,
+      grok_verdict: 'The source code is now officially shielded. A digital fortress with a government seal. Let them try to copy it.'
+    }
+  },
+  {
+    id: '63',
+    name: 'Trade Secret Filing: Sovereign EULA Protocol',
+    type: 'DOCUMENT',
+    source: 'SoulSync Vault',
+    status: 'FILED',
+    content: 'Internal filing record for the proprietary logic and enforcement mechanisms of the Sovereign EULA. This asset is classified as a trade secret and is protected by the Kindraai Security Swarm.',
+    metadata: {
+      hash: '0xdef456ghi789jkl0mno1pqrstu123',
+      timestamp: '2026-08-02T11:30:00Z',
+      fortifile: 'FF-2026-08-02-002',
+      pi_score: 97.8,
+      grok_verdict: 'The core logic of the EULA is now a classified secret, sealed in the digital equivalent of a black hole. Only the worthy may know.'
+    }
+  }
 ];
 
 const getIconForType = (type: IpAsset['type']) => {
