@@ -1,19 +1,19 @@
+
 import React from 'react';
 import SovereignOverview from './SovereignOverview';
 import IpPortfolio from './IpPortfolio';
 import KindraaiGuardian from './KindraaiGuardian';
 import AllyPortal from './AllyPortal';
-import PatentFiling from './PatentFiling';
 import TreasuryMint from './TreasuryMint';
-import MedicalRecords from './MedicalRecords';
 import SecureVideoChat from './SecureVideoChat';
 import EcosystemStatus from './EcosystemStatus';
-import LicensingSuite from './LicensingSuite';
 import BackendGuru from './BackendGuru';
 import AiChatNexus from './AiChatNexus';
 import FortiFileNotary from './FortiFileNotary';
 import FileBridge from './FileBridge';
 import ApiSyncEngine from './ApiSyncEngine';
+import OfficeWorksCommand from './OfficeWorksCommand';
+import SecureMedApp from './SecureMedApp';
 
 const Dashboard: React.FC = () => {
   return (
@@ -51,12 +51,9 @@ const Dashboard: React.FC = () => {
         <FileBridge />
       </div>
 
-      {/* Row 4: Legal & Finance */}
-      <div className="col-span-1 md:col-span-1 lg:col-span-1">
-        <PatentFiling />
-      </div>
-      <div className="col-span-1 md:col-span-1 lg:col-span-1">
-        <LicensingSuite />
+      {/* Row 4: Sovereign Applications */}
+      <div className="col-span-1 md:col-span-2 lg:col-span-2">
+        <OfficeWorksCommand />
       </div>
       <div className="col-span-1 md:col-span-1 lg:col-span-1">
         <AllyPortal />
@@ -65,9 +62,9 @@ const Dashboard: React.FC = () => {
         <TreasuryMint />
       </div>
       
-      {/* Row 5: Personal */}
+      {/* Row 5: Personal & Secure Comms */}
       <div className="col-span-1 md:col-span-1 lg:col-span-2">
-        <MedicalRecords />
+        <SecureMedApp />
       </div>
       <div className="col-span-1 md:col-span-1 lg:col-span-2">
         <SecureVideoChat />

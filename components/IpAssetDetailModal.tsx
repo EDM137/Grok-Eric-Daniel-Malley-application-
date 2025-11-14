@@ -10,6 +10,7 @@ import { CameraIcon } from './icons/CameraIcon';
 import { ScaleIcon } from './icons/ScaleIcon';
 import { BookOpenIcon } from './icons/BookOpenIcon';
 import { ClipboardIcon } from './icons/ClipboardIcon';
+import { ArrowDownTrayIcon } from './icons/ArrowDownTrayIcon';
 
 const getIconForType = (type: IpAsset['type']) => {
   switch (type) {
@@ -63,6 +64,19 @@ const IpAssetDetailModal: React.FC<IpAssetDetailModalProps> = ({ asset, onClose 
     });
   };
 
+  const handleDownload = () => {
+    const sanitizedName = asset.name.replace(/[^a-z0-9_.-]/gi, '_');
+    const blob = new Blob([asset.content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${sanitizedName}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div 
       className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50 transition-opacity duration-300 animate-fade-in"
@@ -111,14 +125,24 @@ const IpAssetDetailModal: React.FC<IpAssetDetailModalProps> = ({ asset, onClose 
             <div className="relative">
                 <div className="flex justify-between items-center mb-2">
                     <h3 className="text-sm font-semibold text-gray-400">Asset Content</h3>
-                    <button
-                        onClick={() => handleCopyToClipboard(asset.content, 'content')}
-                        className="flex items-center space-x-1 p-1 text-xs text-gray-400 hover:text-cyan-300 transition-colors rounded-md focus:outline-none focus:ring-1 focus:ring-cyan-500"
-                        aria-label="Copy encrypted content to clipboard"
-                    >
-                        <ClipboardIcon className="w-4 h-4" />
-                        <span>Copy Encrypted</span>
-                    </button>
+                    <div className="flex items-center space-x-2">
+                        <button
+                            onClick={() => handleCopyToClipboard(asset.content, 'content')}
+                            className="flex items-center space-x-1 p-1 text-xs text-gray-400 hover:text-cyan-300 transition-colors rounded-md focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                            aria-label="Copy encrypted content to clipboard"
+                        >
+                            <ClipboardIcon className="w-4 h-4" />
+                            <span>Copy Encrypted</span>
+                        </button>
+                        <button
+                            onClick={handleDownload}
+                            className="flex items-center space-x-1 p-1 text-xs text-gray-400 hover:text-green-400 transition-colors rounded-md focus:outline-none focus:ring-1 focus:ring-green-500"
+                            aria-label="Download asset content"
+                        >
+                            <ArrowDownTrayIcon className="w-4 h-4" />
+                            <span>Download</span>
+                        </button>
+                    </div>
                 </div>
                 <div className="bg-black/30 p-4 rounded-md border border-gray-700 min-h-64 max-h-96 overflow-y-auto relative">
                     {/* Watermark */}

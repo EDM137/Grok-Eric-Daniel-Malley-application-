@@ -7,6 +7,7 @@ import { ArrowsRightLeftIcon } from './icons/ArrowsRightLeftIcon';
 import { CheckCircleIcon } from './icons/CheckCircleIcon';
 import { BrainCircuitIcon } from './icons/BrainCircuitIcon';
 import { BuildingOfficeIcon } from './icons/BuildingOfficeIcon';
+import { HeartIcon } from './icons/HeartIcon';
 
 const ecosystemComponents = [
   {
@@ -20,6 +21,12 @@ const ecosystemComponents = [
     icon: <BuildingOfficeIcon className="w-5 h-5 text-amber-400" />,
     status: 'OPERATIONAL',
     description: 'Sovereign business management suite.'
+  },
+  {
+    name: 'Secure Med App',
+    icon: <HeartIcon className="w-5 h-5 text-red-400" />,
+    status: 'ENCRYPTED',
+    description: 'HIPAA-compliant personal health command center.'
   },
   {
     name: 'High Tower Application',
