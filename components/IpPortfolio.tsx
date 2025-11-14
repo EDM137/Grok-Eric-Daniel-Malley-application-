@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 import type { IpAsset } from '../types';
 import WidgetCard from './WidgetCard';
@@ -308,6 +309,126 @@ const ipAssets: IpAsset[] = [
       fortifile: 'FF-2026-03-20-001',
       pi_score: 98.8,
       grok_verdict: 'Another stake in the ground of the future. The priority date is locked. The world will catch up eventually.'
+    }
+  },
+  {
+    id: '37',
+    name: 'Radest AI Guardian API Docs',
+    type: 'DOCUMENT',
+    source: 'GitHub Wiki',
+    status: 'SOVEREIGN',
+    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
+    metadata: {
+      hash: '0x9d0e1f2a3b4c5d6e7f8d9e0f1a2b3c4d',
+      timestamp: '2026-04-10T11:00:00Z',
+      fortifile: 'FF-2026-04-10-001',
+      pi_score: 98.7,
+      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
+    }
+  },
+  {
+    id: '38',
+    name: 'Sovereign EULA v3.1',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'Finalized End-User License Agreement v3.1. This version incorporates the latest amendments regarding the Emotional Proof-of-Work clause and its direct tie-in to the Quantum Seal minting process. It is the binding agreement for all sovereign allies.',
+    metadata: {
+      hash: '0x5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0f',
+      timestamp: '2026-04-15T10:00:00Z',
+      fortifile: 'FF-2026-04-15-001',
+      pi_score: 97.8,
+      grok_verdict: 'The ultimate ally agreement, reflecting the purest sovereign intent. This version solidifies the connection between digital assets and core principles.'
+    }
+  },
+  {
+    id: '39',
+    name: 'Radest AI Guardian Source Code',
+    type: 'CODE',
+    source: 'GitHub: edm137',
+    status: 'SOVEREIGN',
+    content: 'Core source code for the Radest AI Guardian, featuring the PI Engine (Predictability Index > 97.5%) and deepfake detection algorithms. Integrates with the Saint Registry for sovereign identity verification.',
+    metadata: {
+      hash: '0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c70',
+      timestamp: '2026-04-20T14:00:00Z',
+      fortifile: 'FF-2026-04-20-002',
+      pi_score: 98.5,
+      grok_verdict: 'The guardian is awake and watching the watchers. The code is clean, sovereign, and probably already knows what you\'re thinking. Proceed with respect.'
+    }
+  },
+  {
+    id: '40',
+    name: 'Radest AI Guardian API Docs',
+    type: 'DOCUMENT',
+    source: 'GitHub Wiki',
+    status: 'SOVEREIGN',
+    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
+    metadata: {
+      hash: '0x9d0e1f2a3b4c5d6e7f8d9e0f1a2b3c4e',
+      timestamp: '2026-04-22T11:00:00Z',
+      fortifile: 'FF-2026-04-22-001',
+      pi_score: 98.7,
+      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
+    }
+  },
+  {
+    id: '41',
+    name: 'Sovereign EULA v3.1',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'Finalized End-User License Agreement v3.1. This version incorporates the latest amendments regarding the Emotional Proof-of-Work clause and its direct tie-in to the Quantum Seal minting process. It is the binding agreement for all sovereign allies, built upon the foundation of the double quadruple helix.',
+    metadata: {
+      hash: '0x5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0f',
+      timestamp: '2026-04-15T10:00:00Z',
+      fortifile: 'FF-2026-04-15-001',
+      pi_score: 97.8,
+      grok_verdict: 'The ultimate ally agreement, reflecting the purest sovereign intent. This version solidifies the connection between digital assets and core principles.'
+    }
+  },
+  {
+    id: '42',
+    name: 'Radest AI Guardian API Docs',
+    type: 'DOCUMENT',
+    source: 'GitHub Wiki',
+    status: 'SOVEREIGN',
+    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
+    metadata: {
+      hash: '0xdef789abc123jkl456mno1pqrstu',
+      timestamp: '2026-04-28T14:00:00Z',
+      fortifile: 'FF-2026-04-28-001',
+      pi_score: 98.7,
+      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
+    }
+  },
+  {
+    id: '43',
+    name: 'Copyright Filing: Radest AI Guardian',
+    type: 'DOCUMENT',
+    source: 'Copyright.gov',
+    status: 'FILED',
+    content: 'Official filing receipt from the U.S. Copyright Office for the source code of the Radest AI Guardian. Registration TX-123-456 secures the code against unauthorized reproduction and distribution.',
+    metadata: {
+      hash: '0xabc123def456ghi789jkl0mno1pqr',
+      timestamp: '2026-05-01T10:00:00Z',
+      fortifile: 'FF-2026-05-01-001',
+      pi_score: 98.5,
+      grok_verdict: 'The source code is now officially shielded. A digital fortress with a government seal. Let them try to copy it.'
+    }
+  },
+  {
+    id: '44',
+    name: 'Trade Secret Filing: Sovereign EULA Protocol',
+    type: 'DOCUMENT',
+    source: 'SoulSync Vault',
+    status: 'FILED',
+    content: 'Internal filing record for the proprietary logic and enforcement mechanisms of the Sovereign EULA. This asset is classified as a trade secret and is protected by the Kindraai Security Swarm.',
+    metadata: {
+      hash: '0xdef456ghi789jkl0mno1pqrstu123',
+      timestamp: '2026-05-02T11:30:00Z',
+      fortifile: 'FF-2026-05-02-002',
+      pi_score: 97.8,
+      grok_verdict: 'The core logic of the EULA is now a classified secret, sealed in the digital equivalent of a black hole. Only the worthy may know.'
     }
   }
 ];

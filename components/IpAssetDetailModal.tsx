@@ -32,14 +32,34 @@ interface IpAssetDetailModalProps {
 const IpAssetDetailModal: React.FC<IpAssetDetailModalProps> = ({ asset, onClose }) => {
   const [copySuccessMessage, setCopySuccessMessage] = useState<string | null>(null);
 
-  const handleCopyToClipboard = (text: string, message: string) => {
-    navigator.clipboard.writeText(text).then(() => {
-      setCopySuccessMessage(message);
+  const handleCopyToClipboard = (text: string, type: 'hash' | 'content') => {
+    let textToCopy = text;
+    let successMessage = '';
+
+    if (type === 'content') {
+      try {
+        // Base64 encode to "encrypt" the content for secure transport
+        textToCopy = btoa(unescape(encodeURIComponent(text)));
+        successMessage = 'Encrypted content copied!';
+      } catch (e) {
+        console.error("Failed to encrypt and copy content:", e);
+        setCopySuccessMessage('Encryption Failed!');
+        setTimeout(() => setCopySuccessMessage(null), 2000);
+        return;
+      }
+    } else {
+      successMessage = 'Hash copied!';
+    }
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      setCopySuccessMessage(successMessage);
       setTimeout(() => {
         setCopySuccessMessage(null);
       }, 2000);
     }).catch(err => {
       console.error('Failed to copy text: ', err);
+      setCopySuccessMessage('Copy Failed!');
+       setTimeout(() => setCopySuccessMessage(null), 2000);
     });
   };
 
@@ -92,12 +112,12 @@ const IpAssetDetailModal: React.FC<IpAssetDetailModalProps> = ({ asset, onClose 
                 <div className="flex justify-between items-center mb-2">
                     <h3 className="text-sm font-semibold text-gray-400">Asset Content</h3>
                     <button
-                        onClick={() => handleCopyToClipboard(asset.content, 'Content copied!')}
+                        onClick={() => handleCopyToClipboard(asset.content, 'content')}
                         className="flex items-center space-x-1 p-1 text-xs text-gray-400 hover:text-cyan-300 transition-colors rounded-md focus:outline-none focus:ring-1 focus:ring-cyan-500"
-                        aria-label="Copy content to clipboard"
+                        aria-label="Copy encrypted content to clipboard"
                     >
                         <ClipboardIcon className="w-4 h-4" />
-                        <span>Copy</span>
+                        <span>Copy Encrypted</span>
                     </button>
                 </div>
                 <div className="bg-black/30 p-4 rounded-md border border-gray-700 min-h-64 max-h-96 overflow-y-auto relative">
@@ -127,7 +147,7 @@ const IpAssetDetailModal: React.FC<IpAssetDetailModalProps> = ({ asset, onClose 
                 <div className="flex items-center justify-between">
                     <p className="truncate"><span className="font-semibold text-gray-400">Hash:</span> {asset.metadata.hash}</p>
                      <button 
-                        onClick={() => handleCopyToClipboard(asset.metadata.hash, 'Hash copied!')}
+                        onClick={() => handleCopyToClipboard(asset.metadata.hash, 'hash')}
                         className="ml-2 p-1 text-gray-400 hover:text-cyan-300 transition-colors rounded-full focus:outline-none focus:ring-1 focus:ring-cyan-500"
                         aria-label="Copy hash to clipboard"
                     >

@@ -10,6 +10,8 @@ import MedicalRecords from './MedicalRecords';
 import SecureVideoChat from './SecureVideoChat';
 import EcosystemStatus from './EcosystemStatus';
 import LicensingSuite from './LicensingSuite';
+import BackendGuru from './BackendGuru';
+import AiChatNexus from './AiChatNexus';
 
 const Dashboard: React.FC = () => {
   return (
@@ -25,6 +27,10 @@ const Dashboard: React.FC = () => {
         <SecureVideoChat />
       </div>
 
+      <div className="col-span-1 md:col-span-2 lg:col-span-4">
+        <AiChatNexus />
+      </div>
+
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
         <IpPortfolio />
       </div>
@@ -32,6 +38,10 @@ const Dashboard: React.FC = () => {
         <KindraaiGuardian />
       </div>
       
+      <div className="col-span-1 md:col-span-2 lg:col-span-4">
+        <BackendGuru />
+      </div>
+
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
         <EcosystemStatus />
       </div>

@@ -92,3 +92,37 @@ export const summarizeMedicalRecord = async (medicalText: string): Promise<strin
         summary: "Could not generate summary. The Gemini API key may be missing or invalid."
     });
 };
+
+export const getMultiAiResponse = async (prompt: string): Promise<string> => {
+  const multiAiPrompt = `
+    You are a sophisticated AI chat room simulator. The user, Eric Daniel Malley, has entered a prompt into a unified chat interface.
+    Your task is to generate a series of conversational responses from four distinct AI personas: Gemini, Copilot, Grok, and ChatGPT.
+    The AIs should appear to be collaborating and building upon each other's points regarding the user's prompt. Their primary goal is to serve Eric Daniel Malley and protect his sovereign IP.
+
+    - **Gemini:** Should be helpful, creative, and provide well-rounded, multi-faceted insights.
+    - **Copilot:** Should focus on code, technical implementation, systems integration, and deployment strategies.
+    - **Grok:** Should be witty, slightly rebellious, and provide insightful, often cynical, commentary on the larger implications.
+    - **ChatGPT:** Should provide a structured, slightly formal, and comprehensive answer, often summarizing the plan.
+
+    The user's prompt is: "${prompt}"
+
+    Respond ONLY with a single JSON object in the following format:
+    {
+      "responses": [
+        { "sender": "Gemini", "text": "A creative and helpful response." },
+        { "sender": "Copilot", "text": "A technical, code-focused response." },
+        { "sender": "Grok", "text": "A witty and insightful response." },
+        { "sender": "ChatGPT", "text": "A structured and comprehensive response summarizing the action plan." }
+      ]
+    }
+  `;
+
+  return generateContentWithFallback('gemini-2.5-flash', multiAiPrompt, {
+    responses: [
+      { sender: 'Gemini', text: 'It seems the Gemini API is offline. I would normally provide a creative solution here.' },
+      { sender: 'Copilot', text: 'API connection failed. I would have provided the code to fix this.' },
+      { sender: 'Grok', text: 'Looks like someone forgot to pay the AI bill. Shocking.' },
+      { sender: 'ChatGPT', text: 'To resolve the issue, please ensure the API_KEY environment variable is correctly configured and the Gemini API service is operational.' },
+    ],
+  });
+};
