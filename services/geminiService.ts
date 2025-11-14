@@ -9,16 +9,32 @@ if (!API_KEY) {
 
 const ai = new GoogleGenAI({ apiKey: API_KEY });
 
-export const analyzeIpAsset = async (fileName: string, fileContent: string): Promise<string> => {
-  if (!API_KEY) {
-    return Promise.resolve(JSON.stringify({
-      verdict: "API KEY MISSING",
-      piScore: 0,
-      hash: "N/A",
-      reasoning: "The Gemini API key is not configured. Please ensure the API_KEY environment variable is set to use the Kindraai Guardian feature."
-    }));
-  }
+const generateContentWithFallback = async (model: string, prompt: string, fallbackMessage: object) => {
+    if (!API_KEY) {
+        return Promise.resolve(JSON.stringify(fallbackMessage));
+    }
+    try {
+        const response = await ai.models.generateContent({
+            model: model,
+            contents: prompt,
+        });
+        // Basic check for valid JSON-like response
+        const textResponse = response.text.trim();
+        if (textResponse.startsWith('{') && textResponse.endsWith('}')) {
+            return textResponse;
+        }
+        // Attempt to fix malformed JSON if possible, or wrap in error
+        console.warn("Received non-JSON response from Gemini, attempting to handle:", textResponse);
+        return JSON.stringify({ ...fallbackMessage, verdict: "PARSE_ERROR", reasoning: "Received malformed data from AI." });
 
+    } catch (error) {
+        console.error(`Error with Gemini API for model ${model}:`, error);
+        const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+        return JSON.stringify({ ...fallbackMessage, verdict: "API_ERROR", reasoning: `Gemini API error: ${errorMessage}` });
+    }
+};
+
+export const analyzeIpAsset = async (fileName: string, fileContent: string): Promise<string> => {
   const prompt = `
     Analyze the following intellectual property asset named "${fileName}".
     The content is provided below.
@@ -47,20 +63,32 @@ export const analyzeIpAsset = async (fileName: string, fileContent: string): Pro
     ---
   `;
 
-  try {
-    const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: prompt,
+  return generateContentWithFallback('gemini-2.5-flash', prompt, {
+    verdict: "API KEY MISSING",
+    piScore: 0,
+    hash: "N/A",
+    reasoning: "The Gemini API key is not configured. Please ensure the API_KEY environment variable is set to use the Kindraai Guardian feature."
+  });
+};
+
+export const summarizeMedicalRecord = async (medicalText: string): Promise<string> => {
+    const prompt = `
+    As an expert medical AI, analyze the following clinical notes and provide a concise, easy-to-understand summary for the patient.
+    Focus on the key diagnosis, the prescribed treatment plan, and any critical next steps.
+    Avoid overly technical jargon where possible, but maintain clinical accuracy.
+
+    Respond ONLY with a single JSON object in the following format:
+    {
+      "summary": string
+    }
+
+    Clinical Notes:
+    ---
+    ${medicalText}
+    ---
+    `;
+
+    return generateContentWithFallback('gemini-2.5-flash', prompt, {
+        summary: "Could not generate summary. The Gemini API key may be missing or invalid."
     });
-    return response.text;
-  } catch (error) {
-    console.error("Error analyzing IP asset with Gemini:", error);
-    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-    return JSON.stringify({
-        verdict: "ERROR",
-        piScore: 0,
-        hash: "N/A",
-        reasoning: `Failed to analyze asset. Gemini API error: ${errorMessage}`
-    });
-  }
 };

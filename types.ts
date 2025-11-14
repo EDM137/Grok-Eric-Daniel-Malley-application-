@@ -1,3 +1,4 @@
+
 export interface IpAsset {
   id: string;
   name: string;
@@ -14,3 +15,5 @@ export interface Account {
   email: string;
   synced: boolean;
 }
+
+export type LegalDoc = 'Terms of Service' | 'Privacy Policy' | 'Sovereign EULA';
