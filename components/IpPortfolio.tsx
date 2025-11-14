@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { IpAsset } from '../types';
 import WidgetCard from './WidgetCard';
 import { FolderIcon } from './icons/FolderIcon';
@@ -14,6 +14,7 @@ import { PlusCircleIcon } from './icons/PlusCircleIcon';
 import CreateIpAssetModal from './CreateIpAssetModal';
 import { ArchiveBoxIcon } from './icons/ArchiveBoxIcon';
 import { ArrowDownTrayIcon } from './icons/ArrowDownTrayIcon';
+import IpPortfolioSkeleton from './IpPortfolioSkeleton';
 
 const livingBookOfRecordContent = `
 ERIC DANIEL MALLEY and Radest Publishing Co. Brings you. RADEST ATTORNEY EXPORT:
@@ -869,10 +870,20 @@ const getIconForType = (type: IpAsset['type']) => {
 };
 
 const IpPortfolio: React.FC = () => {
-  const [assets, setAssets] = useState<IpAsset[]>(initialIpAssets);
+  const [isLoading, setIsLoading] = useState(true);
+  const [assets, setAssets] = useState<IpAsset[]>([]);
   const [selectedAsset, setSelectedAsset] = useState<IpAsset | null>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [selectedAssetIds, setSelectedAssetIds] = useState(new Set<string>());
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+        setAssets(initialIpAssets);
+        setIsLoading(false);
+    }, 1500); // Simulate a 1.5-second network request
+
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, []);
 
   const handleAssetClick = (asset: IpAsset) => {
     setSelectedAsset(asset);
@@ -958,93 +969,99 @@ const IpPortfolio: React.FC = () => {
   return (
     <>
       <WidgetCard title="IP Portfolio" icon={<FolderIcon className="w-6 h-6" />}>
-        <div className="mb-4">
-            <button
-              onClick={() => setIsCreateModalOpen(true)}
-              className="w-full bg-cyan-900/50 border border-cyan-700 hover:bg-cyan-800/50 transition-colors duration-300 text-cyan-300 font-bold py-3 px-4 rounded-md flex items-center justify-center space-x-2"
-            >
-              <PlusCircleIcon className="w-5 h-5" />
-              <span>Create New IP Asset</span>
-            </button>
-        </div>
-
-        {selectedAssetIds.size > 0 && (
-          <div className="p-3 mb-4 bg-cyan-900/30 border border-cyan-700 rounded-md flex items-center justify-between animate-fade-in">
-            <div className="flex items-center space-x-4">
-              <input
-                type="checkbox"
-                aria-label="Select all assets"
-                className="h-5 w-5 rounded bg-gray-700 border-gray-500 text-cyan-600 focus:ring-cyan-500"
-                checked={assets.length > 0 && selectedAssetIds.size === assets.length}
-                onChange={handleToggleSelectAll}
-              />
-              <span className="font-semibold text-sm">{selectedAssetIds.size} selected</span>
+        {isLoading ? (
+          <IpPortfolioSkeleton />
+        ) : (
+          <>
+            <div className="mb-4">
+                <button
+                  onClick={() => setIsCreateModalOpen(true)}
+                  className="w-full bg-cyan-900/50 border border-cyan-700 hover:bg-cyan-800/50 transition-colors duration-300 text-cyan-300 font-bold py-3 px-4 rounded-md flex items-center justify-center space-x-2"
+                >
+                  <PlusCircleIcon className="w-5 h-5" />
+                  <span>Create New IP Asset</span>
+                </button>
             </div>
-            <div className="flex items-center space-x-2">
-              <button onClick={handleArchiveSelected} className="flex items-center space-x-1 px-3 py-1 text-xs bg-yellow-600/50 hover:bg-yellow-500/50 text-yellow-200 rounded-md transition-colors">
-                <ArchiveBoxIcon className="w-4 h-4" />
-                <span>Archive</span>
-              </button>
-              <button onClick={handleDownloadSelected} className="flex items-center space-x-1 px-3 py-1 text-xs bg-blue-600/50 hover:bg-blue-500/50 text-blue-200 rounded-md transition-colors">
-                <ArrowDownTrayIcon className="w-4 h-4" />
-                <span>Download</span>
-              </button>
-            </div>
-          </div>
-        )}
 
-        <div className="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
-          {assets.map((asset) => (
-            <div 
-              key={asset.id}
-              className={`w-full p-3 bg-gray-900 rounded-lg border transition-all duration-200 flex items-center gap-4 ${selectedAssetIds.has(asset.id) ? 'border-cyan-600' : 'border-gray-800 hover:border-cyan-700/50'}`}
-            >
-              <input
-                type="checkbox"
-                aria-label={`Select asset ${asset.name}`}
-                className="h-5 w-5 rounded bg-gray-700 border-gray-500 text-cyan-600 focus:ring-cyan-500 flex-shrink-0"
-                checked={selectedAssetIds.has(asset.id)}
-                onChange={() => handleToggleSelect(asset.id)}
-                onClick={(e) => e.stopPropagation()}
-              />
-              <div 
-                className="flex-grow cursor-pointer"
-                onClick={() => handleAssetClick(asset)}
-              >
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="text-cyan-400">{getIconForType(asset.type)}</div>
-                        <div>
-                            <p className="font-semibold text-base text-gray-100">{asset.name}</p>
-                            <p className="text-xs text-gray-400">Source: {asset.source}</p>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                          asset.status === 'SOVEREIGN' || asset.status === 'FILED' ? 'bg-green-500/20 text-green-300' : 'bg-yellow-500/20 text-yellow-300'
-                        }`}>
-                          {asset.status}
-                        </span>
-                      <span className="text-sm font-bold text-cyan-400 bg-cyan-900/50 px-2 py-1 rounded-md">
-                          {asset.metadata.pi_score.toFixed(1)}%
-                      </span>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleArchiveSingleAsset(asset.id);
-                        }}
-                        className="p-1 text-gray-500 hover:text-yellow-400 transition-colors rounded-full"
-                        aria-label={`Archive asset ${asset.name}`}
-                        title="Archive Asset"
-                      >
-                        <ArchiveBoxIcon className="w-5 h-5" />
-                      </button>
-                    </div>
+            {selectedAssetIds.size > 0 && (
+              <div className="p-3 mb-4 bg-cyan-900/30 border border-cyan-700 rounded-md flex items-center justify-between animate-fade-in">
+                <div className="flex items-center space-x-4">
+                  <input
+                    type="checkbox"
+                    aria-label="Select all assets"
+                    className="h-5 w-5 rounded bg-gray-700 border-gray-500 text-cyan-600 focus:ring-cyan-500"
+                    checked={assets.length > 0 && selectedAssetIds.size === assets.length}
+                    onChange={handleToggleSelectAll}
+                  />
+                  <span className="font-semibold text-sm">{selectedAssetIds.size} selected</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button onClick={handleArchiveSelected} className="flex items-center space-x-1 px-3 py-1 text-xs bg-yellow-600/50 hover:bg-yellow-500/50 text-yellow-200 rounded-md transition-colors">
+                    <ArchiveBoxIcon className="w-4 h-4" />
+                    <span>Archive</span>
+                  </button>
+                  <button onClick={handleDownloadSelected} className="flex items-center space-x-1 px-3 py-1 text-xs bg-blue-600/50 hover:bg-blue-500/50 text-blue-200 rounded-md transition-colors">
+                    <ArrowDownTrayIcon className="w-4 h-4" />
+                    <span>Download</span>
+                  </button>
                 </div>
               </div>
+            )}
+
+            <div className="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
+              {assets.map((asset) => (
+                <div 
+                  key={asset.id}
+                  className={`w-full p-3 bg-gray-900 rounded-lg border transition-all duration-200 flex items-center gap-4 ${selectedAssetIds.has(asset.id) ? 'border-cyan-600' : 'border-gray-800 hover:border-cyan-700/50'}`}
+                >
+                  <input
+                    type="checkbox"
+                    aria-label={`Select asset ${asset.name}`}
+                    className="h-5 w-5 rounded bg-gray-700 border-gray-500 text-cyan-600 focus:ring-cyan-500 flex-shrink-0"
+                    checked={selectedAssetIds.has(asset.id)}
+                    onChange={() => handleToggleSelect(asset.id)}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                  <div 
+                    className="flex-grow cursor-pointer"
+                    onClick={() => handleAssetClick(asset)}
+                  >
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="text-cyan-400">{getIconForType(asset.type)}</div>
+                            <div>
+                                <p className="font-semibold text-base text-gray-100">{asset.name}</p>
+                                <p className="text-xs text-gray-400">Source: {asset.source}</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                              asset.status === 'SOVEREIGN' || asset.status === 'FILED' ? 'bg-green-500/20 text-green-300' : 'bg-yellow-500/20 text-yellow-300'
+                            }`}>
+                              {asset.status}
+                            </span>
+                          <span className="text-sm font-bold text-cyan-400 bg-cyan-900/50 px-2 py-1 rounded-md">
+                              {asset.metadata.pi_score.toFixed(1)}%
+                          </span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleArchiveSingleAsset(asset.id);
+                            }}
+                            className="p-1 text-gray-500 hover:text-yellow-400 transition-colors rounded-full"
+                            aria-label={`Archive asset ${asset.name}`}
+                            title="Archive Asset"
+                          >
+                            <ArchiveBoxIcon className="w-5 h-5" />
+                          </button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </WidgetCard>
       {selectedAsset && (
         <IpAssetDetailModal asset={selectedAsset} onClose={handleCloseModal} />
