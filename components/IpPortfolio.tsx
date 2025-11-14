@@ -430,6 +430,111 @@ const ipAssets: IpAsset[] = [
       pi_score: 97.8,
       grok_verdict: 'The core logic of the EULA is now a classified secret, sealed in the digital equivalent of a black hole. Only the worthy may know.'
     }
+  },
+  {
+    id: '45',
+    name: 'Sovereign EULA v4.0',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'The definitive End-User License Agreement for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses and the binding terms for all sovereign allies and technological integrations. It serves as the operating system for the ecosystem.',
+    metadata: {
+      hash: '0xb4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9',
+      timestamp: '2026-05-10T12:00:00Z',
+      fortifile: 'FF-2026-05-10-001',
+      pi_score: 98.5,
+      grok_verdict: 'The definitive agreement for all sovereign allies. This isn\'t just a contract; it\'s the operating system for the ecosystem. The terms are locked.'
+    }
+  },
+  {
+    id: '46',
+    name: 'Radest AI Guardian AI Model Weights',
+    type: 'SYSTEM',
+    source: 'AI Core Repository',
+    status: 'SOVEREIGN',
+    content: 'The proprietary, trained model weights for the Kindraai AI Guardian. These weights represent the core intelligence of the system, enabling PI score calculation, deepfake detection, and sovereign asset verification.',
+    metadata: {
+      hash: '0xc5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0',
+      timestamp: '2026-05-15T18:30:00Z',
+      fortifile: 'FF-2026-05-15-003',
+      pi_score: 99.2,
+      grok_verdict: 'The distilled intelligence of the Guardian. These weights are more valuable than gold because they can tell the difference between truth and a really good lie.'
+    }
+  },
+  {
+    id: '47',
+    name: 'FortiFile™ Metadata Schema',
+    type: 'CODE',
+    source: 'GitHub: edm137/fortifile',
+    status: 'SOVEREIGN',
+    content: 'The foundational JSON schema defining the structure for all FortiFile™ records. This schema ensures the integrity, verifiability, and immutability of all registered IP assets across the Radest ecosystem.',
+    metadata: {
+      hash: '0xd6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1',
+      timestamp: '2026-05-20T09:45:00Z',
+      fortifile: 'FF-2026-05-20-001',
+      pi_score: 97.9,
+      grok_verdict: 'The blueprint for immutability. Every FortiFile™ record is built on this schema. It\'s the DNA of digital truth.'
+    }
+  },
+  {
+    id: '48',
+    name: 'Radest AI Guardian Proprietary Algorithms',
+    type: 'DOCUMENT',
+    source: 'Internal Vault',
+    status: 'FILED',
+    content: 'This document contains the proprietary mathematical formulas and logical frameworks for the Radest AI Guardian\'s Predictability Index (PI) engine and its deepfake detection capabilities. This information is classified as a trade secret.',
+    metadata: {
+      hash: '0xe7f8a9b0c1d2e3f4a5b6c7d8e9f0a2b3',
+      timestamp: '2026-05-25T10:00:00Z',
+      fortifile: 'FF-2026-05-25-001',
+      pi_score: 99.5,
+      grok_verdict: 'The core logic that makes the Guardian truly sovereign and unreplicable. Sealed tighter than a black hole.'
+    }
+  },
+  {
+    id: '49',
+    name: 'Radest AI Guardian API Docs',
+    type: 'DOCUMENT',
+    source: 'GitHub Wiki',
+    status: 'SOVEREIGN',
+    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
+    metadata: {
+      hash: '0xfab123cde456ghi789jkl0mno1pqr',
+      timestamp: '2026-06-01T11:00:00Z',
+      fortifile: 'FF-2026-06-01-001',
+      pi_score: 98.7,
+      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
+    }
+  },
+  {
+    id: '50',
+    name: 'Radest AI Guardian API Docs',
+    type: 'DOCUMENT',
+    source: 'GitHub Wiki',
+    status: 'SOVEREIGN',
+    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
+    metadata: {
+      hash: '0x234bcd567efa890hij1klm2nop3qrs',
+      timestamp: '2026-06-03T09:00:00Z',
+      fortifile: 'FF-2026-06-03-002',
+      pi_score: 98.7,
+      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
+    }
+  },
+  {
+    id: '51',
+    name: 'Radest AI Guardian API Docs',
+    type: 'DOCUMENT',
+    source: 'GitHub Wiki',
+    status: 'SOVEREIGN',
+    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
+    metadata: {
+      hash: '0x456def789abc123hij1klm2nop3qrs',
+      timestamp: '2026-06-10T11:00:00Z',
+      fortifile: 'FF-2026-06-10-001',
+      pi_score: 98.7,
+      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
+    }
   }
 ];
 

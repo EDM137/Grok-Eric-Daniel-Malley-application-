@@ -12,6 +12,7 @@ import EcosystemStatus from './EcosystemStatus';
 import LicensingSuite from './LicensingSuite';
 import BackendGuru from './BackendGuru';
 import AiChatNexus from './AiChatNexus';
+import FortiFileNotary from './FortiFileNotary';
 
 const Dashboard: React.FC = () => {
   return (
@@ -31,11 +32,14 @@ const Dashboard: React.FC = () => {
         <AiChatNexus />
       </div>
 
-      <div className="col-span-1 md:col-span-2 lg:col-span-2">
+      <div className="col-span-1 md:col-span-2 lg:col-span-4">
         <IpPortfolio />
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
         <KindraaiGuardian />
+      </div>
+      <div className="col-span-1 md:col-span-2 lg:col-span-2">
+        <FortiFileNotary />
       </div>
       
       <div className="col-span-1 md:col-span-2 lg:col-span-4">
