@@ -4,7 +4,7 @@ import type { IpAsset } from '../types';
 import { XMarkIcon } from './icons/XMarkIcon';
 import { CodeBracketIcon } from './icons/CodeBracketIcon';
 import { DocumentIcon } from './icons/DocumentIcon';
-import { CpuChipIcon } from './icons/CpuChipIcon';
+import { BrainCircuitIcon } from './icons/BrainCircuitIcon';
 import CodeBlock from './CodeBlock';
 import { CameraIcon } from './icons/CameraIcon';
 import { ScaleIcon } from './icons/ScaleIcon';
@@ -14,7 +14,7 @@ import { ClipboardIcon } from './icons/ClipboardIcon';
 const getIconForType = (type: IpAsset['type']) => {
   switch (type) {
     case 'CODE': return <CodeBracketIcon className="w-6 h-6" />;
-    case 'SYSTEM': return <CpuChipIcon className="w-6 h-6" />;
+    case 'SYSTEM': return <BrainCircuitIcon className="w-6 h-6" />;
     case 'IMAGE': return <CameraIcon className="w-6 h-6" />;
     case 'PATENT': return <ScaleIcon className="w-6 h-6" />;
     case 'LEDGER': return <BookOpenIcon className="w-6 h-6" />;

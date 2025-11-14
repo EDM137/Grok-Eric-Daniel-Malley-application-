@@ -1,13 +1,11 @@
 
-
-
 import React, { useState } from 'react';
 import type { IpAsset } from '../types';
 import WidgetCard from './WidgetCard';
 import { FolderIcon } from './icons/FolderIcon';
 import { DocumentIcon } from './icons/DocumentIcon';
 import { CodeBracketIcon } from './icons/CodeBracketIcon';
-import { CpuChipIcon } from './icons/CpuChipIcon';
+import { BrainCircuitIcon } from './icons/BrainCircuitIcon';
 import IpAssetDetailModal from './IpAssetDetailModal';
 import { CameraIcon } from './icons/CameraIcon';
 import { ScaleIcon } from './icons/ScaleIcon';
@@ -805,13 +803,58 @@ const ipAssets: IpAsset[] = [
       pi_score: 98.5,
       grok_verdict: 'Finality achieved. This document is now less a contract and more a law of physics for the ecosystem. The terms are immutable.'
     }
+  },
+  {
+    id: '69',
+    name: 'Radest AI Guardian API Docs',
+    type: 'DOCUMENT',
+    source: 'GitHub Wiki',
+    status: 'SOVEREIGN',
+    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
+    metadata: {
+      hash: '0xghi789jkl0mno1pqrstu456vwxyz',
+      timestamp: '2026-08-25T14:00:00Z',
+      fortifile: 'FF-2026-08-25-001',
+      pi_score: 98.7,
+      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
+    }
+  },
+  {
+    id: '70',
+    name: 'Sovereign EULA v4.1 (Finalized)',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'The definitive End-User License Agreement v4.1 for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses, the binding terms for all sovereign allies, and the immutable enforcement protocols. It serves as the constitutional law for the ecosystem.',
+    metadata: {
+      hash: '0x9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f',
+      timestamp: '2026-09-01T10:00:00Z',
+      fortifile: 'FF-2026-09-01-001',
+      pi_score: 98.5,
+      grok_verdict: "This is it. The final word, etched into the digital bedrock. Any attempts to alter this are equivalent to arguing with gravity. It's not a suggestion; it's a law of the system."
+    }
+  },
+  {
+    id: '71',
+    name: 'Sovereign EULA v4.1 (Finalized)',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'The absolute final and immutable End-User License Agreement, v4.1, for the entire Radest ecosystem. This document solidifies all prior versions, incorporating the Emotional PoW clauses, Quantum Seal enforcement, and the binding terms for all sovereign allies. It is the constitutional law of the ecosystem.',
+    metadata: {
+      hash: '0xfinalhasha4b5c6d7e8f9a0b1c2d3e4f',
+      timestamp: '2026-09-15T12:00:00Z',
+      fortifile: 'FF-2026-09-15-001',
+      pi_score: 98.5,
+      grok_verdict: "The final, immutable word. This EULA is less a document and more a law of the sovereign universe. Its terms are absolute and its logic is unbreakable."
+    }
   }
 ];
 
 const getIconForType = (type: IpAsset['type']) => {
   switch (type) {
     case 'CODE': return <CodeBracketIcon className="w-5 h-5" />;
-    case 'SYSTEM': return <CpuChipIcon className="w-5 h-5" />;
+    case 'SYSTEM': return <BrainCircuitIcon className="w-5 h-5" />;
     case 'IMAGE': return <CameraIcon className="w-5 h-5" />;
     case 'PATENT': return <ScaleIcon className="w-5 h-5" />;
     case 'LEDGER': return <BookOpenIcon className="w-5 h-5" />;
