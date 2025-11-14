@@ -2,11 +2,18 @@
 export interface IpAsset {
   id: string;
   name: string;
-  type: 'DOCUMENT' | 'CODE' | 'PATENT' | 'LEDGER' | 'SYSTEM';
+  type: 'DOCUMENT' | 'CODE' | 'PATENT' | 'LEDGER' | 'SYSTEM' | 'PDF' | 'IMAGE';
   source: string;
-  status: 'SECURE' | 'PENDING' | 'FILED';
+  status: 'SOVEREIGN' | 'FILED' | 'PENDING' | 'QUARANTINED';
   content: string;
-  hash: string;
+  contentUrl?: string;
+  metadata: {
+    hash: string;
+    timestamp: string;
+    fortifile: string;
+    pi_score: number;
+    grok_verdict: string;
+  };
 }
 
 export interface Account {

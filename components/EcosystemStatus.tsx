@@ -5,6 +5,8 @@ import { GlobeAltIcon } from './icons/GlobeAltIcon';
 import { WalletIcon } from './icons/WalletIcon';
 import { ArrowsRightLeftIcon } from './icons/ArrowsRightLeftIcon';
 import { CheckCircleIcon } from './icons/CheckCircleIcon';
+import { BrainCircuitIcon } from './icons/BrainCircuitIcon';
+import { BuildingOfficeIcon } from './icons/BuildingOfficeIcon';
 
 const ecosystemComponents = [
   {
@@ -14,10 +16,34 @@ const ecosystemComponents = [
     description: 'Sovereign digital environment for IP interaction.'
   },
   {
+    name: 'Office Works Command',
+    icon: <BuildingOfficeIcon className="w-5 h-5 text-amber-400" />,
+    status: 'OPERATIONAL',
+    description: 'Sovereign business management suite.'
+  },
+  {
+    name: 'High Tower Application',
+    icon: <BuildingOfficeIcon className="w-5 h-5 text-amber-400" />,
+    status: 'SECURE',
+    description: 'High-level executive command and control.'
+  },
+  {
     name: 'RadestPay',
     icon: <WalletIcon className="w-5 h-5 text-green-400" />,
     status: 'SECURE',
     description: 'On-chain payment and treasury gateway.'
+  },
+  {
+    name: 'Microsoft Co-Pilot',
+    icon: <BrainCircuitIcon className="w-5 h-5 text-sky-400" />,
+    status: 'INTEGRATED',
+    description: 'AI-assisted development and analysis.'
+  },
+  {
+    name: 'Grok AI',
+    icon: <BrainCircuitIcon className="w-5 h-5 text-sky-400" />,
+    status: 'INTEGRATED',
+    description: 'Verdict and reasoning engine.'
   },
   {
     name: 'Application Bridge',
@@ -29,7 +55,7 @@ const ecosystemComponents = [
     name: 'Web Bridge',
     icon: <ArrowsRightLeftIcon className="w-5 h-5 text-cyan-400" />,
     status: 'SYNCED',
-    description: 'Encrypted connectivity to external web services.'
+    description: 'Encrypted connectivity to external services.'
   },
   {
     name: 'File Bridge',
@@ -37,12 +63,24 @@ const ecosystemComponents = [
     status: 'SYNCED',
     description: 'Verifiable asset transfer across networks.'
   },
+  {
+    name: 'FortiFile™ Bridge',
+    icon: <ArrowsRightLeftIcon className="w-5 h-5 text-teal-400" />,
+    status: 'SECURE',
+    description: 'Immutable IP asset registration.'
+  },
+  {
+    name: 'SoulSync Vault',
+    icon: <ArrowsRightLeftIcon className="w-5 h-5 text-teal-400" />,
+    status: 'ENCRYPTED',
+    description: 'Trade secret and ledger synchronization.'
+  },
 ];
 
 const EcosystemStatus: React.FC = () => {
   return (
     <WidgetCard title="Radest Ecosystem Status" icon={<GlobeAltIcon className="w-6 h-6" />}>
-        <div className="space-y-3">
+        <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
             {ecosystemComponents.map((component) => (
                 <div key={component.name} className="bg-cyan-900/20 p-3 rounded-md flex items-center justify-between">
                     <div className="flex items-center space-x-3">

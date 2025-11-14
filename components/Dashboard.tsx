@@ -9,6 +9,7 @@ import TreasuryMint from './TreasuryMint';
 import MedicalRecords from './MedicalRecords';
 import SecureVideoChat from './SecureVideoChat';
 import EcosystemStatus from './EcosystemStatus';
+import LicensingSuite from './LicensingSuite';
 
 const Dashboard: React.FC = () => {
   return (
@@ -34,16 +35,20 @@ const Dashboard: React.FC = () => {
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
         <EcosystemStatus />
       </div>
-      <div className="col-span-1 md:col-span-1 lg:col-span-1">
+      <div className="col-span-1 md:col-span-2 lg:col-span-2">
+        <LicensingSuite />
+      </div>
+
+       <div className="col-span-1 md:col-span-1 lg:col-span-2">
          <PatentFiling />
       </div>
-      <div className="col-span-1 md:col-span-1 lg:col-span-1">
+       <div className="col-span-1 md:col-span-1 lg:col-span-2">
+        <AllyPortal />
+      </div>
+       <div className="col-span-1 md:col-span-2 lg:col-span-4">
         <TreasuryMint />
       </div>
 
-      <div className="col-span-1 md:col-span-2 lg:col-span-4">
-        <AllyPortal />
-      </div>
     </div>
   );
 };

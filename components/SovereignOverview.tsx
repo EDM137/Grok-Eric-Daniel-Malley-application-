@@ -7,11 +7,11 @@ import { CameraIcon } from './icons/CameraIcon';
 import { MicrophoneIcon } from './icons/MicrophoneIcon';
 
 const accounts: Account[] = [
-  { name: 'Primary Gmail', provider: 'Google', email: 'mybusinesspartnereric@gmail.com', synced: true },
-  { name: 'Google Drive + Cloud', provider: 'Google', email: 'malleyrides@gmail.com', synced: true },
-  { name: 'Gemini Studio + Microsoft', provider: 'Microsoft', email: 'radestmetaverse@outlook.com', synced: true },
-  { name: 'GitHub', provider: 'GitHub', email: 'edm137', synced: true },
-  { name: 'Vercel', provider: 'Vercel', email: 'eric@radestpublishing.co', synced: true },
+  { name: 'Google Sovereign Hub', provider: 'Google', email: 'mybusinesspartnereric@gmail.com', synced: true },
+  { name: 'Google Drive (Assets)', provider: 'Google', email: 'malleyrides@gmail.com', synced: true },
+  { name: 'AI & Cloud Services', provider: 'Microsoft', email: 'radestmetaverse@gmail.com', synced: true },
+  { name: 'GitHub (Source Code)', provider: 'GitHub', email: 'edm137', synced: true },
+  { name: 'Vercel (Deployments)', provider: 'Vercel', email: 'mybusinesspartnereric@gmail.com', synced: true },
 ];
 
 const SovereignOverview: React.FC = () => {
@@ -22,7 +22,7 @@ const SovereignOverview: React.FC = () => {
             <h3 className="text-sm font-semibold text-gray-400 mb-2">Synced Accounts</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {accounts.map((account) => (
-              <div key={account.email} className="bg-cyan-900/20 p-3 rounded-md flex items-center justify-between">
+              <div key={account.name} className="bg-cyan-900/20 p-3 rounded-md flex items-center justify-between">
                 <div>
                   <p className="font-semibold text-sm">{account.name}</p>
                   <p className="text-xs text-gray-400">{account.email}</p>
