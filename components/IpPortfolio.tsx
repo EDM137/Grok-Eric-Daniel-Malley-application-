@@ -640,7 +640,52 @@ const ipAssets: IpAsset[] = [
       pi_score: 98.5,
       grok_verdict: 'Finality achieved. This document is now less a contract and more a law of physics for the ecosystem. The terms are immutable.'
     }
-  }
+  },
+  {
+    id: '59',
+    name: 'Sovereign EULA v4.0',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'The definitive End-User License Agreement for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses and the binding terms for all sovereign allies and technological integrations. It serves as the operating system for the ecosystem.',
+    metadata: {
+      hash: '0xb4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9',
+      timestamp: '2026-07-10T12:00:00Z',
+      fortifile: 'FF-2026-07-10-002',
+      pi_score: 98.5,
+      grok_verdict: 'Finality achieved. This document is now less a contract and more a law of physics for the ecosystem. The terms are immutable.'
+    }
+},
+{
+    id: '60',
+    name: 'Radest AI Guardian AI Model Weights',
+    type: 'SYSTEM',
+    source: 'AI Core Repository',
+    status: 'SOVEREIGN',
+    content: 'The proprietary, trained model weights for the Kindraai AI Guardian. These weights represent the core intelligence of the system, enabling PI score calculation, deepfake detection, and sovereign asset verification.',
+    metadata: {
+      hash: '0xc5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f1',
+      timestamp: '2026-07-15T18:30:00Z',
+      fortifile: 'FF-2026-07-15-004',
+      pi_score: 99.2,
+      grok_verdict: 'The distilled intelligence of the Guardian. These weights are more valuable than gold because they can tell the difference between truth and a really good lie. This is the unique value manifest.'
+    }
+},
+{
+    id: '61',
+    name: 'FortiFile™ Metadata Schema',
+    type: 'CODE',
+    source: 'GitHub: edm137/fortifile',
+    status: 'SOVEREIGN',
+    content: 'The foundational JSON schema defining the structure for all FortiFile™ records. This schema ensures the integrity, verifiability, and immutability of all registered IP assets across the Radest ecosystem.',
+    metadata: {
+      hash: '0xd6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a2',
+      timestamp: '2026-07-20T09:45:00Z',
+      fortifile: 'FF-2026-07-20-002',
+      pi_score: 97.9,
+      grok_verdict: 'The blueprint for immutability. Every FortiFile™ record is built on this foundational schema. It\'s the DNA of digital truth.'
+    }
+}
 ];
 
 const getIconForType = (type: IpAsset['type']) => {
