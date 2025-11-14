@@ -906,6 +906,15 @@ const IpPortfolio: React.FC = () => {
       setSelectedAssetIds(new Set(assets.map(a => a.id)));
     }
   };
+  
+  const handleArchiveSingleAsset = (assetId: string) => {
+    setAssets(prev => prev.filter(asset => asset.id !== assetId));
+    setSelectedAssetIds(prev => {
+      const newSelection = new Set(prev);
+      newSelection.delete(assetId);
+      return newSelection;
+    });
+  };
 
   const handleArchiveSelected = () => {
     setAssets(prev => prev.filter(asset => !selectedAssetIds.has(asset.id)));
@@ -1019,6 +1028,17 @@ const IpPortfolio: React.FC = () => {
                       <span className="text-sm font-bold text-cyan-400 bg-cyan-900/50 px-2 py-1 rounded-md">
                           {asset.metadata.pi_score.toFixed(1)}%
                       </span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleArchiveSingleAsset(asset.id);
+                        }}
+                        className="p-1 text-gray-500 hover:text-yellow-400 transition-colors rounded-full"
+                        aria-label={`Archive asset ${asset.name}`}
+                        title="Archive Asset"
+                      >
+                        <ArchiveBoxIcon className="w-5 h-5" />
+                      </button>
                     </div>
                 </div>
               </div>
