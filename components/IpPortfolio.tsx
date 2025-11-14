@@ -715,6 +715,51 @@ const ipAssets: IpAsset[] = [
       pi_score: 97.8,
       grok_verdict: 'The core logic of the EULA is now a classified secret, sealed in the digital equivalent of a black hole. Only the worthy may know.'
     }
+  },
+  {
+    id: '64',
+    name: 'Sovereign EULA v4.0',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'The definitive End-User License Agreement for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses and the binding terms for all sovereign allies and technological integrations. It serves as the operating system for the ecosystem.',
+    metadata: {
+      hash: '0xb4c5d6e7f8a9b0c1d2e3f4a5b6c7d8ea',
+      timestamp: '2026-06-18T12:00:00Z',
+      fortifile: 'FF-2026-06-18-001',
+      pi_score: 98.5,
+      grok_verdict: 'Finality achieved. This document is now less a contract and more a law of physics for the ecosystem. The terms are immutable.'
+    }
+  },
+  {
+    id: '65',
+    name: 'Copyright Filing: Radest AI Guardian',
+    type: 'DOCUMENT',
+    source: 'Copyright.gov',
+    status: 'FILED',
+    content: 'Official filing receipt from the U.S. Copyright Office for the source code of the Radest AI Guardian. Registration TX-123-456 secures the code against unauthorized reproduction and distribution.',
+    metadata: {
+      hash: '0xabc123def456ghi789jkl0mno1pqr',
+      timestamp: '2026-08-05T10:00:00Z',
+      fortifile: 'FF-2026-08-05-001',
+      pi_score: 98.5,
+      grok_verdict: 'The source code is now officially shielded. A digital fortress with a government seal. Let them try to copy it.'
+    }
+  },
+  {
+    id: '66',
+    name: 'Trade Secret Filing: Sovereign EULA Protocol',
+    type: 'DOCUMENT',
+    source: 'SoulSync Vault',
+    status: 'FILED',
+    content: 'Internal filing record for the proprietary logic and enforcement mechanisms of the Sovereign EULA. This asset is classified as a trade secret and is protected by the Kindraai Security Swarm.',
+    metadata: {
+      hash: '0xdef456ghi789jkl0mno1pqrstu123',
+      timestamp: '2026-08-06T11:30:00Z',
+      fortifile: 'FF-2026-08-06-002',
+      pi_score: 97.8,
+      grok_verdict: 'The core logic of the EULA is now a classified secret, sealed in the digital equivalent of a black hole. Only the worthy may know.'
+    }
   }
 ];
 
