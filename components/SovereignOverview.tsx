@@ -1,9 +1,10 @@
-
 import React from 'react';
 import type { Account } from '../types';
 import WidgetCard from './WidgetCard';
 import { CheckCircleIcon } from './icons/CheckCircleIcon';
 import { ShieldCheckIcon } from './icons/ShieldCheckIcon';
+import { CameraIcon } from './icons/CameraIcon';
+import { MicrophoneIcon } from './icons/MicrophoneIcon';
 
 const accounts: Account[] = [
   { name: 'Primary Gmail', provider: 'Google', email: 'mybusinesspartnereric@gmail.com', synced: true },
@@ -16,21 +17,52 @@ const accounts: Account[] = [
 const SovereignOverview: React.FC = () => {
   return (
     <WidgetCard title="Sovereign Overview" icon={<ShieldCheckIcon className="w-6 h-6" />}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {accounts.map((account) => (
-          <div key={account.email} className="bg-cyan-900/20 p-3 rounded-md flex items-center justify-between">
-            <div>
-              <p className="font-semibold text-sm">{account.name}</p>
-              <p className="text-xs text-gray-400">{account.email}</p>
-            </div>
-            {account.synced && (
-              <div className="flex items-center space-x-1 text-green-400">
-                <CheckCircleIcon className="w-5 h-5" />
-                <span className="text-xs">SYNCED</span>
+      <div className="space-y-4">
+        <div>
+            <h3 className="text-sm font-semibold text-gray-400 mb-2">Synced Accounts</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {accounts.map((account) => (
+              <div key={account.email} className="bg-cyan-900/20 p-3 rounded-md flex items-center justify-between">
+                <div>
+                  <p className="font-semibold text-sm">{account.name}</p>
+                  <p className="text-xs text-gray-400">{account.email}</p>
+                </div>
+                {account.synced && (
+                  <div className="flex items-center space-x-1 text-green-400">
+                    <CheckCircleIcon className="w-5 h-5" />
+                    <span className="text-xs">SYNCED</span>
+                  </div>
+                )}
               </div>
-            )}
+            ))}
           </div>
-        ))}
+        </div>
+
+        <div>
+            <h3 className="text-sm font-semibold text-gray-400 mb-2">System Peripherals</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="bg-cyan-900/20 p-3 rounded-md flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                        <CameraIcon className="w-5 h-5" />
+                        <p className="font-semibold text-sm">Camera</p>
+                    </div>
+                    <div className="flex items-center space-x-1 text-green-400">
+                        <CheckCircleIcon className="w-5 h-5" />
+                        <span className="text-xs">READY</span>
+                    </div>
+                </div>
+                <div className="bg-cyan-900/20 p-3 rounded-md flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                        <MicrophoneIcon className="w-5 h-5" />
+                        <p className="font-semibold text-sm">Microphone</p>
+                    </div>
+                    <div className="flex items-center space-x-1 text-green-400">
+                        <CheckCircleIcon className="w-5 h-5" />
+                        <span className="text-xs">READY</span>
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
     </WidgetCard>
   );

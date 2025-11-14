@@ -6,6 +6,7 @@ import { DocumentIcon } from './icons/DocumentIcon';
 import { CpuChipIcon } from './icons/CpuChipIcon';
 import { ClipboardIcon } from './icons/ClipboardIcon';
 import { KeyIcon } from './icons/KeyIcon';
+import CodeBlock from './CodeBlock';
 
 const getIconForType = (type: IpAsset['type']) => {
   switch (type) {
@@ -19,6 +20,12 @@ interface IpAssetDetailModalProps {
   asset: IpAsset;
   onClose: () => void;
 }
+
+const statusTooltips: Record<IpAsset['status'], string> = {
+  SECURE: 'Asset is verified and stored securely within the sovereign vault.',
+  PENDING: 'Asset is awaiting verification or processing.',
+  FILED: 'Asset has been successfully filed with the relevant authority (e.g., USPTO).',
+};
 
 const IpAssetDetailModal: React.FC<IpAssetDetailModalProps> = ({ asset, onClose }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -73,11 +80,16 @@ const IpAssetDetailModal: React.FC<IpAssetDetailModalProps> = ({ asset, onClose 
                 <div className="bg-black/20 p-2 rounded-md"><span className="font-semibold text-gray-400 block">Type:</span> {asset.type}</div>
                  <div className="bg-black/20 p-2 rounded-md">
                    <span className="font-semibold text-gray-400 block">Status:</span>
-                   <span className={`px-2 py-0.5 text-xs rounded-full ${
-                      asset.status === 'FILED' ? 'bg-green-500/30 text-green-300' : 'bg-blue-500/30 text-blue-300'
-                    }`}>
-                      {asset.status}
-                    </span>
+                   <div className="relative group inline-block">
+                      <span className={`px-2 py-0.5 text-xs rounded-full cursor-help ${
+                          asset.status === 'FILED' ? 'bg-green-500/30 text-green-300' : 'bg-blue-500/30 text-blue-300'
+                        }`}>
+                          {asset.status}
+                      </span>
+                      <div className="absolute bottom-full -left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs p-2 text-xs text-white bg-gray-800 border border-cyan-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 invisible group-hover:visible z-10 pointer-events-none">
+                        {statusTooltips[asset.status]}
+                      </div>
+                   </div>
                  </div>
                  <div className="bg-black/20 p-2 rounded-md col-span-full"><span className="font-semibold text-gray-400 block">Asset Hash:</span> <span className="font-mono text-xs break-all">{asset.hash}</span></div>
             </div>
@@ -104,9 +116,13 @@ const IpAssetDetailModal: React.FC<IpAssetDetailModalProps> = ({ asset, onClose 
                         </button>
                     </div>
                 </div>
-                <p className="text-gray-300 whitespace-pre-wrap font-mono text-xs leading-relaxed">
-                  {asset.content}
-                </p>
+                {asset.type === 'CODE' ? (
+                  <CodeBlock content={asset.content} />
+                ) : (
+                  <p className="text-gray-300 whitespace-pre-wrap font-mono text-xs leading-loose">
+                    {asset.content}
+                  </p>
+                )}
             </div>
         </div>
       </div>
