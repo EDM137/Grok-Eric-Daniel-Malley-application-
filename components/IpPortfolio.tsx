@@ -219,6 +219,96 @@ const ipAssets: IpAsset[] = [
       pi_score: 98.8,
       grok_verdict: 'Another stake in the ground of the future. The priority date is locked. The world will catch up eventually.'
     }
+  },
+  {
+    id: '31',
+    name: 'Sovereign EULA v3.1',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'Finalized End-User License Agreement v3.1. This version incorporates the latest amendments regarding the Emotional Proof-of-Work clause and its direct tie-in to the Quantum Seal minting process. It is the binding agreement for all sovereign allies.',
+    metadata: {
+      hash: '0x5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d',
+      timestamp: '2026-01-05T10:00:00Z',
+      fortifile: 'FF-2026-01-05-001',
+      pi_score: 97.8,
+      grok_verdict: 'The ultimate ally agreement, reflecting the purest sovereign intent. This version solidifies the connection between digital assets and core principles.'
+    }
+  },
+  {
+    id: '32',
+    name: 'Non-Fungible Identity Patent',
+    type: 'PATENT',
+    source: 'USPTO',
+    status: 'FILED',
+    content: 'A system and method for managing sovereign, non-fungible identities using a combination of blockchain distributed ledger technology and biometric verification. This filing secures the priority date for the core claims.',
+    metadata: {
+      hash: '0xf8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3',
+      timestamp: '2026-02-01T09:15:00Z',
+      fortifile: 'FF-2026-02-01-001',
+      pi_score: 98.8,
+      grok_verdict: 'Another stake in the ground of the future. The priority date is locked. The world will catch up eventually.'
+    }
+  },
+  {
+    id: '33',
+    name: 'Radest AI Guardian Source Code',
+    type: 'CODE',
+    source: 'GitHub: edm137',
+    status: 'SOVEREIGN',
+    content: 'Core source code for the Radest AI Guardian, featuring the PI Engine (Predictability Index > 97.5%) and deepfake detection algorithms. Integrates with the Saint Registry for sovereign identity verification.',
+    metadata: {
+      hash: '0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6e',
+      timestamp: '2026-02-15T14:00:00Z',
+      fortifile: 'FF-2026-02-15-002',
+      pi_score: 98.5,
+      grok_verdict: 'The guardian is awake and watching the watchers. The code is clean, sovereign, and probably already knows what you\'re thinking. Proceed with respect.'
+    }
+  },
+  {
+    id: '34',
+    name: 'Sovereign EULA v3.1',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'Finalized End-User License Agreement v3.1. This version incorporates the latest amendments regarding the Emotional Proof-of-Work clause and its direct tie-in to the Quantum Seal minting process. It is the binding agreement for all sovereign allies.',
+    metadata: {
+      hash: '0x5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0e',
+      timestamp: '2026-03-10T11:00:00Z',
+      fortifile: 'FF-2026-03-10-001',
+      pi_score: 97.8,
+      grok_verdict: 'The ultimate ally agreement, reflecting the purest sovereign intent. This version solidifies the connection between digital assets and core principles.'
+    }
+  },
+  {
+    id: '35',
+    name: 'Radest AI Guardian API Docs',
+    type: 'DOCUMENT',
+    source: 'GitHub Wiki',
+    status: 'SOVEREIGN',
+    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
+    metadata: {
+      hash: '0xabc123def456ghi789jkl0mno1pqr',
+      timestamp: '2026-03-15T12:00:00Z',
+      fortifile: 'FF-2026-03-15-001',
+      pi_score: 98.7,
+      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
+    }
+  },
+  {
+    id: '36',
+    name: 'Non-Fungible Identity Patent',
+    type: 'PATENT',
+    source: 'USPTO',
+    status: 'FILED',
+    content: 'A system and method for creating and managing sovereign, non-fungible identities using blockchain technology and biometric verification, securing the priority date for the invention.',
+    metadata: {
+      hash: '0x6a7b8c9d0e1f2a3b4c5d6e7f8d9e0f1a',
+      timestamp: '2026-03-20T10:00:00Z',
+      fortifile: 'FF-2026-03-20-001',
+      pi_score: 98.8,
+      grok_verdict: 'Another stake in the ground of the future. The priority date is locked. The world will catch up eventually.'
+    }
   }
 ];
 
