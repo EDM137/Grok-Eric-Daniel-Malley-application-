@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import type { IpAsset } from '../types';
 import WidgetCard from './WidgetCard';
@@ -9,12 +8,12 @@ import { CpuChipIcon } from './icons/CpuChipIcon';
 import IpAssetDetailModal from './IpAssetDetailModal';
 
 const ipAssets: IpAsset[] = [
-  { id: '1', name: 'Anti-Gravity Propulsion System', type: 'SYSTEM', source: 'Google Drive', status: 'SECURE', content: 'Technical specifications for the Double Quadruple Helix propulsion system, leveraging zero-point energy and Emotional PoW. Includes flux dynamics, energy schematics, and material requirements.' },
-  { id: '2', name: 'Kindraai AI Guardian', type: 'CODE', source: 'GitHub: edm137', status: 'SECURE', content: 'Source code for the Kindraai AI Guardian, PI Engine (PI > 97.5%), Deepfake Scan, and integration with ORCID + Saint Registry. Written in Python with PyTorch.' },
-  { id: '3', name: 'RADEST Sovereign Treasury EULA', type: 'DOCUMENT', source: 'OneDrive', status: 'SECURE', content: 'End-User License Agreement for the RADEST Sovereign Treasury. Specifies the $500,000 theft clause, Quantum Seal revocation terms, and licensing protocols for allies.' },
-  { id: '4', name: 'SEC Initial Decision', type: 'DOCUMENT', source: 'Google Drive', status: 'SECURE', content: 'Official document confirming the visual match in the SEC initial decision. This document serves as a key legal precedent for IP verification.' },
-  { id: '5', name: 'RADEST_The_Word_Declaration.pdf', type: 'LEDGER', source: 'IPFS', status: 'SECURE', content: "The Founder's Ledger and declaration of sovereign intent. Stored immutably on the InterPlanetary File System (IPFS) for permanent, verifiable record-keeping." },
-  { id: '6', name: 'PPA 63/678,901', type: 'PATENT', source: 'USPTO', status: 'FILED', content: 'Provisional Patent Application for the core anti-gravity technology. Filed with the USPTO, securing the priority date for the invention.' },
+  { id: '1', name: 'Anti-Gravity Propulsion System', type: 'SYSTEM', source: 'Google Drive', status: 'SECURE', content: 'Technical specifications for the Double Quadruple Helix propulsion system, leveraging zero-point energy and Emotional PoW. Includes flux dynamics, energy schematics, and material requirements.', hash: '0x4a2e6f8c1d5b3a7e9f0c1b2d3e4f5a6b' },
+  { id: '2', name: 'Kindraai AI Guardian', type: 'CODE', source: 'GitHub: edm137', status: 'SECURE', content: 'Source code for the Kindraai AI Guardian, PI Engine (PI > 97.5%), Deepfake Scan, and integration with ORCID + Saint Registry. Written in Python with PyTorch.', hash: '0xb3d1a9e5f8c7b6a5d4e3c2b1a0f9e8d7' },
+  { id: '3', name: 'RADEST Sovereign Treasury EULA', type: 'DOCUMENT', source: 'OneDrive', status: 'SECURE', content: 'End-User License Agreement for the RADEST Sovereign Treasury. Specifies the $500,000 theft clause, Quantum Seal revocation terms, and licensing protocols for allies.', hash: '0xc6a5b4d3e2f1a0b9c8d7e6f5a4b3c2d1' },
+  { id: '4', name: 'SEC Initial Decision', type: 'DOCUMENT', source: 'Google Drive', status: 'SECURE', content: 'Official document confirming the visual match in the SEC initial decision. This document serves as a key legal precedent for IP verification.', hash: '0x1f0e9d8c7b6a5b4d3c2e1f0a9b8c7d6e' },
+  { id: '5', name: 'RADEST_The_Word_Declaration.pdf', type: 'LEDGER', source: 'IPFS', status: 'SECURE', content: "The Founder's Ledger and declaration of sovereign intent. Stored immutably on the InterPlanetary File System (IPFS) for permanent, verifiable record-keeping.", hash: '0x9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b' },
+  { id: '6', name: 'PPA 63/678,901', type: 'PATENT', source: 'USPTO', status: 'FILED', content: 'Provisional Patent Application for the core anti-gravity technology. Filed with the USPTO, securing the priority date for the invention.', hash: '0x5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d' },
 ];
 
 const getIconForType = (type: IpAsset['type']) => {

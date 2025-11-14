@@ -1,4 +1,3 @@
-
 export interface IpAsset {
   id: string;
   name: string;
@@ -6,6 +5,7 @@ export interface IpAsset {
   source: string;
   status: 'SECURE' | 'PENDING' | 'FILED';
   content: string;
+  hash: string;
 }
 
 export interface Account {
