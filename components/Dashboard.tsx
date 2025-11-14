@@ -13,6 +13,7 @@ import LicensingSuite from './LicensingSuite';
 import BackendGuru from './BackendGuru';
 import AiChatNexus from './AiChatNexus';
 import FortiFileNotary from './FortiFileNotary';
+import FileBridge from './FileBridge';
 
 const Dashboard: React.FC = () => {
   return (
@@ -59,7 +60,11 @@ const Dashboard: React.FC = () => {
        <div className="col-span-1 md:col-span-1 lg:col-span-2">
         <AllyPortal />
       </div>
-       <div className="col-span-1 md:col-span-2 lg:col-span-4">
+      
+       <div className="col-span-1 md:col-span-2 lg:col-span-2">
+        <FileBridge />
+      </div>
+       <div className="col-span-1 md:col-span-2 lg:col-span-2">
         <TreasuryMint />
       </div>
 

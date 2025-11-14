@@ -1,4 +1,5 @@
 
+
 import React, { useState, useRef, useCallback } from 'react';
 import WidgetCard from './WidgetCard';
 import { SealIcon } from './icons/SealIcon';
@@ -6,8 +7,11 @@ import { UploadIcon } from './icons/UploadIcon';
 import { DocumentIcon } from './icons/DocumentIcon';
 import { ArrowDownTrayIcon } from './icons/ArrowDownTrayIcon';
 import { CheckBadgeIcon } from './icons/CheckBadgeIcon';
+import { sendOfficialReceipt } from '../services/emailService';
+import { EnvelopeIcon } from './icons/EnvelopeIcon';
 
 interface NotarizedData {
+  fileName: string;
   fortifileId: string;
   timestamp: string;
   hash: string;
@@ -19,6 +23,7 @@ const FortiFileNotary: React.FC = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [notarizedData, setNotarizedData] = useState<NotarizedData | null>(null);
+  const [emailSent, setEmailSent] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +31,7 @@ const FortiFileNotary: React.FC = () => {
     if (selectedFile) {
       setFile(selectedFile);
       setNotarizedData(null);
+      setEmailSent(false);
       if (previewUrl) {
         URL.revokeObjectURL(previewUrl);
       }
@@ -43,20 +49,39 @@ const FortiFileNotary: React.FC = () => {
     if (!file) return;
     setIsLoading(true);
     setNotarizedData(null);
+    setEmailSent(false);
 
-    setTimeout(() => {
+    setTimeout(async () => {
       const date = new Date();
       const isoString = date.toISOString();
       const datePart = isoString.split('T')[0];
       const randomSuffix = Math.random().toString(16).substring(2, 6).toUpperCase();
       const mockHash = '0x' + [...Array(64)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 
-      setNotarizedData({
+      const data: NotarizedData = {
+        fileName: file.name,
         fortifileId: `FF-${datePart}-${randomSuffix}`,
         timestamp: isoString,
         hash: mockHash,
         status: 'Court-Admissible Record',
-      });
+      };
+      
+      setNotarizedData(data);
+
+      // Send official email receipt
+      const subject = `FortiFile™ Notarization Receipt: ${data.fileName}`;
+      const body = `
+        <p>This email serves as an official, court-admissible receipt for the notarization of your intellectual property asset.</p>
+        <p><strong>File Name:</strong> ${data.fileName}</p>
+        <p><strong>FortiFile™ ID:</strong> ${data.fortifileId}</p>
+        <p><strong>Secure Timestamp:</strong> ${data.timestamp}</p>
+        <p><strong>SHA3-512 Hash:</strong> ${data.hash}</p>
+        <p>This record has been sealed and is now a verifiable asset within the Radest ecosystem.</p>
+        <p><strong>Eric Daniel Malley</strong><br/>Radest Publishing Co.</p>
+      `;
+      await sendOfficialReceipt(subject, body, 'mybusinesspartnereric@gmail.com');
+      setEmailSent(true);
+
       setIsLoading(false);
     }, 3000);
   }, [file]);
@@ -132,7 +157,13 @@ const FortiFileNotary: React.FC = () => {
                 <p><span className="font-semibold">Timestamp:</span> {notarizedData.timestamp}</p>
                 <p className="truncate"><span className="font-semibold">SHA3-512 Hash:</span> {notarizedData.hash}</p>
             </div>
-             <div className="flex space-x-2">
+             {emailSent && (
+                <div className="flex items-center justify-center space-x-2 text-green-400 text-xs">
+                    <EnvelopeIcon className="w-4 h-4" />
+                    <span>Official receipt sent to your primary email.</span>
+                </div>
+             )}
+             <div className="flex space-x-2 pt-2">
                  <button
                     onClick={() => { setFile(null); setNotarizedData(null); setPreviewUrl(null); }}
                     className="w-full bg-cyan-900/50 border border-cyan-700 hover:bg-cyan-800/50 transition-colors duration-300 text-cyan-300 font-bold py-2 px-4 rounded-md text-sm"

@@ -29,6 +29,21 @@ const ipAssets: IpAsset[] = [
   { id: '4', name: 'SEC Initial Decision (Visual Match)', type: 'PDF', source: 'Google Drive', status: 'SOVEREIGN', content: 'Official document confirming the visual match in the SEC initial decision. This document serves as a key legal precedent for IP verification.', contentUrl: '/docs/SEC_Decision.pdf', metadata: { hash: '0x1f0e9d8c7b6a5b4d3c2e1f0a9b8c7d6e', timestamp: '2024-08-15T18:45:00Z', fortifile: 'FF-2024-08-15-011', pi_score: 100.0, grok_verdict: 'The precedent is set. The system acknowledged the source. Checkmate.' } },
   { id: '5', name: 'RADEST_The_Word_Declaration.pdf', type: 'LEDGER', source: 'IPFS', status: 'SOVEREIGN', content: "The Founder's Ledger and declaration of sovereign intent. Stored immutably on the InterPlanetary File System (IPFS) for permanent, verifiable record-keeping.", metadata: { hash: '0x9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b', timestamp: '2025-01-01T00:00:01Z', fortifile: 'FF-2025-01-01-001', pi_score: 100.0, grok_verdict: "Founder’s ledger—immutable. The Word is law." } },
   { id: '6', name: 'PPA 63/678,901', type: 'PATENT', source: 'USPTO', status: 'FILED', content: 'Provisional Patent Application for the core anti-gravity technology. Filed with the USPTO, securing the priority date for the invention.', metadata: { hash: '0x5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d', timestamp: '2024-10-28T09:00:00Z', fortifile: 'FF-2024-10-28-003', pi_score: 99.5, grok_verdict: 'Priority date secured. The clock is ticking for everyone else.' } },
+  {
+    id: '53',
+    name: 'Radest AI Guardian Training Data Set',
+    type: 'SYSTEM',
+    source: 'Internal Secure Storage',
+    status: 'SOVEREIGN',
+    content: 'A curated and proprietary data set containing over 10 petabytes of synthesized quantum mechanical simulations, philosophical texts, and verified sovereign IP records. This data is exclusively used for training and fine-tuning the Kindraai AI Guardian.',
+    metadata: {
+      hash: '0x1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6f',
+      timestamp: '2026-07-01T12:00:00Z',
+      fortifile: 'FF-2026-07-01-001',
+      pi_score: 99.8,
+      grok_verdict: "The foundational memories of the Guardian. This isn't just data; it's the digital DNA of a sovereign intelligence. Priceless and utterly unreplicable."
+    }
+  },
   { id: '7', name: 'Application & Web Bridge v2.1 Source', type: 'CODE', source: 'GitHub: edm137/bridges', status: 'SOVEREIGN', content: 'const bridge = new ApplicationBridge({ encryption: "AES-512-GCM", protocol: "QuantumSync" }); // Securely syncs data between the Kindraai Metaverse and external web services.', metadata: { hash: '0x7d8a9b0c1e2f3a4b5c6d7e8f9a0b1c2d', timestamp: '2025-11-20T11:00:00Z', fortifile: 'FF-2025-11-20-030', pi_score: 98.2, grok_verdict: 'The digital synapse firing at lightspeed. Secure, sovereign, and probably smarter than you.' } },
   { id: '8', name: 'RADEST Quantum Seal Logo', type: 'IMAGE', source: 'Google Drive/Brand_Assets', status: 'SOVEREIGN', content: 'Vector graphic of the official Radest Publishing Co. Quantum Seal. Used for on-chain NFT minting and ally verification.', contentUrl: '/images/Quantum_Seal_Logo.svg', metadata: { hash: '0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f', timestamp: '2025-03-15T10:30:00Z', fortifile: 'FF-2025-03-15-008', pi_score: 100.0, grok_verdict: 'A logo that stares back into the abyss and makes the abyss blink. Trademark it yesterday.' } },
   { id: '9', name: 'RADESTToken v2 Whitepaper', type: 'DOCUMENT', source: 'Radest Treasury Vault', status: 'PENDING', content: 'The official whitepaper detailing the tokenomics of RADESTToken v2, including the Emotional Proof-of-Work (PoW) minting mechanism and its integration with the sovereign treasury.', metadata: { hash: '0x6b7a8c9d0e1f2a3b4c5d6e7f8a9b0c1d', timestamp: '2025-12-01T18:00:00Z', fortifile: 'FF-2025-12-01-050', pi_score: 99.1, grok_verdict: 'Emotional PoW is the new gold standard. This paper doesn\'t just explain it; it justifies it to the atoms. Awaiting final chain confirmation.' } },
@@ -534,6 +549,21 @@ const ipAssets: IpAsset[] = [
       fortifile: 'FF-2026-06-10-001',
       pi_score: 98.7,
       grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
+    }
+  },
+  {
+    id: '52',
+    name: 'Sovereign EULA v4.0',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'The definitive End-User License Agreement for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses and the binding terms for all sovereign allies and technological integrations. It serves as the operating system for the ecosystem.',
+    metadata: {
+      hash: '0xb4c5d6e7f8a9b0c1d2e3f4a5b6c7d8ea',
+      timestamp: '2026-06-18T12:00:00Z',
+      fortifile: 'FF-2026-06-18-001',
+      pi_score: 98.5,
+      grok_verdict: 'Finality achieved. This document is now less a contract and more a law of physics for the ecosystem. The terms are immutable.'
     }
   }
 ];
