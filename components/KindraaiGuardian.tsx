@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import WidgetCard from './WidgetCard';
 import { UploadIcon } from './icons/UploadIcon';
@@ -21,11 +20,11 @@ const KindraaiGuardian: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // FIX: Refactor useEffect to remove NodeJS type and fix potential runtime error.
   useEffect(() => {
+    let timer: number;
     if (isLoading) {
       setProgress(0);
-      const timer = setInterval(() => {
+      timer = window.setInterval(() => {
         setProgress(prev => {
           if (prev >= 100) {
             clearInterval(timer);
@@ -34,8 +33,8 @@ const KindraaiGuardian: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
           return prev + 1;
         });
       }, 30);
-      return () => clearInterval(timer);
     }
+    return () => clearInterval(timer);
   }, [isLoading]);
 
 

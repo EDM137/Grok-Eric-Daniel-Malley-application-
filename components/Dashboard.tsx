@@ -14,6 +14,7 @@ import ApiSyncEngine from './ApiSyncEngine';
 import OfficeWorksCommand from './OfficeWorksCommand';
 import SecureMedApp from './SecureMedApp';
 import SoulSyncVault from './SoulSyncVault';
+import PatentFiling from './PatentFiling';
 
 const Dashboard: React.FC = () => {
   return (
@@ -35,6 +36,9 @@ const Dashboard: React.FC = () => {
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
         <FortiFileNotary color="blue" />
+      </div>
+      <div className="col-span-1 md:col-span-2 lg:col-span-4">
+        <PatentFiling />
       </div>
 
       {/* --- SYSTEMS & INFRASTRUCTURE --- */}

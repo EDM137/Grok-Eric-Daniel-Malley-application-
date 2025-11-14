@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import WidgetCard from './WidgetCard';
 import { DocumentArrowUpIcon } from './icons/DocumentArrowUpIcon';
@@ -54,10 +53,10 @@ const IpFiling: React.FC = () => {
   };
 
   return (
-    <WidgetCard title="IP Filing & Registration" icon={<DocumentArrowUpIcon className="w-6 h-6" />}>
+    <WidgetCard title="IP Filing & Registration" icon={<DocumentArrowUpIcon className="w-6 h-6" />} color="blue">
       <div className="space-y-3">
         {filingOptions.map(({ id, type, name, target, icon }) => (
-          <div key={id} className="p-3 bg-cyan-900/20 rounded-md">
+          <div key={id} className="p-3 bg-cyan-900/20 rounded-md border border-cyan-500/20">
             <div className="flex items-start justify-between">
                 <div>
                     <div className="flex items-center space-x-2">
@@ -70,7 +69,7 @@ const IpFiling: React.FC = () => {
                 <button
                     onClick={() => handleFile(id, type, name, target)}
                     disabled={statuses[id] === 'FILING' || statuses[id] === 'FILED'}
-                    className="ml-2 px-3 py-1 text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-600 disabled:opacity-70 transition-colors duration-300 text-white rounded-md whitespace-nowrap"
+                    className="ml-2 px-3 py-1 text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 disabled:bg-gray-600 disabled:opacity-70 transition-colors duration-300 text-black rounded-md whitespace-nowrap"
                     >
                     {getButtonText(id)}
                 </button>

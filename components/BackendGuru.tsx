@@ -39,7 +39,7 @@ const BackendGuru: React.FC<{color?: 'indigo'}> = ({ color = 'indigo' }) => {
           <h3 className="text-sm font-semibold text-gray-400 mb-3">Live Microservices</h3>
           <div className="space-y-2">
             {services.map(service => (
-              <div key={service.name} className="flex items-center justify-between text-sm bg-indigo-900/10 p-2 rounded-md">
+              <div key={service.name} className="flex items-center justify-between text-sm bg-indigo-900/20 p-2 rounded-md border border-indigo-500/20">
                 <p className="text-gray-300">{service.name}</p>
                 <span className={`text-xs font-bold flex items-center space-x-1 ${service.status === 'ONLINE' ? 'text-green-400' : 'text-yellow-400 animate-pulse'}`}>
                   <span>●</span>
@@ -72,7 +72,7 @@ const BackendGuru: React.FC<{color?: 'indigo'}> = ({ color = 'indigo' }) => {
                 <div className="p-3 bg-black/30 rounded-md border border-gray-700 font-mono text-xs">
                    <p><span className="text-green-400">✓</span> GitHub Push (main)</p>
                    <p><span className="text-green-400">✓</span> Build & Test Runner</p>
-                   <p><span className="text-cyan-400">{'>'}</span> Ready for Production Deployment</p>
+                   <p className="text-indigo-300">{'>'} Ready for Production Deployment</p>
                 </div>
             </div>
              <div className="pt-2">

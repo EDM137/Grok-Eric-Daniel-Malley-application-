@@ -13,11 +13,11 @@ const OfficeWorksCommand: React.FC<{color?: 'green'}> = ({ color = 'green' }) =>
       case 'cases':
         return (
           <div className="space-y-3 animate-fade-in">
-            <div className="p-3 bg-green-900/20 rounded-md">
+            <div className="p-3 bg-green-900/20 rounded-md border border-green-500/20">
               <p className="font-bold text-sm">Case 2024-10-28: PPA 63/678,901</p>
               <p className="text-xs text-gray-300">Status: <span className="text-green-300">FILED</span> | Next Action: Monitor USPTO Response</p>
             </div>
-            <div className="p-3 bg-green-900/20 rounded-md">
+            <div className="p-3 bg-green-900/20 rounded-md border border-green-500/20">
               <p className="font-bold text-sm">Case 2025-11-30: Sovereign EULA v3.0</p>
               <p className="text-xs text-gray-300">Status: <span className="text-green-300">ENFORCED</span> | Next Action: Annual Ally Review</p>
             </div>
@@ -27,11 +27,11 @@ const OfficeWorksCommand: React.FC<{color?: 'green'}> = ({ color = 'green' }) =>
       case 'docs':
         return (
            <div className="space-y-3 animate-fade-in">
-            <div className="p-3 bg-green-900/20 rounded-md flex justify-between items-center">
+            <div className="p-3 bg-green-900/20 rounded-md flex justify-between items-center border border-green-500/20">
               <p className="font-bold text-sm">RADEST Living Book of Record</p>
               <p className="text-xs text-gray-400">.ledger</p>
             </div>
-            <div className="p-3 bg-green-900/20 rounded-md flex justify-between items-center">
+            <div className="p-3 bg-green-900/20 rounded-md flex justify-between items-center border border-green-500/20">
               <p className="font-bold text-sm">SEC Initial Decision (Visual Match)</p>
               <p className="text-xs text-gray-400">.pdf</p>
             </div>
@@ -41,11 +41,11 @@ const OfficeWorksCommand: React.FC<{color?: 'green'}> = ({ color = 'green' }) =>
       case 'billing':
         return (
            <div className="space-y-3 animate-fade-in">
-            <div className="p-3 bg-green-900/20 rounded-md">
+            <div className="p-3 bg-green-900/20 rounded-md border border-green-500/20">
               <p className="font-bold text-sm">Q4 2025 Retainer - ACME Corp</p>
               <p className="text-xs text-gray-300">Status: <span className="text-yellow-300">PENDING</span> | Amount: $25,000</p>
             </div>
-             <div className="p-3 bg-green-900/20 rounded-md">
+             <div className="p-3 bg-green-900/20 rounded-md border border-green-500/20">
               <p className="font-bold text-sm">Q3 2025 Filing Fees - USPTO</p>
               <p className="text-xs text-gray-300">Status: <span className="text-green-300">PAID</span> | Amount: $1,850</p>
             </div>

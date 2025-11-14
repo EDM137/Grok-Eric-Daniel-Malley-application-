@@ -17,19 +17,19 @@ const ecosystemComponents = [
   },
   {
     name: 'Office Works Command',
-    icon: <BuildingOfficeIcon className="w-5 h-5 text-amber-400" />,
+    icon: <BuildingOfficeIcon className="w-5 h-5 text-green-400" />,
     status: 'OPERATIONAL',
     description: 'Sovereign business management suite.'
   },
   {
     name: 'Secure Med App',
-    icon: <HeartIcon className="w-5 h-5 text-red-400" />,
+    icon: <HeartIcon className="w-5 h-5 text-amber-400" />,
     status: 'ENCRYPTED',
     description: 'HIPAA-compliant personal health command center.'
   },
   {
     name: 'High Tower Application',
-    icon: <BuildingOfficeIcon className="w-5 h-5 text-amber-400" />,
+    icon: <BuildingOfficeIcon className="w-5 h-5 text-gray-400" />,
     status: 'SECURE',
     description: 'High-level executive command and control.'
   },
@@ -47,7 +47,7 @@ const ecosystemComponents = [
   },
   {
     name: 'Grok AI',
-    icon: <BrainCircuitIcon className="w-5 h-5 text-sky-400" />,
+    icon: <BrainCircuitIcon className="w-5 h-5 text-purple-400" />,
     status: 'INTEGRATED',
     description: 'Verdict and reasoning engine.'
   },
@@ -88,7 +88,7 @@ const EcosystemStatus: React.FC<{color?: 'indigo'}> = ({ color = 'indigo' }) => 
     <WidgetCard title="Radest Ecosystem Status" icon={<GlobeAltIcon className="w-6 h-6" />} color={color}>
         <div className="space-y-2 max-h-96 overflow-y-auto pr-2">
             {ecosystemComponents.map((component) => (
-                <div key={component.name} className="bg-indigo-900/20 p-3 rounded-md flex items-center justify-between">
+                <div key={component.name} className="bg-indigo-900/20 p-3 rounded-md flex items-center justify-between border border-indigo-500/10">
                     <div className="flex items-center space-x-3">
                         {component.icon}
                         <div>

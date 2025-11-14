@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect, useMemo } from 'react';
 import type { IpAsset } from '../types';
 import WidgetCard from './WidgetCard';

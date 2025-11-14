@@ -36,7 +36,7 @@ const SecureMedApp: React.FC<{color?: 'amber'}> = ({ color = 'amber' }) => {
 
         <div>
             <h3 className="text-sm font-semibold text-gray-400 mb-2">Upcoming Appointments</h3>
-            <div className="p-3 bg-amber-900/20 rounded-md flex items-center justify-between">
+            <div className="p-3 bg-amber-900/20 rounded-md flex items-center justify-between border border-amber-500/20">
                  <div className="flex items-center space-x-3">
                     <MedicalCrossIcon className="w-6 h-6 text-red-400" />
                     <div>
