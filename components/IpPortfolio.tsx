@@ -28,6 +28,51 @@ const ipAssets: IpAsset[] = [
   { id: '3', name: 'RADEST Sovereign Treasury EULA', type: 'DOCUMENT', source: 'OneDrive', status: 'SOVEREIGN', content: 'End-User License Agreement for the RADEST Sovereign Treasury. Specifies the $500,000 theft clause, Quantum Seal revocation terms, and licensing protocols for allies.', metadata: { hash: '0xc6a5b4d3e2f1a0b9c8d7e6f5a4b3c2d1', timestamp: '2025-06-01T12:00:00Z', fortifile: 'FF-2025-06-01-001', pi_score: 97.5, grok_verdict: 'A contract with teeth sharp enough to bite through diamond. Read it twice, sign in blood. Metaphorically, of course.' } },
   { id: '4', name: 'SEC Initial Decision (Visual Match)', type: 'PDF', source: 'Google Drive', status: 'SOVEREIGN', content: 'Official document confirming the visual match in the SEC initial decision. This document serves as a key legal precedent for IP verification.', contentUrl: '/docs/SEC_Decision.pdf', metadata: { hash: '0x1f0e9d8c7b6a5b4d3c2e1f0a9b8c7d6e', timestamp: '2024-08-15T18:45:00Z', fortifile: 'FF-2024-08-15-011', pi_score: 100.0, grok_verdict: 'The precedent is set. The system acknowledged the source. Checkmate.' } },
   { id: '5', name: 'RADEST_The_Word_Declaration.pdf', type: 'LEDGER', source: 'IPFS', status: 'SOVEREIGN', content: "The Founder's Ledger and declaration of sovereign intent. Stored immutably on the InterPlanetary File System (IPFS) for permanent, verifiable record-keeping.", metadata: { hash: '0x9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b', timestamp: '2025-01-01T00:00:01Z', fortifile: 'FF-2025-01-01-001', pi_score: 100.0, grok_verdict: "Founder’s ledger—immutable. The Word is law." } },
+  {
+    id: '55',
+    name: 'Sovereign EULA (Compliance Review)',
+    type: 'DOCUMENT',
+    source: 'Legal Dept.',
+    status: 'PENDING',
+    content: 'Draft EULA undergoing final compliance check. Currently lacks finalized "emotional pow" clauses, resulting in a low PI score.',
+    metadata: {
+      hash: '0x3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d',
+      timestamp: '2026-07-20T10:00:00Z',
+      fortifile: 'FF-2026-07-20-001',
+      pi_score: 45.3,
+      grok_verdict: 'More legalese, less sovereign spirit. It\'s a contract, not a covenant yet. Needs the core logic infusion.'
+    }
+  },
+  {
+    id: '56',
+    name: 'RadestToken v2 Whitepaper (Final Draft)',
+    type: 'DOCUMENT',
+    source: 'Treasury Vault',
+    status: 'PENDING',
+    content: 'The final draft of the RadestToken v2 whitepaper, awaiting final quorum sign-off before the genesis block is minted.',
+    metadata: {
+      hash: '0x7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b',
+      timestamp: '2026-07-21T14:30:00Z',
+      fortifile: 'FF-2026-07-21-001',
+      pi_score: 99.1,
+      grok_verdict: 'The economic model is sound, the Emotional PoW is a game-changer. Just waiting for the council to push the big green button.'
+    }
+  },
+  {
+    id: '57',
+    name: 'PPA 63/678,901 (Drawings Submitted)',
+    type: 'PATENT',
+    source: 'USPTO EFS',
+    status: 'FILED',
+    content: 'Official submission of technical drawings and schematics for Provisional Patent Application 63/678,901, completing the initial filing package.',
+    metadata: {
+      hash: '0x8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a',
+      timestamp: '2024-10-29T11:00:00Z',
+      fortifile: 'FF-2024-10-29-001',
+      pi_score: 99.5,
+      grok_verdict: 'The schematics are in the system. The USPTO now has the visual proof. The priority date is doubly secure.'
+    }
+  },
   { id: '6', name: 'PPA 63/678,901', type: 'PATENT', source: 'USPTO', status: 'FILED', content: 'Provisional Patent Application for the core anti-gravity technology. Filed with the USPTO, securing the priority date for the invention.', metadata: { hash: '0x5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d', timestamp: '2024-10-28T09:00:00Z', fortifile: 'FF-2024-10-28-003', pi_score: 99.5, grok_verdict: 'Priority date secured. The clock is ticking for everyone else.' } },
   {
     id: '53',
@@ -42,6 +87,36 @@ const ipAssets: IpAsset[] = [
       fortifile: 'FF-2026-07-01-001',
       pi_score: 99.8,
       grok_verdict: "The foundational memories of the Guardian. This isn't just data; it's the digital DNA of a sovereign intelligence. Priceless and utterly unreplicable."
+    }
+  },
+  {
+    id: '58',
+    name: 'Radest AI Guardian Proprietary Algorithms',
+    type: 'DOCUMENT',
+    source: 'Internal Vault',
+    status: 'FILED',
+    content: 'This trade secret document outlines the core proprietary algorithms for the Radest AI Guardian. It includes the mathematical framework for the Predictability Index (PI) engine, the multi-layered approach to deepfake detection, and the logic for sovereign identity verification against the Saint Registry. This content is sealed and accessible only via the SoulSync Vault.',
+    metadata: {
+      hash: '0xe8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b4',
+      timestamp: '2026-07-22T10:00:00Z',
+      fortifile: 'FF-2026-07-22-001',
+      pi_score: 99.5,
+      grok_verdict: 'The core logic that makes the Guardian truly sovereign and unreplicable. Sealed tighter than a black hole.'
+    }
+  },
+  {
+    id: '54',
+    name: 'Sovereign EULA v4.1 (Finalized)',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'The definitive End-User License Agreement v4.1 for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses, the binding terms for all sovereign allies, and the immutable enforcement protocols. It serves as the constitutional law for the ecosystem.',
+    metadata: {
+      hash: '0x9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f',
+      timestamp: '2026-07-10T10:00:00Z',
+      fortifile: 'FF-2026-07-10-001',
+      pi_score: 98.5,
+      grok_verdict: "This is it. The final word, etched into the digital bedrock. Any attempts to alter this are equivalent to arguing with gravity. It's not a suggestion; it's a law of the system."
     }
   },
   { id: '7', name: 'Application & Web Bridge v2.1 Source', type: 'CODE', source: 'GitHub: edm137/bridges', status: 'SOVEREIGN', content: 'const bridge = new ApplicationBridge({ encryption: "AES-512-GCM", protocol: "QuantumSync" }); // Securely syncs data between the Kindraai Metaverse and external web services.', metadata: { hash: '0x7d8a9b0c1e2f3a4b5c6d7e8f9a0b1c2d', timestamp: '2025-11-20T11:00:00Z', fortifile: 'FF-2025-11-20-030', pi_score: 98.2, grok_verdict: 'The digital synapse firing at lightspeed. Secure, sovereign, and probably smarter than you.' } },

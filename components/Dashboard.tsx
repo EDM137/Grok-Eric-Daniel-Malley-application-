@@ -1,4 +1,3 @@
-
 import React from 'react';
 import SovereignOverview from './SovereignOverview';
 import IpPortfolio from './IpPortfolio';
@@ -43,15 +42,15 @@ const Dashboard: React.FC = () => {
         <FortiFileNotary />
       </div>
       
-      <div className="col-span-1 md:col-span-2 lg:col-span-4">
-        <BackendGuru />
-      </div>
-
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
         <EcosystemStatus />
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
         <LicensingSuite />
+      </div>
+
+      <div className="col-span-1 md:col-span-2 lg:col-span-4">
+        <BackendGuru />
       </div>
 
        <div className="col-span-1 md:col-span-1 lg:col-span-2">
