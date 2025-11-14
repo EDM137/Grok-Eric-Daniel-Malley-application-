@@ -16,9 +16,14 @@ const initialApiStatuses: ApiStatus[] = [
   { name: 'ChatGPT Connector', version: 'v4.0-turbo', status: 'SYNCED' },
 ];
 
+const latestApiVersions: Record<string, string> = {
+  'Grok Verdict Engine': 'v1.6-sovereign',
+};
+
 const ApiSyncEngine: React.FC<{color?: 'indigo'}> = ({ color = 'indigo' }) => {
   const [statuses, setStatuses] = useState<ApiStatus[]>(initialApiStatuses);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [updatingApi, setUpdatingApi] = useState<string | null>(null);
 
   useEffect(() => {
     // Check for Gemini API key and set status accordingly
@@ -49,6 +54,25 @@ const ApiSyncEngine: React.FC<{color?: 'indigo'}> = ({ color = 'indigo' }) => {
     }, 2000);
   };
 
+  const handleUpdate = (apiNameToUpdate: string) => {
+    setUpdatingApi(apiNameToUpdate);
+    setTimeout(() => {
+      setStatuses(prevStatuses =>
+        prevStatuses.map(api =>
+          api.name === apiNameToUpdate
+            ? {
+                ...api,
+                status: 'SYNCED',
+                version: latestApiVersions[apiNameToUpdate] || api.version,
+              }
+            : api
+        )
+      );
+      setUpdatingApi(null);
+    }, 1500);
+  };
+
+
   const getStatusClasses = (status: ApiStatus['status']) => {
     switch (status) {
       case 'SYNCED':
@@ -56,7 +80,7 @@ const ApiSyncEngine: React.FC<{color?: 'indigo'}> = ({ color = 'indigo' }) => {
       case 'OFFLINE':
         return 'bg-red-500/20 text-red-400';
       case 'OUTDATED':
-        return 'bg-yellow-500/20 text-yellow-300 animate-pulse';
+        return 'bg-yellow-500/20 text-yellow-300';
       default:
         return 'bg-gray-500/20 text-gray-300';
     }
@@ -72,16 +96,34 @@ const ApiSyncEngine: React.FC<{color?: 'indigo'}> = ({ color = 'indigo' }) => {
                 <p className="font-semibold text-sm">{api.name}</p>
                 <p className="text-xs text-gray-400 font-mono">Version: {api.version}</p>
               </div>
-              <span className={`px-2 py-1 text-xs font-bold rounded-full whitespace-nowrap ${getStatusClasses(api.status)}`}>
-                {api.status}
-              </span>
+              <div className="flex-shrink-0 ml-2">
+                {api.status === 'OUTDATED' && updatingApi !== api.name && (
+                  <button
+                    onClick={() => handleUpdate(api.name)}
+                    className="px-3 py-1 text-xs font-bold text-black bg-amber-500 hover:bg-amber-400 rounded-full transition-colors animate-pulse"
+                  >
+                    Update
+                  </button>
+                )}
+                {updatingApi === api.name && (
+                  <div className="flex items-center space-x-2 px-2 py-1 text-xs font-bold text-amber-300">
+                    <ArrowPathIcon className="w-4 h-4 animate-spin" />
+                    <span>Updating...</span>
+                  </div>
+                )}
+                {api.status !== 'OUTDATED' && updatingApi !== api.name && (
+                   <span className={`px-2 py-1 text-xs font-bold rounded-full whitespace-nowrap ${getStatusClasses(api.status)}`}>
+                    {api.status}
+                  </span>
+                )}
+              </div>
             </div>
           ))}
         </div>
         <div className="pt-4 mt-auto">
           <button
             onClick={handleSync}
-            disabled={isSyncing}
+            disabled={isSyncing || !!updatingApi}
             className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors duration-300 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2"
           >
             {isSyncing ? (

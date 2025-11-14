@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useMemo } from 'react';
 import type { IpAsset } from '../types';
 import WidgetCard from './WidgetCard';
@@ -20,6 +21,8 @@ import { CheckBadgeIcon } from './icons/CheckBadgeIcon';
 import { ShieldCheckIcon } from './icons/ShieldCheckIcon';
 import { ClockIcon } from './icons/ClockIcon';
 import { ShieldExclamationIcon } from './icons/ShieldExclamationIcon';
+import { SparklesIcon } from './icons/SparklesIcon';
+import { analyzeIpAsset } from '../services/geminiService';
 
 const livingBookOfRecordContent = `
 ERIC DANIEL MALLEY and Radest Publishing Co. Brings you. RADEST ATTORNEY EXPORT:
@@ -893,6 +896,7 @@ const IpPortfolio: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
   const [selectedAssetIds, setSelectedAssetIds] = useState(new Set<string>());
   const [filterType, setFilterType] = useState<string>('ALL');
   const [filterStatus, setFilterStatus] = useState<string>('ALL');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -1016,6 +1020,49 @@ const IpPortfolio: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
     URL.revokeObjectURL(url);
   };
 
+  const handleBulkAnalyze = async () => {
+    setIsAnalyzing(true);
+
+    const assetsToAnalyze = Array.from(selectedAssetIds)
+      .map(id => assets.find(a => a.id === id))
+      .filter((asset): asset is IpAsset => !!asset);
+
+    try {
+      const analysisPromises = assetsToAnalyze.map(asset =>
+        analyzeIpAsset(asset.name, asset.content).then(res => ({ id: asset.id, ...JSON.parse(res) }))
+      );
+
+      const results = await Promise.all(analysisPromises);
+
+      setAssets(prevAssets => {
+        const newAssets = [...prevAssets];
+        results.forEach(result => {
+          const assetIndex = newAssets.findIndex(a => a.id === result.id);
+          if (assetIndex !== -1) {
+            newAssets[assetIndex] = {
+              ...newAssets[assetIndex],
+              status: result.verdict === 'SOVEREIGN' ? 'SOVEREIGN' : 'QUARANTINED',
+              metadata: {
+                ...newAssets[assetIndex].metadata,
+                hash: result.hash,
+                pi_score: result.piScore,
+                grok_verdict: result.reasoning,
+                timestamp: new Date().toISOString(), // Update timestamp on re-analysis
+              },
+            };
+          }
+        });
+        return newAssets;
+      });
+    } catch (error) {
+      console.error("Bulk analysis failed:", error);
+      // Here you could set an error state to show a message to the user
+    } finally {
+      setSelectedAssetIds(new Set());
+      setIsAnalyzing(false);
+    }
+  };
+
   const isSelectAllChecked = filteredAssets.length > 0 && filteredAssets.every(a => selectedAssetIds.has(a.id));
 
   return (
@@ -1062,15 +1109,19 @@ const IpPortfolio: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
                     className="h-5 w-5 rounded bg-gray-700 border-gray-500 text-cyan-600 focus:ring-cyan-500"
                     checked={isSelectAllChecked}
                     onChange={handleToggleSelectAll}
+                    disabled={isAnalyzing}
                   />
                   <span className="font-semibold text-sm">{selectedAssetIds.size} selected</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <button onClick={handleArchiveSelected} className="flex items-center space-x-1 px-3 py-1 text-xs bg-amber-600/50 hover:bg-amber-500/50 text-amber-200 rounded-md transition-colors">
+                  <button onClick={handleArchiveSelected} disabled={isAnalyzing} className="flex items-center space-x-1 px-3 py-1 text-xs bg-amber-600/50 hover:bg-amber-500/50 text-amber-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                     <ArchiveBoxIcon className="w-4 h-4" />
                     <span>Archive</span>
                   </button>
-                  <button onClick={handleDownloadSelected} className="flex items-center space-x-1 px-3 py-1 text-xs bg-blue-600/50 hover:bg-blue-500/50 text-blue-200 rounded-md transition-colors">
+                  <button onClick={handleBulkAnalyze} disabled={isAnalyzing} className="flex items-center space-x-1 px-3 py-1 text-xs bg-purple-600/50 hover:bg-purple-500/50 text-purple-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    {isAnalyzing ? <><SparklesIcon className="w-4 h-4 animate-spin" /><span>Analyzing...</span></> : <><SparklesIcon className="w-4 h-4" /><span>Analyze</span></>}
+                  </button>
+                  <button onClick={handleDownloadSelected} disabled={isAnalyzing} className="flex items-center space-x-1 px-3 py-1 text-xs bg-blue-600/50 hover:bg-blue-500/50 text-blue-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                     <ArrowDownTrayIcon className="w-4 h-4" />
                     <span>Download</span>
                   </button>
