@@ -1,8 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import type { IpAsset } from '../types';
 import { analyzeIpAsset } from '../services/geminiService';
 import { XMarkIcon } from './icons/XMarkIcon';
+import { UploadIcon } from './icons/UploadIcon';
 
 interface CreateIpAssetModalProps {
   onClose: () => void;
@@ -18,8 +19,31 @@ const CreateIpAssetModal: React.FC<CreateIpAssetModalProps> = ({ onClose, onSave
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const isFormValid = name.trim() !== '' && source.trim() !== '' && content.trim() !== '';
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setName(file.name);
+    setSource('Local Upload');
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const fileContent = e.target?.result as string;
+      setContent(fileContent);
+    };
+    reader.onerror = () => {
+      setError('Failed to read the selected file.');
+    };
+    reader.readAsText(file);
+  };
+
+  const triggerFileSelect = () => {
+    fileInputRef.current?.click();
+  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,6 +106,22 @@ const CreateIpAssetModal: React.FC<CreateIpAssetModalProps> = ({ onClose, onSave
         </div>
 
         <form onSubmit={handleSave} className="p-6 space-y-4 overflow-y-auto">
+          <input type="file" ref={fileInputRef} onChange={handleFileChange} className="hidden" />
+          <button
+            type="button"
+            onClick={triggerFileSelect}
+            className="w-full bg-cyan-900/50 border border-cyan-700 hover:bg-cyan-800/50 transition-colors duration-300 text-cyan-300 font-bold py-3 px-4 rounded-md flex items-center justify-center space-x-2"
+          >
+            <UploadIcon className="w-5 h-5" />
+            <span>Upload File to Autofill</span>
+          </button>
+          
+          <div className="flex items-center text-xs text-gray-500">
+            <div className="flex-grow border-t border-gray-700"></div>
+            <span className="flex-shrink mx-4">OR FILL MANUALLY</span>
+            <div className="flex-grow border-t border-gray-700"></div>
+          </div>
+          
           <div>
             <label htmlFor="asset-name" className="block text-sm font-medium text-gray-300 mb-1">Asset Name</label>
             <input

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import type { IpAsset } from '../types';
 import WidgetCard from './WidgetCard';
 import { FolderIcon } from './icons/FolderIcon';
@@ -15,6 +15,7 @@ import CreateIpAssetModal from './CreateIpAssetModal';
 import { ArchiveBoxIcon } from './icons/ArchiveBoxIcon';
 import { ArrowDownTrayIcon } from './icons/ArrowDownTrayIcon';
 import IpPortfolioSkeleton from './IpPortfolioSkeleton';
+import { FunnelIcon } from './icons/FunnelIcon';
 
 const livingBookOfRecordContent = `
 ERIC DANIEL MALLEY and Radest Publishing Co. Brings you. RADEST ATTORNEY EXPORT:
@@ -875,6 +876,8 @@ const IpPortfolio: React.FC = () => {
   const [selectedAsset, setSelectedAsset] = useState<IpAsset | null>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [selectedAssetIds, setSelectedAssetIds] = useState(new Set<string>());
+  const [filterType, setFilterType] = useState<string>('ALL');
+  const [filterStatus, setFilterStatus] = useState<string>('ALL');
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -884,6 +887,17 @@ const IpPortfolio: React.FC = () => {
 
     return () => clearTimeout(timer); // Cleanup on unmount
   }, []);
+
+  const assetTypes = useMemo(() => ['ALL', ...Array.from(new Set(initialIpAssets.map(a => a.type)))], []);
+  const assetStatuses = useMemo(() => ['ALL', ...Array.from(new Set(initialIpAssets.map(a => a.status)))], []);
+  
+  const filteredAssets = useMemo(() => {
+    return assets.filter(asset => {
+        const typeMatch = filterType === 'ALL' || asset.type === filterType;
+        const statusMatch = filterStatus === 'ALL' || asset.status === filterStatus;
+        return typeMatch && statusMatch;
+    });
+  }, [assets, filterType, filterStatus]);
 
   const handleAssetClick = (asset: IpAsset) => {
     setSelectedAsset(asset);
@@ -911,10 +925,19 @@ const IpPortfolio: React.FC = () => {
   };
 
   const handleToggleSelectAll = () => {
-    if (selectedAssetIds.size === assets.length) {
-      setSelectedAssetIds(new Set());
+    const filteredAssetIds = new Set(filteredAssets.map(a => a.id));
+    const currentSelection = new Set(selectedAssetIds);
+    
+    const allFilteredSelected = filteredAssets.length > 0 && filteredAssets.every(a => currentSelection.has(a.id));
+
+    if (allFilteredSelected) {
+        // Deselect all filtered assets
+        filteredAssetIds.forEach(id => currentSelection.delete(id));
+        setSelectedAssetIds(currentSelection);
     } else {
-      setSelectedAssetIds(new Set(assets.map(a => a.id)));
+        // Select all filtered assets
+        filteredAssetIds.forEach(id => currentSelection.add(id));
+        setSelectedAssetIds(currentSelection);
     }
   };
   
@@ -965,6 +988,7 @@ const IpPortfolio: React.FC = () => {
     setSelectedAssetIds(new Set());
   };
 
+  const isSelectAllChecked = filteredAssets.length > 0 && filteredAssets.every(a => selectedAssetIds.has(a.id));
 
   return (
     <>
@@ -983,14 +1007,32 @@ const IpPortfolio: React.FC = () => {
                 </button>
             </div>
 
+            <div className="p-3 mb-4 bg-gray-800/50 border border-gray-700 rounded-md flex items-center space-x-4">
+              <FunnelIcon className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+              <div className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                      <label htmlFor="filter-type" className="text-xs text-gray-400 block mb-1">Filter by Type</label>
+                      <select id="filter-type" value={filterType} onChange={e => setFilterType(e.target.value)} className="w-full bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-cyan-500">
+                          {assetTypes.map(t => <option key={t} value={t}>{t === 'ALL' ? 'All Types' : t}</option>)}
+                      </select>
+                  </div>
+                   <div>
+                      <label htmlFor="filter-status" className="text-xs text-gray-400 block mb-1">Filter by Status</label>
+                      <select id="filter-status" value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="w-full bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-cyan-500">
+                          {assetStatuses.map(s => <option key={s} value={s}>{s === 'ALL' ? 'All Statuses' : s}</option>)}
+                      </select>
+                  </div>
+              </div>
+            </div>
+
             {selectedAssetIds.size > 0 && (
               <div className="p-3 mb-4 bg-cyan-900/30 border border-cyan-700 rounded-md flex items-center justify-between animate-fade-in">
                 <div className="flex items-center space-x-4">
                   <input
                     type="checkbox"
-                    aria-label="Select all assets"
+                    aria-label="Select all visible assets"
                     className="h-5 w-5 rounded bg-gray-700 border-gray-500 text-cyan-600 focus:ring-cyan-500"
-                    checked={assets.length > 0 && selectedAssetIds.size === assets.length}
+                    checked={isSelectAllChecked}
                     onChange={handleToggleSelectAll}
                   />
                   <span className="font-semibold text-sm">{selectedAssetIds.size} selected</span>
@@ -1009,56 +1051,62 @@ const IpPortfolio: React.FC = () => {
             )}
 
             <div className="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
-              {assets.map((asset) => (
-                <div 
-                  key={asset.id}
-                  className={`w-full p-3 bg-gray-900 rounded-lg border transition-all duration-200 flex items-center gap-4 ${selectedAssetIds.has(asset.id) ? 'border-cyan-600' : 'border-gray-800 hover:border-cyan-700/50'}`}
-                >
-                  <input
-                    type="checkbox"
-                    aria-label={`Select asset ${asset.name}`}
-                    className="h-5 w-5 rounded bg-gray-700 border-gray-500 text-cyan-600 focus:ring-cyan-500 flex-shrink-0"
-                    checked={selectedAssetIds.has(asset.id)}
-                    onChange={() => handleToggleSelect(asset.id)}
-                    onClick={(e) => e.stopPropagation()}
-                  />
+              {filteredAssets.length > 0 ? (
+                filteredAssets.map((asset) => (
                   <div 
-                    className="flex-grow cursor-pointer"
-                    onClick={() => handleAssetClick(asset)}
+                    key={asset.id}
+                    className={`w-full p-3 bg-gray-900 rounded-lg border transition-all duration-200 flex items-center gap-4 ${selectedAssetIds.has(asset.id) ? 'border-cyan-600' : 'border-gray-800 hover:border-cyan-700/50'}`}
                   >
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <div className="text-cyan-400">{getIconForType(asset.type)}</div>
-                            <div>
-                                <p className="font-semibold text-base text-gray-100">{asset.name}</p>
-                                <p className="text-xs text-gray-400">Source: {asset.source}</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                              asset.status === 'SOVEREIGN' || asset.status === 'FILED' ? 'bg-green-500/20 text-green-300' : 'bg-yellow-500/20 text-yellow-300'
-                            }`}>
-                              {asset.status}
+                    <input
+                      type="checkbox"
+                      aria-label={`Select asset ${asset.name}`}
+                      className="h-5 w-5 rounded bg-gray-700 border-gray-500 text-cyan-600 focus:ring-cyan-500 flex-shrink-0"
+                      checked={selectedAssetIds.has(asset.id)}
+                      onChange={() => handleToggleSelect(asset.id)}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                    <div 
+                      className="flex-grow cursor-pointer"
+                      onClick={() => handleAssetClick(asset)}
+                    >
+                      <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                              <div className="text-cyan-400">{getIconForType(asset.type)}</div>
+                              <div>
+                                  <p className="font-semibold text-base text-gray-100">{asset.name}</p>
+                                  <p className="text-xs text-gray-400">Source: {asset.source}</p>
+                              </div>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                                asset.status === 'SOVEREIGN' || asset.status === 'FILED' ? 'bg-green-500/20 text-green-300' : 'bg-yellow-500/20 text-yellow-300'
+                              }`}>
+                                {asset.status}
+                              </span>
+                            <span className="text-sm font-bold text-cyan-400 bg-cyan-900/50 px-2 py-1 rounded-md">
+                                {asset.metadata.pi_score.toFixed(1)}%
                             </span>
-                          <span className="text-sm font-bold text-cyan-400 bg-cyan-900/50 px-2 py-1 rounded-md">
-                              {asset.metadata.pi_score.toFixed(1)}%
-                          </span>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleArchiveSingleAsset(asset.id);
-                            }}
-                            className="p-1 text-gray-500 hover:text-yellow-400 transition-colors rounded-full"
-                            aria-label={`Archive asset ${asset.name}`}
-                            title="Archive Asset"
-                          >
-                            <ArchiveBoxIcon className="w-5 h-5" />
-                          </button>
-                        </div>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleArchiveSingleAsset(asset.id);
+                              }}
+                              className="p-1 text-gray-500 hover:text-yellow-400 transition-colors rounded-full"
+                              aria-label={`Archive asset ${asset.name}`}
+                              title="Archive Asset"
+                            >
+                              <ArchiveBoxIcon className="w-5 h-5" />
+                            </button>
+                          </div>
+                      </div>
                     </div>
                   </div>
+                ))
+              ) : (
+                <div className="text-center py-10 text-gray-500">
+                  <p>No assets match the current filters.</p>
                 </div>
-              ))}
+              )}
             </div>
           </>
         )}
