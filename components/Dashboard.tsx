@@ -13,6 +13,7 @@ import FileBridge from './FileBridge';
 import ApiSyncEngine from './ApiSyncEngine';
 import OfficeWorksCommand from './OfficeWorksCommand';
 import SecureMedApp from './SecureMedApp';
+import SoulSyncVault from './SoulSyncVault';
 
 const Dashboard: React.FC = () => {
   return (
@@ -40,8 +41,11 @@ const Dashboard: React.FC = () => {
       <div className="col-span-1 md:col-span-2 lg:col-span-2">
         <EcosystemStatus color="indigo" />
       </div>
-      <div className="col-span-1 md:col-span-2 lg:col-span-2">
+      <div className="col-span-1 md:col-span-1 lg:col-span-1">
         <ApiSyncEngine color="indigo" />
+      </div>
+      <div className="col-span-1 md:col-span-1 lg:col-span-1">
+        <SoulSyncVault color="indigo" />
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-4">
         <BackendGuru color="indigo" />
