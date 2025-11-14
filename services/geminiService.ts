@@ -1,5 +1,4 @@
-
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Type } from "@google/genai";
 
 const API_KEY = process.env.API_KEY;
 
@@ -106,23 +105,61 @@ export const getMultiAiResponse = async (prompt: string): Promise<string> => {
 
     The user's prompt is: "${prompt}"
 
-    Respond ONLY with a single JSON object in the following format:
-    {
-      "responses": [
-        { "sender": "Gemini", "text": "A creative and helpful response." },
-        { "sender": "Copilot", "text": "A technical, code-focused response." },
-        { "sender": "Grok", "text": "A witty and insightful response." },
-        { "sender": "ChatGPT", "text": "A structured and comprehensive response summarizing the action plan." }
-      ]
-    }
+    Respond with a JSON object that adheres to the provided schema.
   `;
 
-  return generateContentWithFallback('gemini-2.5-flash', multiAiPrompt, {
+  const multiAiResponseSchema = {
+    type: Type.OBJECT,
+    properties: {
+        responses: {
+            type: Type.ARRAY,
+            description: "An array of responses from the different AIs.",
+            items: {
+                type: Type.OBJECT,
+                properties: {
+                    sender: { 
+                        type: Type.STRING,
+                        description: "The name of the AI sender: Gemini, Copilot, Grok, or ChatGPT."
+                    },
+                    text: { 
+                        type: Type.STRING,
+                        description: "The conversational text from the AI."
+                    },
+                },
+                required: ['sender', 'text']
+            },
+        },
+    },
+    required: ['responses']
+  };
+
+  const fallback = {
     responses: [
       { sender: 'Gemini', text: 'It seems the Gemini API is offline. I would normally provide a creative solution here.' },
       { sender: 'Copilot', text: 'API connection failed. I would have provided the code to fix this.' },
       { sender: 'Grok', text: 'Looks like someone forgot to pay the AI bill. Shocking.' },
       { sender: 'ChatGPT', text: 'To resolve the issue, please ensure the API_KEY environment variable is correctly configured and the Gemini API service is operational.' },
     ],
-  });
+  };
+
+  if (!API_KEY) {
+    return Promise.resolve(JSON.stringify(fallback));
+  }
+  
+  try {
+    const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: multiAiPrompt,
+        config: {
+            responseMimeType: "application/json",
+            responseSchema: multiAiResponseSchema,
+        },
+    });
+    // The response.text is already a guaranteed JSON string due to the config.
+    return response.text;
+  } catch (error) {
+    console.error(`Error with Gemini API (JSON mode) for multi-AI response:`, error);
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+    return JSON.stringify({ ...fallback, error: `Gemini API error: ${errorMessage}` });
+  }
 };
