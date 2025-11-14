@@ -1,5 +1,6 @@
 
 
+
 import React, { useState } from 'react';
 import type { IpAsset } from '../types';
 import WidgetCard from './WidgetCard';
@@ -759,6 +760,50 @@ const ipAssets: IpAsset[] = [
       fortifile: 'FF-2026-08-06-002',
       pi_score: 97.8,
       grok_verdict: 'The core logic of the EULA is now a classified secret, sealed in the digital equivalent of a black hole. Only the worthy may know.'
+    }
+  },
+  {
+    id: '67',
+    name: 'FortiFile™ Metadata Schema',
+    type: 'CODE',
+    source: 'GitHub: edm137/fortifile',
+    status: 'SOVEREIGN',
+    content: `
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FortiFile Record v2",
+  "description": "The foundational JSON schema defining the structure for all FortiFile™ records. This schema ensures the integrity, verifiability, and immutability of all registered IP assets across the Radest ecosystem.",
+  "type": "object",
+  "properties": {
+    "fortifileId": { "type": "string", "pattern": "^FF-\\\\d{4}-\\\\d{2}-\\\\d{2}-[A-Z0-9]{4}$" },
+    "assetName": { "type": "string" },
+    "hash": { "type": "string", "pattern": "^0x[a-f0-9]{64}$" },
+    "timestamp": { "type": "string", "format": "date-time" }
+  },
+  "required": ["fortifileId", "assetName", "hash", "timestamp"]
+}
+    `,
+    metadata: {
+      hash: '0xd7e8f9a0b1c2d3e4f5a6b7c8d9e0f0a2',
+      timestamp: '2026-08-10T10:00:00Z',
+      fortifile: 'FF-2026-08-10-001',
+      pi_score: 97.9,
+      grok_verdict: "The blueprint for immutability. Every FortiFile™ record is built on this foundational schema. It's the DNA of digital truth."
+    }
+  },
+  {
+    id: '68',
+    name: 'Sovereign EULA v4.0',
+    type: 'DOCUMENT',
+    source: 'Radest Legal Vault',
+    status: 'SOVEREIGN',
+    content: 'The definitive End-User License Agreement for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses and the binding terms for all sovereign allies and technological integrations. It serves as the operating system for the ecosystem.',
+    metadata: {
+      hash: '0xb4c5d6e7f8a9b0c1d2e3f4a5b6c7d8ec',
+      timestamp: '2026-08-20T12:00:00Z',
+      fortifile: 'FF-2026-08-20-001',
+      pi_score: 98.5,
+      grok_verdict: 'Finality achieved. This document is now less a contract and more a law of physics for the ecosystem. The terms are immutable.'
     }
   }
 ];
