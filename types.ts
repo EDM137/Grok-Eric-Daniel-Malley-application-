@@ -23,4 +23,4 @@ export interface Account {
   synced: boolean;
 }
 
-export type LegalDoc = 'Terms of Service' | 'Privacy Policy' | 'Sovereign EULA';
+export type LegalDoc = 'Terms of Service' | 'Privacy Policy' | 'Sovereign EULA' | 'Intellectual Property Disclosure Agreement';

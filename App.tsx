@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
@@ -33,12 +34,14 @@ const App: React.FC = () => {
         </main>
         <footer className="text-center p-4 text-xs text-gray-500 border-t border-gray-800">
           <p className="mb-2">RADEST PROPRIETARY LICENSING FRAMEWORK v4.0 | Owner: Eric Daniel Malley | Entity: Radest Publishing Co.</p>
-          <div className="flex justify-center items-center space-x-4">
+          <div className="flex justify-center items-center space-x-4 flex-wrap">
             <button onClick={() => handleShowLegal('Terms of Service')} className="hover:text-cyan-300 transition-colors">Terms of Service</button>
             <span className="opacity-50">|</span>
             <button onClick={() => handleShowLegal('Privacy Policy')} className="hover:text-cyan-300 transition-colors">Privacy Policy</button>
             <span className="opacity-50">|</span>
             <button onClick={() => handleShowLegal('Sovereign EULA')} className="hover:text-cyan-300 transition-colors">Sovereign EULA</button>
+            <span className="opacity-50">|</span>
+            <button onClick={() => handleShowLegal('Intellectual Property Disclosure Agreement')} className="hover:text-cyan-300 transition-colors">IP Disclosure</button>
           </div>
         </footer>
         {legalDoc && <LegalModal docType={legalDoc} onClose={handleCloseLegal} />}

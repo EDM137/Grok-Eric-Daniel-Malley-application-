@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { LegalDoc } from '../types';
 import { XMarkIcon } from './icons/XMarkIcon';
@@ -34,6 +35,20 @@ const legalContent: Record<LegalDoc, { title: string, content: string }> = {
       2.  **THEFT CLAUSE:** Violations will result in an immediate and non-negotiable penalty of $500,000 USD, payable to Radest Publishing Co.
       3.  **QUANTUM SEAL REVOCATION:** Any breach of this EULA will result in the immediate and permanent revocation of any and all issued Quantum Seal NFTs, terminating your status as a verified ally.
       4.  **JURISDICTION:** All disputes arising from this EULA shall be settled under the sovereign jurisdiction of the laws governing Radest Publishing Co.
+    `
+  },
+  'Intellectual Property Disclosure Agreement': {
+    title: 'Intellectual Property Disclosure Agreement',
+    content: `
+      THIS AGREEMENT GOVERNS THE DISCLOSURE AND PROTECTION OF ALL INTELLECTUAL PROPERTY (IP) WITHIN THE RADEST ECOSYSTEM.
+
+      1. **ACKNOWLEDGMENT OF OWNERSHIP:** The User acknowledges that all data, algorithms, codebases (including the Kindraai Guardian), and proprietary concepts (e.g., "Emotional PoW", "Double Quadruple Helix") are the exclusive property of Eric Daniel Malley and Radest Publishing Co.
+
+      2. **CONFIDENTIALITY & NON-DISCLOSURE:** All assets viewed, accessed, or interacted with in this Vault are classified as confidential trade secrets unless publicly released by the Owner. The User agrees to maintain strict confidentiality and shall not disclose any details to third parties without cryptographically signed authorization.
+
+      3. **RESTRICTIONS ON USE:** The User shall not reverse engineer, decompile, or attempt to derive the source code of any software provided within the Vault. Derivative works are strictly prohibited.
+
+      4. **ENFORCEMENT:** Breach of this agreement triggers the specific performance clauses of the Sovereign EULA, including the $500,000 penalty and immediate revocation of Ally status.
     `
   }
 };
