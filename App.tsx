@@ -41,7 +41,7 @@ const App: React.FC = () => {
             <span className="opacity-50">|</span>
             <button onClick={() => handleShowLegal('Sovereign EULA')} className="hover:text-cyan-300 transition-colors">Sovereign EULA</button>
             <span className="opacity-50">|</span>
-            <button onClick={() => handleShowLegal('Intellectual Property Disclosure Agreement')} className="hover:text-cyan-300 transition-colors">IP Disclosure</button>
+            <button onClick={() => handleShowLegal('Intellectual Property Disclosure Agreement')} className="hover:text-cyan-300 transition-colors">IP Disclosure Agreement</button>
           </div>
         </footer>
         {legalDoc && <LegalModal docType={legalDoc} onClose={handleCloseLegal} />}

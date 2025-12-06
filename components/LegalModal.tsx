@@ -40,15 +40,35 @@ const legalContent: Record<LegalDoc, { title: string, content: string }> = {
   'Intellectual Property Disclosure Agreement': {
     title: 'Intellectual Property Disclosure Agreement',
     content: `
-      THIS AGREEMENT GOVERNS THE DISCLOSURE AND PROTECTION OF ALL INTELLECTUAL PROPERTY (IP) WITHIN THE RADEST ECOSYSTEM.
+      **INTELLECTUAL PROPERTY DISCLOSURE AGREEMENT**
+      **RADEST PROPRIETARY LICENSING FRAMEWORK v4.0**
 
-      1. **ACKNOWLEDGMENT OF OWNERSHIP:** The User acknowledges that all data, algorithms, codebases (including the Kindraai Guardian), and proprietary concepts (e.g., "Emotional PoW", "Double Quadruple Helix") are the exclusive property of Eric Daniel Malley and Radest Publishing Co.
+      **1. PARTIES & SCOPE**
+      This Intellectual Property Disclosure Agreement ("Agreement") is entered into by and between the User ("Ally") and Eric Daniel Malley / Radest Publishing Co. ("Owner"). This Agreement governs the access, viewing, and potential usage of the proprietary Intellectual Property (IP) contained within the RADEST ALLY VAULT v4.0.
 
-      2. **CONFIDENTIALITY & NON-DISCLOSURE:** All assets viewed, accessed, or interacted with in this Vault are classified as confidential trade secrets unless publicly released by the Owner. The User agrees to maintain strict confidentiality and shall not disclose any details to third parties without cryptographically signed authorization.
+      **2. DEFINITION OF INTELLECTUAL PROPERTY**
+      "Intellectual Property" includes, but is not limited to:
+      *   **Proprietary Algorithms:** The Kindraai Guardian PI Engine, Emotional Proof-of-Work (PoW) consensus mechanisms, and deepfake detection logic.
+      *   **Theoretical Frameworks:** The "Double Quadruple Helix" propulsion system, Zero-Point Energy applications, and non-fungible sovereign identity protocols.
+      *   **Source Code:** All frontend and backend codebases, including the Application Bridge, Web Bridge, and FortiFile™ schemas.
+      *   **Creative Assets:** The Quantum Seal design, RADEST trademarks, and all visual/audio content.
 
-      3. **RESTRICTIONS ON USE:** The User shall not reverse engineer, decompile, or attempt to derive the source code of any software provided within the Vault. Derivative works are strictly prohibited.
+      **3. CONFIDENTIALITY & TRADE SECRETS**
+      The Ally acknowledges that the IP constitutes valuable "Trade Secrets" of the Owner. The Ally agrees to hold all such IP in strict confidence and shall not disclose, reproduce, distribute, reverse engineer, or decompile any portion of the System without the Owner's express, cryptographically signed written consent.
 
-      4. **ENFORCEMENT:** Breach of this agreement triggers the specific performance clauses of the Sovereign EULA, including the $500,000 penalty and immediate revocation of Ally status.
+      **4. LIMITED LICENSE**
+      Access to this Vault grants a limited, revocable, non-exclusive license to *view* the IP for the purpose of authorized ecosystem participation. This is NOT a transfer of title or ownership.
+
+      **5. NON-CIRCUMVENTION**
+      The Ally agrees not to bypass, disable, or interfere with any security features of the Vault, including but not limited to the Kindraai Guardian, FortiFile™ Notary, or Quantum Seal verification.
+
+      **6. ENFORCEMENT & REMEDIES**
+      Violation of this Agreement constitutes a breach of the Sovereign EULA. The Owner reserves the right to:
+      *   Immediately revoke Ally status and all associated licenses.
+      *   Enforce the **$500,000.00 USD** liquidated damages clause pursuant to the Sovereign EULA.
+      *   Pursue injunctive relief and all other remedies available under applicable law.
+
+      **BY ACCESSING THIS DOCUMENT, YOU ACKNOWLEDGE AND AGREE TO THESE TERMS.**
     `
   }
 };
