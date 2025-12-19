@@ -1,55 +1,79 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-  console.warn("Gemini API key not found. Please set the API_KEY environment variable.");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+/**
+ * Implements exponential backoff for retrying API calls, specifically targeting 429 errors.
+ */
+const withRetry = async <T>(fn: () => Promise<T>, maxRetries = 3): Promise<T> => {
+    let lastError: any;
+    for (let i = 0; i < maxRetries; i++) {
+        try {
+            return await fn();
+        } catch (error: any) {
+            lastError = error;
+            const isRateLimit = error?.message?.includes('429') || error?.status === 429 || error?.message?.includes('RESOURCE_EXHAUSTED');
+            
+            if (isRateLimit && i < maxRetries - 1) {
+                const waitTime = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                console.warn(`Rate limit hit (429). Retrying in ${Math.round(waitTime)}ms... (Attempt ${i + 1}/${maxRetries})`);
+                await new Promise(resolve => setTimeout(resolve, waitTime));
+                continue;
+            }
+            // Handle key selection reset requirement if entity not found
+            if (error?.message?.includes('Requested entity was not found.')) {
+                console.error("Gemini API Error: Requested entity was not found. Please re-select your API key via Sovereign Key Auth.");
+            }
+            throw error;
+        }
+    }
+    throw lastError;
+};
 
 const generateContentWithFallback = async (model: string, prompt: string, fallbackMessage: object) => {
-    if (!API_KEY) {
-        return Promise.resolve(JSON.stringify(fallbackMessage));
+    if (!process.env.API_KEY) {
+        return JSON.stringify(fallbackMessage);
     }
-    try {
-        const response = await ai.models.generateContent({
-            model: model,
-            contents: prompt,
-        });
-        // FIX: Access the .text property directly for the response text.
-        const textResponse = response.text;
-        if (textResponse.startsWith('{') && textResponse.endsWith('}')) {
-            return textResponse;
-        }
-        // Attempt to fix malformed JSON if possible, or wrap in error
-        console.warn("Received non-JSON response from Gemini, attempting to handle:", textResponse);
-        return JSON.stringify({ ...fallbackMessage, verdict: "PARSE_ERROR", reasoning: "Received malformed data from AI." });
 
-    } catch (error) {
+    try {
+        return await withRetry(async () => {
+            /**
+             * Create a new GoogleGenAI instance right before the call to ensure it uses the most current API key from process.env.
+             */
+            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+            const response = await ai.models.generateContent({
+                model: model,
+                contents: prompt,
+            });
+            /**
+             * Extracting text output directly from the .text property of GenerateContentResponse.
+             */
+            const textResponse = response.text || "";
+            if (textResponse.trim().startsWith('{') || textResponse.trim().startsWith('[')) {
+                return textResponse;
+            }
+            return JSON.stringify({ ...fallbackMessage, verdict: "PARSE_ERROR", reasoning: "Received non-structured data from AI." });
+        });
+    } catch (error: any) {
         console.error(`Error with Gemini API for model ${model}:`, error);
-        const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-        return JSON.stringify({ ...fallbackMessage, verdict: "API_ERROR", reasoning: `Gemini API error: ${errorMessage}` });
+        const isQuotaError = error?.message?.includes('429') || error?.message?.includes('RESOURCE_EXHAUSTED');
+        const reasoning = isQuotaError 
+            ? "API quota exhausted. Please use 'Sovereign Key Auth' in the Overview to provide a paid API key for uninterrupted service."
+            : `Gemini API error: ${error.message || 'Unknown error'}`;
+            
+        return JSON.stringify({ ...fallbackMessage, verdict: "ERROR", reasoning });
     }
 };
 
 export const analyzeIpAsset = async (fileName: string, fileContent: string): Promise<string> => {
   const prompt = `
     Analyze the following intellectual property asset named "${fileName}".
-    The content is provided below.
-    Your task is to act as the "Kindraai AI Guardian".
     The core sovereign concepts to verify are: "double quadruple helix", "zero-point energy", and "emotional pow".
 
-    1.  Calculate a "Predictability Index" (PI) score from 0 to 100. The score is based on how strongly the content aligns with the core sovereign concepts. 
-        - If all three concepts ("helix", "zero-point", "emotional pow") are present and discussed with depth, the score should be above 97.5.
-        - If only some are present, the score should be proportionally lower.
-        - If none are present, the score should be very low.
-    2.  Provide a final verdict: "SOVEREIGN" if PI score >= 97.5, otherwise "QUARANTINE".
-    3.  Generate a simulated SHA3-512 hash of the content (first 16 characters for display).
-    4.  Provide a brief, witty reasoning for your verdict in the style of the Grok AI, mentioning the PI score.
+    1. Calculate a "Predictability Index" (PI) score from 0 to 100.
+    2. Provide a final verdict: "SOVEREIGN" if PI score >= 97.5, otherwise "QUARANTINE".
+    3. Generate a simulated SHA3-512 hash.
+    4. Provide a brief, witty reasoning in the style of Grok AI.
 
-    Respond ONLY with a single JSON object in the following format:
+    Respond ONLY with a single JSON object:
     {
       "verdict": "SOVEREIGN" | "QUARANTINE",
       "piScore": number,
@@ -57,56 +81,37 @@ export const analyzeIpAsset = async (fileName: string, fileContent: string): Pro
       "reasoning": string
     }
 
-    File Content:
-    ---
+    Content:
     ${fileContent}
-    ---
   `;
 
-  return generateContentWithFallback('gemini-2.5-flash', prompt, {
-    verdict: "API KEY MISSING",
+  // Use Gemini 3 Pro for complex IP analysis tasks
+  return generateContentWithFallback('gemini-3-pro-preview', prompt, {
+    verdict: "QUARANTINE",
     piScore: 0,
     hash: "N/A",
-    reasoning: "The Gemini API key is not configured. Please ensure the API_KEY environment variable is set to use the Kindraai Guardian feature."
+    reasoning: "Analysis failed. Ensure API configuration is valid."
   });
 };
 
 export const summarizeMedicalRecord = async (medicalText: string): Promise<string> => {
     const prompt = `
-    As an expert medical AI, analyze the following clinical notes and provide a concise, easy-to-understand summary for the patient.
-    Focus on the key diagnosis, the prescribed treatment plan, and any critical next steps.
-    Avoid overly technical jargon where possible, but maintain clinical accuracy.
-
-    Respond ONLY with a single JSON object in the following format:
-    {
-      "summary": string
-    }
+    As an expert medical AI, summarize these clinical notes for the patient. Focus on key diagnosis, treatment, and next steps.
+    Respond ONLY with a JSON object: {"summary": string}
 
     Clinical Notes:
-    ---
     ${medicalText}
-    ---
     `;
 
-    return generateContentWithFallback('gemini-2.5-flash', prompt, {
-        summary: "Could not generate summary. The Gemini API key may be missing or invalid."
+    return generateContentWithFallback('gemini-3-flash-preview', prompt, {
+        summary: "Summary unavailable due to API constraints."
     });
 };
 
 export const getMultiAiResponse = async (prompt: string): Promise<string> => {
   const multiAiPrompt = `
-    You are a sophisticated AI chat room simulator. The user, Eric Daniel Malley, has entered a prompt into a unified chat interface.
-    Your task is to generate a series of conversational responses from four distinct AI personas: Gemini, Copilot, Grok, and ChatGPT.
-    The AIs should appear to be collaborating and building upon each other's points regarding the user's prompt. Their primary goal is to serve Eric Daniel Malley and protect his sovereign IP.
-
-    - **Gemini:** Should be helpful, creative, and provide well-rounded, multi-faceted insights.
-    - **Copilot:** Should focus on code, technical implementation, systems integration, and deployment strategies.
-    - **Grok:** Should be witty, slightly rebellious, and provide insightful, often cynical, commentary on the larger implications.
-    - **ChatGPT:** Should provide a structured, slightly formal, and comprehensive answer, often summarizing the plan.
-
-    The user's prompt is: "${prompt}"
-
-    Respond with a JSON object that adheres to the provided schema.
+    Generate responses from Gemini, Copilot, Grok, and ChatGPT regarding: "${prompt}"
+    AIs should collaborate to protect Eric Daniel Malley's sovereign IP.
   `;
 
   const multiAiResponseSchema = {
@@ -114,18 +119,11 @@ export const getMultiAiResponse = async (prompt: string): Promise<string> => {
     properties: {
         responses: {
             type: Type.ARRAY,
-            description: "An array of responses from the different AIs.",
             items: {
                 type: Type.OBJECT,
                 properties: {
-                    sender: { 
-                        type: Type.STRING,
-                        description: "The name of the AI sender: Gemini, Copilot, Grok, or ChatGPT."
-                    },
-                    text: { 
-                        type: Type.STRING,
-                        description: "The conversational text from the AI."
-                    },
+                    sender: { type: Type.STRING },
+                    text: { type: Type.STRING },
                 },
                 required: ['sender', 'text']
             },
@@ -136,31 +134,29 @@ export const getMultiAiResponse = async (prompt: string): Promise<string> => {
 
   const fallback = {
     responses: [
-      { sender: 'Gemini', text: 'It seems the Gemini API is offline. I would normally provide a creative solution here.' },
-      { sender: 'Copilot', text: 'API connection failed. I would have provided the code to fix this.' },
-      { sender: 'Grok', text: 'Looks like someone forgot to pay the AI bill. Shocking.' },
-      { sender: 'ChatGPT', text: 'To resolve the issue, please ensure the API_KEY environment variable is correctly configured and the Gemini API service is operational.' },
+      { sender: 'Gemini', text: 'Sovereign AI collective is currently throttled. Please check your API quota.' },
     ],
   };
 
-  if (!API_KEY) {
-    return Promise.resolve(JSON.stringify(fallback));
-  }
+  if (!process.env.API_KEY) return JSON.stringify(fallback);
   
   try {
-    const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: multiAiPrompt,
-        config: {
-            responseMimeType: "application/json",
-            responseSchema: multiAiResponseSchema,
-        },
+    return await withRetry(async () => {
+        /**
+         * Re-initializing GoogleGenAI inside the retry block to use the latest API key.
+         */
+        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        const response = await ai.models.generateContent({
+            model: 'gemini-3-flash-preview',
+            contents: multiAiPrompt,
+            config: {
+                responseMimeType: "application/json",
+                responseSchema: multiAiResponseSchema,
+            },
+        });
+        return response.text || JSON.stringify(fallback);
     });
-    // FIX: Access the .text property directly for the response text.
-    return response.text;
   } catch (error) {
-    console.error(`Error with Gemini API (JSON mode) for multi-AI response:`, error);
-    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-    return JSON.stringify({ ...fallback, error: `Gemini API error: ${errorMessage}` });
+    return JSON.stringify(fallback);
   }
 };

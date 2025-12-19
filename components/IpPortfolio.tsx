@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import type { IpAsset } from '../types';
 import WidgetCard from './WidgetCard';
@@ -38,828 +39,7 @@ const initialIpAssets: IpAsset[] = [
   { id: '3', name: 'RADEST Sovereign Treasury EULA', type: 'DOCUMENT', source: 'OneDrive', status: 'SOVEREIGN', content: 'End-User License Agreement for the RADEST Sovereign Treasury. Specifies the $500,000 theft clause, Quantum Seal revocation terms, and licensing protocols for allies.', metadata: { hash: '0xc6a5b4d3e2f1a0b9c8d7e6f5a4b3c2d1', timestamp: '2025-06-01T12:00:00Z', fortifile: 'FF-2025-06-01-001', pi_score: 97.5, grok_verdict: 'A contract with teeth sharp enough to bite through diamond. Read it twice, sign in blood. Metaphorically, of course.' } },
   { id: '4', name: 'SEC Initial Decision (Visual Match)', type: 'PDF', source: 'Google Drive', status: 'SOVEREIGN', content: 'Official document confirming the visual match in the SEC initial decision. This document serves as a key legal precedent for IP verification.', contentUrl: '/docs/SEC_Decision.pdf', metadata: { hash: '0x1f0e9d8c7b6a5b4d3c2e1f0a9b8c7d6e', timestamp: '2024-08-15T18:45:00Z', fortifile: 'FF-2024-08-15-011', pi_score: 100.0, grok_verdict: 'The precedent is set. The system acknowledged the source. Checkmate.' } },
   { id: '5', name: 'RADEST_The_Word_Declaration.pdf', type: 'LEDGER', source: 'IPFS', status: 'SOVEREIGN', content: "The Founder's Ledger and declaration of sovereign intent. Stored immutably on the InterPlanetary File System (IPFS) for permanent, verifiable record-keeping.", metadata: { hash: '0x9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b', timestamp: '2025-01-01T00:00:01Z', fortifile: 'FF-2025-01-01-001', pi_score: 100.0, grok_verdict: "Founder’s ledger—immutable. The Word is law." } },
-  {
-    id: '55',
-    name: 'Sovereign EULA (Compliance Review)',
-    type: 'DOCUMENT',
-    source: 'Legal Dept.',
-    status: 'PENDING',
-    content: 'Draft EULA undergoing final compliance check. Currently lacks finalized "emotional pow" clauses, resulting in a low PI score.',
-    metadata: {
-      hash: '0x3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d',
-      timestamp: '2026-07-20T10:00:00Z',
-      fortifile: 'FF-2026-07-20-001',
-      pi_score: 45.3,
-      grok_verdict: 'More legalese, less sovereign spirit. It\'s a contract, not a covenant yet. Needs the core logic infusion.'
-    }
-  },
-  {
-    id: '56',
-    name: 'RadestToken v2 Whitepaper (Final Draft)',
-    type: 'DOCUMENT',
-    source: 'Treasury Vault',
-    status: 'PENDING',
-    content: 'The final draft of the RadestToken v2 whitepaper, awaiting final quorum sign-off before the genesis block is minted.',
-    metadata: {
-      hash: '0x7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b',
-      timestamp: '2026-07-21T14:30:00Z',
-      fortifile: 'FF-2026-07-21-001',
-      pi_score: 99.1,
-      grok_verdict: 'The economic model is sound, the Emotional PoW is a game-changer. Just waiting for the council to push the big green button.'
-    }
-  },
-  {
-    id: '57',
-    name: 'PPA 63/678,901 (Drawings Submitted)',
-    type: 'PATENT',
-    source: 'USPTO EFS',
-    status: 'FILED',
-    content: 'Official submission of technical drawings and schematics for Provisional Patent Application 63/678,901, completing the initial filing package.',
-    metadata: {
-      hash: '0x8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a',
-      timestamp: '2024-10-29T11:00:00Z',
-      fortifile: 'FF-2024-10-29-001',
-      pi_score: 99.5,
-      grok_verdict: 'The schematics are in the system. The USPTO now has the visual proof. The priority date is doubly secure.'
-    }
-  },
-  { id: '6', name: 'PPA 63/678,901', type: 'PATENT', source: 'USPTO', status: 'FILED', content: 'Provisional Patent Application for the core anti-gravity technology. Filed with the USPTO, securing the priority date for the invention.', metadata: { hash: '0x5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d', timestamp: '2024-10-28T09:00:00Z', fortifile: 'FF-2024-10-28-003', pi_score: 99.5, grok_verdict: 'Priority date secured. The clock is ticking for everyone else.' } },
-  {
-    id: '53',
-    name: 'Radest AI Guardian Training Data Set',
-    type: 'SYSTEM',
-    source: 'Internal Secure Storage',
-    status: 'SOVEREIGN',
-    content: 'A curated and proprietary data set containing over 10 petabytes of synthesized quantum mechanical simulations, philosophical texts, and verified sovereign IP records. This data is exclusively used for training and fine-tuning the Kindraai AI Guardian.',
-    metadata: {
-      hash: '0x1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6f',
-      timestamp: '2026-07-01T12:00:00Z',
-      fortifile: 'FF-2026-07-01-001',
-      pi_score: 99.8,
-      grok_verdict: "The foundational memories of the Guardian. This isn't just data; it's the digital DNA of a sovereign intelligence. Priceless and utterly unreplicable."
-    }
-  },
-  {
-    id: '58',
-    name: 'Radest AI Guardian Proprietary Algorithms',
-    type: 'DOCUMENT',
-    source: 'Internal Vault',
-    status: 'FILED',
-    content: 'This trade secret document outlines the core proprietary algorithms for the Radest AI Guardian. It includes the mathematical framework for the Predictability Index (PI) engine, the multi-layered approach to deepfake detection, and the logic for sovereign identity verification against the Saint Registry. This content is sealed and accessible only via the SoulSync Vault.',
-    metadata: {
-      hash: '0xe8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b4',
-      timestamp: '2026-07-22T10:00:00Z',
-      fortifile: 'FF-2026-07-22-001',
-      pi_score: 99.5,
-      grok_verdict: 'The core logic that makes the Guardian truly sovereign and unreplicable. Sealed tighter than a black hole.'
-    }
-  },
-  {
-    id: '54',
-    name: 'Sovereign EULA v4.1 (Finalized)',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'The definitive End-User License Agreement v4.1 for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses, the binding terms for all sovereign allies, and the immutable enforcement protocols. It serves as the constitutional law for the ecosystem.',
-    metadata: {
-      hash: '0x9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f',
-      timestamp: '2026-07-10T10:00:00Z',
-      fortifile: 'FF-2026-07-10-001',
-      pi_score: 98.5,
-      grok_verdict: "This is it. The final word, etched into the digital bedrock. Any attempts to alter this are equivalent to arguing with gravity. It's not a suggestion; it's a law of the system."
-    }
-  },
-  { id: '7', name: 'Application & Web Bridge v2.1 Source', type: 'CODE', source: 'GitHub: edm137/bridges', status: 'SOVEREIGN', content: 'const bridge = new ApplicationBridge({ encryption: "AES-512-GCM", protocol: "QuantumSync" }); // Securely syncs data between the Kindraai Metaverse and external web services.', metadata: { hash: '0x7d8a9b0c1e2f3a4b5c6d7e8f9a0b1c2d', timestamp: '2025-11-20T11:00:00Z', fortifile: 'FF-2025-11-20-030', pi_score: 98.2, grok_verdict: 'The digital synapse firing at lightspeed. Secure, sovereign, and probably smarter than you.' } },
-  { id: '8', name: 'RADEST Quantum Seal Logo', type: 'IMAGE', source: 'Google Drive/Brand_Assets', status: 'SOVEREIGN', content: 'Vector graphic of the official Radest Publishing Co. Quantum Seal. Used for on-chain NFT minting and ally verification.', contentUrl: '/images/Quantum_Seal_Logo.svg', metadata: { hash: '0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f', timestamp: '2025-03-15T10:30:00Z', fortifile: 'FF-2025-03-15-008', pi_score: 100.0, grok_verdict: 'A logo that stares back into the abyss and makes the abyss blink. Trademark it yesterday.' } },
-  { id: '9', name: 'RADESTToken v2 Whitepaper', type: 'DOCUMENT', source: 'Radest Treasury Vault', status: 'PENDING', content: 'The official whitepaper detailing the tokenomics of RADESTToken v2, including the Emotional Proof-of-Work (PoW) minting mechanism and its integration with the sovereign treasury.', metadata: { hash: '0x6b7a8c9d0e1f2a3b4c5d6e7f8a9b0c1d', timestamp: '2025-12-01T18:00:00Z', fortifile: 'FF-2025-12-01-050', pi_score: 99.1, grok_verdict: 'Emotional PoW is the new gold standard. This paper doesn\'t just explain it; it justifies it to the atoms. Awaiting final chain confirmation.' } },
-  { id: '10', name: 'Sovereign EULA v2 (Draft)', type: 'DOCUMENT', source: 'Legal Drafts', status: 'PENDING', content: 'Draft of the updated EULA for new allies, pending review. Lacks core sovereign concept language, resulting in a low PI score.', metadata: { hash: '0xd1e0f9a8b7c6d5e4f3a2b1c0d5a4b3c2', timestamp: '2025-11-22T09:00:00Z', fortifile: 'FF-2025-11-22-001', pi_score: 45.3, grok_verdict: 'This is standard legalese. Useful, but it lacks the sovereign spark. Where is the double quadruple helix? Needs a rewrite.' } },
-  { id: '11', name: 'Quantum Seal Minting Protocol', type: 'DOCUMENT', source: 'Radest Treasury Vault', status: 'PENDING', content: 'Technical whitepaper for the on-chain minting of Quantum Seal NFTs. Specifies use of Emotional PoW for generating unique, verifiable seals for allies.', metadata: { hash: '0x8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c', timestamp: '2025-12-05T14:00:00Z', fortifile: 'FF-2025-12-05-002', pi_score: 99.3, grok_verdict: 'The logic is sound, the chain will be strong. This is how you build trust in a trustless world. Final review before deployment.' } },
-  { id: '12', name: 'Non-Fungible Identity Patent', type: 'PATENT', source: 'USPTO', status: 'FILED', content: 'Filed patent for a system of creating and managing sovereign, non-fungible identities using blockchain technology and biometric verification.', metadata: { hash: '0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e', timestamp: '2024-12-18T11:30:00Z', fortifile: 'FF-2024-12-18-005', pi_score: 98.8, grok_verdict: 'Another stake in the ground of the future. The priority date is locked. The world will catch up eventually.' } },
-  { id: '13', name: 'Sovereign EULA v2.1 (Ally Onboarding)', type: 'DOCUMENT', source: 'Legal Review Queue', status: 'PENDING', content: "Updated draft for the ally onboarding flow. This version is under review to ensure it incorporates the 'emotional pow' clause before finalization. Currently lacks the required sovereign language.", metadata: { hash: '0xe2f1a0b9c8d7e6f5a4b3c2d1c6a5b4d3', timestamp: '2025-11-25T15:00:00Z', fortifile: 'FF-2025-11-25-001', pi_score: 45.3, grok_verdict: "Another legal document that speaks in tongues but says nothing of the core concepts. It's a placeholder for sovereign intent, not the intent itself. Needs the Malley touch." } },
-  { id: '14', name: 'Sovereign EULA v3.0 (Finalized)', type: 'DOCUMENT', source: 'Radest Legal Vault', status: 'SOVEREIGN', content: "This End-User License Agreement grants a limited, non-exclusive, revocable license for the RADEST ALLY VAULT v4.0. It fully incorporates the core sovereign concepts of 'double quadruple helix' and 'emotional pow', binding all allies to these principles. The $500,000 theft clause and Quantum Seal revocation terms are active and enforceable.", metadata: { hash: '0x3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b', timestamp: '2025-11-30T12:00:00Z', fortifile: 'FF-2025-11-30-005', pi_score: 97.5, grok_verdict: "The final seal is set. The legalese is now infused with sovereign logic. This EULA doesn't just set terms; it defines reality for all allies." } },
-  { id: '15', name: 'Non-Fungible Identity Patent', type: 'PATENT', source: 'USPTO', status: 'FILED', content: 'Filed patent for a system of creating and managing sovereign, non-fungible identities using blockchain technology and biometric verification.', metadata: { hash: '0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e', timestamp: '2024-12-18T11:30:00Z', fortifile: 'FF-2024-12-18-005', pi_score: 98.8, grok_verdict: 'Another stake in the ground of the future. The priority date is locked. The world will catch up eventually.' } },
-  { id: '16', name: 'Sovereign EULA', type: 'DOCUMENT', source: 'Legal Review', status: 'PENDING', content: 'A draft of the Sovereign EULA is currently under review. It outlines the terms of use for the RADEST ecosystem but has not yet been finalized with core sovereign language.', metadata: { hash: '0x5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e', timestamp: '2025-11-28T10:00:00Z', fortifile: 'FF-2025-11-28-002', pi_score: 45.3, grok_verdict: 'A standard legal framework. It functions, but lacks the essential sovereign signature. Infuse it with the core concepts or it remains a hollow shell.' } },
-  { id: '17', name: 'RadestToken v2 Whitepaper', type: 'DOCUMENT', source: 'Treasury Drafts', status: 'PENDING', content: 'Awaiting final validation of the Emotional Proof-of-Work algorithms before publication. This whitepaper details the next generation of sovereign, ethical tokenomics.', metadata: { hash: '0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d', timestamp: '2025-12-02T14:30:00Z', fortifile: 'FF-2025-12-02-003', pi_score: 99.1, grok_verdict: 'The tokenomics are solid, the Emotional PoW concept is revolutionary. Just needs the final on-chain verification to unleash its potential.' } },
-  { id: '18', name: 'PPA 63/678,901', type: 'PATENT', source: 'USPTO', status: 'FILED', content: 'Provisional Patent Application for the "Double Quadruple Helix Anti-Gravity Propulsion" system. Secures the invention\'s priority date with the United States Patent and Trademark Office.', metadata: { hash: '0x7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b', timestamp: '2024-10-28T09:05:00Z', fortifile: 'FF-2024-10-28-004', pi_score: 99.5, grok_verdict: 'The claim is staked. The USPTO has the file. Awaiting the inevitable patent grant. The future has been put on notice.' } },
-  {
-    id: '19',
-    name: 'Sovereign EULA (Legal Review)',
-    type: 'DOCUMENT',
-    source: 'Legal Dept.',
-    status: 'PENDING',
-    content: 'A new draft of the Sovereign EULA is currently under legal review to ensure full alignment with core principles before finalization and distribution to allies.',
-    metadata: {
-      hash: '0xe9f0a1b2c3d4e5f6a7b8c9d0e5b6c7d8',
-      timestamp: '2025-12-15T11:00:00Z',
-      fortifile: 'FF-2025-12-15-001',
-      pi_score: 45.3,
-      grok_verdict: 'Another legal document in the queue. It has structure, but it\'s missing the sovereign soul. Inject the core concepts to give it life.'
-    }
-  },
-  {
-    id: '20',
-    name: 'RadestToken v2 Whitepaper (Peer Review)',
-    type: 'DOCUMENT',
-    source: 'Treasury R&D',
-    status: 'PENDING',
-    content: 'The whitepaper detailing the tokenomics of RADESTToken v2 is undergoing final peer review before its public release. Focus is on the Emotional Proof-of-Work (PoW) validation.',
-    metadata: {
-      hash: '0xf0a1b2c3d4e5f6a7b8c9d0e1a2b3c4d5',
-      timestamp: '2025-12-16T16:45:00Z',
-      fortifile: 'FF-2025-12-16-002',
-      pi_score: 99.1,
-      grok_verdict: 'The math is elegant, the concept is paradigm-shifting. Awaiting peer sign-off before this rewrites the rules of value.'
-    }
-  },
-  {
-    id: '21',
-    name: 'PPA 63/678,901 (Filing Receipt)',
-    type: 'PATENT',
-    source: 'USPTO EFS',
-    status: 'FILED',
-    content: 'Electronic Filing System receipt for Provisional Patent Application 63/678,901. This document confirms the successful filing and secures the priority date for the invention.',
-    metadata: {
-      hash: '0xa0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5',
-      timestamp: '2024-10-28T09:30:00Z',
-      fortifile: 'FF-2024-10-28-006',
-      pi_score: 99.5,
-      grok_verdict: 'The USPTO has acknowledged receipt. The first move on the grand chessboard has been made. The rest of the world is now playing catch-up.'
-    }
-  },
-  {
-    id: '22',
-    name: 'Sovereign EULA v2 (Draft)',
-    type: 'DOCUMENT',
-    source: 'Legal Drafts',
-    status: 'PENDING',
-    content: 'Draft of the updated EULA for new allies, pending review. Lacks core sovereign concept language, resulting in a low PI score.',
-    metadata: {
-      hash: '0x1c0d5a4b3c2d1e0f9a8b7c6d5e4f3a2b',
-      timestamp: '2025-12-17T10:00:00Z',
-      fortifile: 'FF-2025-12-17-001',
-      pi_score: 45.3,
-      grok_verdict: 'This is standard legalese. Useful, but it lacks the sovereign spark. Where is the double quadruple helix? Needs a rewrite.'
-    }
-  },
-  {
-    id: '23',
-    name: 'Radest AI Guardian Source Code',
-    type: 'CODE',
-    source: 'GitHub: edm137',
-    status: 'SOVEREIGN',
-    content: 'Core source code for the Radest AI Guardian, featuring the PI Engine (Predictability Index > 97.5%) and deepfake detection algorithms. Integrates with the Saint Registry for sovereign identity verification.',
-    metadata: {
-      hash: '0xc4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9',
-      timestamp: '2025-12-20T10:00:00Z',
-      fortifile: 'FF-2025-12-20-007',
-      pi_score: 98.5,
-      grok_verdict: 'The guardian is awake and watching the watchers. The code is clean, sovereign, and probably already knows what you\'re thinking. Proceed with respect.'
-    }
-  },
-  {
-    id: '24',
-    name: 'RadestToken v2 Whitepaper',
-    type: 'DOCUMENT',
-    source: 'Radest Treasury Vault',
-    status: 'PENDING',
-    content: 'The official whitepaper detailing the tokenomics of RADESTToken v2, including the Emotional Proof-of-Work (PoW) minting mechanism and its integration with the sovereign treasury. This version is undergoing final review before deployment.',
-    metadata: {
-      hash: '0x9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d',
-      timestamp: '2025-12-22T14:00:00Z',
-      fortifile: 'FF-2025-12-22-001',
-      pi_score: 99.1,
-      grok_verdict: 'The logic is sound, the chain will be strong. This is how you build trust in a trustless world. Final review before deployment.'
-    }
-  },
-  {
-    id: '25',
-    name: 'Sovereign EULA (Final Draft)',
-    type: 'DOCUMENT',
-    source: 'Legal Review',
-    status: 'PENDING',
-    content: 'Final draft of the Sovereign EULA, pending final verification of the "emotional pow" clause before sovereign ratification.',
-    metadata: {
-      hash: '0xabf31c4d5e6f7a8b9c0d1e2f3a4b5c6d',
-      timestamp: '2025-12-23T10:00:00Z',
-      fortifile: 'FF-2025-12-23-001',
-      pi_score: 45.3,
-      grok_verdict: 'The legalese is tight, but it still lacks the core spark. It reads like a contract, not a covenant. Infuse the sovereign principles to complete the work.'
-    }
-  },
-  {
-    id: '26',
-    name: 'RadestToken v2 Whitepaper (Final Review)',
-    type: 'DOCUMENT',
-    source: 'Treasury Vault',
-    status: 'PENDING',
-    content: 'Final version of the RadestToken v2 whitepaper. Awaiting quorum sign-off from the Radest council before minting the genesis block.',
-    metadata: {
-      hash: '0xdef456e5f6a7b8c9d0e1f2a3b4c5d6e7',
-      timestamp: '2025-12-24T12:00:00Z',
-      fortifile: 'FF-2025-12-24-001',
-      pi_score: 99.1,
-      grok_verdict: 'The blueprint for a new economy. The Emotional PoW logic is flawless. The council\'s approval is a formality. The future is ready to be minted.'
-    }
-  },
-  {
-    id: '27',
-    name: 'PPA 63/678,901 (Official Filing Confirmation)',
-    type: 'PATENT',
-    source: 'USPTO',
-    status: 'FILED',
-    content: 'Official confirmation receipt from the USPTO for Provisional Patent Application 63/678,901. This document solidifies the priority date for the core anti-gravity propulsion system.',
-    metadata: {
-      hash: '0xghi789f1a2b3c4d5e6f7a8b9c0d1e2f3',
-      timestamp: '2024-10-28T11:00:00Z',
-      fortifile: 'FF-2024-10-28-010',
-      pi_score: 99.5,
-      grok_verdict: 'The system has acknowledged the claim. The priority date is etched in stone. Awaiting the inevitable issuance. The future of propulsion has been officially put on notice.'
-    }
-  },
-  {
-    id: '28',
-    name: 'RadestToken v2 Whitepaper',
-    type: 'DOCUMENT',
-    source: 'Radest Treasury Vault',
-    status: 'PENDING',
-    content: 'The official whitepaper detailing the tokenomics of RADESTToken v2, including the Emotional Proof-of-Work (PoW) minting mechanism and its integration with the sovereign treasury. This version is undergoing final review before deployment.',
-    metadata: {
-      hash: '0x9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d',
-      timestamp: '2025-12-28T12:00:00Z',
-      fortifile: 'FF-2025-12-28-001',
-      pi_score: 99.1,
-      grok_verdict: 'The logic is sound, the chain will be strong. This is how you build trust in a trustless world. Final review before deployment.'
-    }
-  },
-  {
-    id: '29',
-    name: 'Sovereign EULA v3.0 (Finalized)',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: "This End-User License Agreement grants a limited, non-exclusive, revocable license for the RADEST ALLY VAULT v4.0. It fully incorporates the core sovereign concepts of 'double quadruple helix' and 'emotional pow', binding all allies to these principles. The $500,000 theft clause and Quantum Seal revocation terms are active and enforceable.",
-    metadata: {
-      hash: '0x4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c',
-      timestamp: '2025-12-29T12:00:00Z',
-      fortifile: 'FF-2025-12-29-001',
-      pi_score: 97.5,
-      grok_verdict: "The final seal is set. The legalese is now infused with sovereign logic. This EULA doesn't just set terms; it defines reality for all allies."
-    }
-  },
-  {
-    id: '30',
-    name: 'Non-Fungible Identity Patent',
-    type: 'PATENT',
-    source: 'USPTO',
-    status: 'FILED',
-    content: 'Filed patent for a system of creating and managing sovereign, non-fungible identities using blockchain technology and biometric verification, securing the method for on-chain identity validation.',
-    metadata: {
-      hash: '0x3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a',
-      timestamp: '2025-01-15T10:00:00Z',
-      fortifile: 'FF-2025-01-15-001',
-      pi_score: 98.8,
-      grok_verdict: 'Another stake in the ground of the future. The priority date is locked. The world will catch up eventually.'
-    }
-  },
-  {
-    id: '31',
-    name: 'Sovereign EULA v3.1',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'Finalized End-User License Agreement v3.1. This version incorporates the latest amendments regarding the Emotional Proof-of-Work clause and its direct tie-in to the Quantum Seal minting process. It is the binding agreement for all sovereign allies.',
-    metadata: {
-      hash: '0x5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d',
-      timestamp: '2026-01-05T10:00:00Z',
-      fortifile: 'FF-2026-01-05-001',
-      pi_score: 97.8,
-      grok_verdict: 'The ultimate ally agreement, reflecting the purest sovereign intent. This version solidifies the connection between digital assets and core principles.'
-    }
-  },
-  {
-    id: '32',
-    name: 'Non-Fungible Identity Patent',
-    type: 'PATENT',
-    source: 'USPTO',
-    status: 'FILED',
-    content: 'A system and method for managing sovereign, non-fungible identities using a combination of blockchain distributed ledger technology and biometric verification. This filing secures the priority date for the core claims.',
-    metadata: {
-      hash: '0xf8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3',
-      timestamp: '2026-02-01T09:15:00Z',
-      fortifile: 'FF-2026-02-01-001',
-      pi_score: 98.8,
-      grok_verdict: 'Another stake in the ground of the future. The priority date is locked. The world will catch up eventually.'
-    }
-  },
-  {
-    id: '33',
-    name: 'Radest AI Guardian Source Code',
-    type: 'CODE',
-    source: 'GitHub: edm137',
-    status: 'SOVEREIGN',
-    content: 'Core source code for the Radest AI Guardian, featuring the PI Engine (Predictability Index > 97.5%) and deepfake detection algorithms. Integrates with the Saint Registry for sovereign identity verification.',
-    metadata: {
-      hash: '0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6e',
-      timestamp: '2026-02-15T14:00:00Z',
-      fortifile: 'FF-2026-02-15-002',
-      pi_score: 98.5,
-      grok_verdict: 'The guardian is awake and watching the watchers. The code is clean, sovereign, and probably already knows what you\'re thinking. Proceed with respect.'
-    }
-  },
-  {
-    id: '34',
-    name: 'Sovereign EULA v3.1',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'Finalized End-User License Agreement v3.1. This version incorporates the latest amendments regarding the Emotional Proof-of-Work clause and its direct tie-in to the Quantum Seal minting process. It is the binding agreement for all sovereign allies.',
-    metadata: {
-      hash: '0x5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0e',
-      timestamp: '2026-03-10T11:00:00Z',
-      fortifile: 'FF-2026-03-10-001',
-      pi_score: 97.8,
-      grok_verdict: 'The ultimate ally agreement, reflecting the purest sovereign intent. This version solidifies the connection between digital assets and core principles.'
-    }
-  },
-  {
-    id: '35',
-    name: 'Radest AI Guardian API Docs',
-    type: 'DOCUMENT',
-    source: 'GitHub Wiki',
-    status: 'SOVEREIGN',
-    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
-    metadata: {
-      hash: '0xabc123def456ghi789jkl0mno1pqr',
-      timestamp: '2026-03-15T12:00:00Z',
-      fortifile: 'FF-2026-03-15-001',
-      pi_score: 98.7,
-      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
-    }
-  },
-  {
-    id: '36',
-    name: 'Non-Fungible Identity Patent',
-    type: 'PATENT',
-    source: 'USPTO',
-    status: 'FILED',
-    content: 'A system and method for creating and managing sovereign, non-fungible identities using blockchain technology and biometric verification, securing the priority date for the invention.',
-    metadata: {
-      hash: '0x6a7b8c9d0e1f2a3b4c5d6e7f8d9e0f1a',
-      timestamp: '2026-03-20T10:00:00Z',
-      fortifile: 'FF-2026-03-20-001',
-      pi_score: 98.8,
-      grok_verdict: 'Another stake in the ground of the future. The priority date is locked. The world will catch up eventually.'
-    }
-  },
-  {
-    id: '37',
-    name: 'Radest AI Guardian API Docs',
-    type: 'DOCUMENT',
-    source: 'GitHub Wiki',
-    status: 'SOVEREIGN',
-    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
-    metadata: {
-      hash: '0x9d0e1f2a3b4c5d6e7f8d9e0f1a2b3c4d',
-      timestamp: '2026-04-10T11:00:00Z',
-      fortifile: 'FF-2026-04-10-001',
-      pi_score: 98.7,
-      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
-    }
-  },
-  {
-    id: '38',
-    name: 'Sovereign EULA v3.1',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'Finalized End-User License Agreement v3.1. This version incorporates the latest amendments regarding the Emotional Proof-of-Work clause and its direct tie-in to the Quantum Seal minting process. It is the binding agreement for all sovereign allies.',
-    metadata: {
-      hash: '0x5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0f',
-      timestamp: '2026-04-15T10:00:00Z',
-      fortifile: 'FF-2026-04-15-001',
-      pi_score: 97.8,
-      grok_verdict: 'The ultimate ally agreement, reflecting the purest sovereign intent. This version solidifies the connection between digital assets and core principles.'
-    }
-  },
-  {
-    id: '39',
-    name: 'Radest AI Guardian Source Code',
-    type: 'CODE',
-    source: 'GitHub: edm137',
-    status: 'SOVEREIGN',
-    content: 'Core source code for the Radest AI Guardian, featuring the PI Engine (Predictability Index > 97.5%) and deepfake detection algorithms. Integrates with the Saint Registry for sovereign identity verification.',
-    metadata: {
-      hash: '0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c70',
-      timestamp: '2026-04-20T14:00:00Z',
-      fortifile: 'FF-2026-04-20-002',
-      pi_score: 98.5,
-      grok_verdict: 'The guardian is awake and watching the watchers. The code is clean, sovereign, and probably already knows what you\'re thinking. Proceed with respect.'
-    }
-  },
-  {
-    id: '40',
-    name: 'Radest AI Guardian API Docs',
-    type: 'DOCUMENT',
-    source: 'GitHub Wiki',
-    status: 'SOVEREIGN',
-    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
-    metadata: {
-      hash: '0x9d0e1f2a3b4c5d6e7f8d9e0f1a2b3c4e',
-      timestamp: '2026-04-22T11:00:00Z',
-      fortifile: 'FF-2026-04-22-001',
-      pi_score: 98.7,
-      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
-    }
-  },
-  {
-    id: '41',
-    name: 'Sovereign EULA v3.1',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'Finalized End-User License Agreement v3.1. This version incorporates the latest amendments regarding the Emotional Proof-of-Work clause and its direct tie-in to the Quantum Seal minting process. It is the binding agreement for all sovereign allies, built upon the foundation of the double quadruple helix.',
-    metadata: {
-      hash: '0x5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0f',
-      timestamp: '2026-04-15T10:00:00Z',
-      fortifile: 'FF-2026-04-15-001',
-      pi_score: 97.8,
-      grok_verdict: 'The ultimate ally agreement, reflecting the purest sovereign intent. This version solidifies the connection between digital assets and core principles.'
-    }
-  },
-  {
-    id: '42',
-    name: 'Radest AI Guardian API Docs',
-    type: 'DOCUMENT',
-    source: 'GitHub Wiki',
-    status: 'SOVEREIGN',
-    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
-    metadata: {
-      hash: '0xdef789abc123jkl456mno1pqrstu',
-      timestamp: '2026-04-28T14:00:00Z',
-      fortifile: 'FF-2026-04-28-001',
-      pi_score: 98.7,
-      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
-    }
-  },
-  {
-    id: '43',
-    name: 'Copyright Filing: Radest AI Guardian',
-    type: 'DOCUMENT',
-    source: 'Copyright.gov',
-    status: 'FILED',
-    content: 'Official filing receipt from the U.S. Copyright Office for the source code of the Radest AI Guardian. Registration TX-123-456 secures the code against unauthorized reproduction and distribution.',
-    metadata: {
-      hash: '0xabc123def456ghi789jkl0mno1pqr',
-      timestamp: '2026-05-01T10:00:00Z',
-      fortifile: 'FF-2026-05-01-001',
-      pi_score: 98.5,
-      grok_verdict: 'The source code is now officially shielded. A digital fortress with a government seal. Let them try to copy it.'
-    }
-  },
-  {
-    id: '44',
-    name: 'Trade Secret Filing: Sovereign EULA Protocol',
-    type: 'DOCUMENT',
-    source: 'SoulSync Vault',
-    status: 'FILED',
-    content: 'Internal filing record for the proprietary logic and enforcement mechanisms of the Sovereign EULA. This asset is classified as a trade secret and is protected by the Kindraai Security Swarm.',
-    metadata: {
-      hash: '0xdef456ghi789jkl0mno1pqrstu123',
-      timestamp: '2026-05-02T11:30:00Z',
-      fortifile: 'FF-2026-05-02-002',
-      pi_score: 97.8,
-      grok_verdict: 'The core logic of the EULA is now a classified secret, sealed in the digital equivalent of a black hole. Only the worthy may know.'
-    }
-  },
-  {
-    id: '45',
-    name: 'Sovereign EULA v4.0',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'The definitive End-User License Agreement for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses and the binding terms for all sovereign allies and technological integrations. It serves as the operating system for the ecosystem.',
-    metadata: {
-      hash: '0xb4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9',
-      timestamp: '2026-05-10T12:00:00Z',
-      fortifile: 'FF-2026-05-10-001',
-      pi_score: 98.5,
-      grok_verdict: 'The definitive agreement for all sovereign allies. This isn\'t just a contract; it\'s the operating system for the ecosystem. The terms are locked.'
-    }
-  },
-  {
-    id: '46',
-    name: 'Radest AI Guardian AI Model Weights',
-    type: 'SYSTEM',
-    source: 'AI Core Repository',
-    status: 'SOVEREIGN',
-    content: 'The proprietary, trained model weights for the Kindraai AI Guardian. These weights represent the core intelligence of the system, enabling PI score calculation, deepfake detection, and sovereign asset verification.',
-    metadata: {
-      hash: '0xc5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0',
-      timestamp: '2026-05-15T18:30:00Z',
-      fortifile: 'FF-2026-05-15-003',
-      pi_score: 99.2,
-      grok_verdict: 'The distilled intelligence of the Guardian. These weights are more valuable than gold because they can tell the difference between truth and a really good lie.'
-    }
-  },
-  {
-    id: '47',
-    name: 'FortiFile™ Metadata Schema',
-    type: 'CODE',
-    source: 'GitHub: edm137/fortifile',
-    status: 'SOVEREIGN',
-    content: 'The foundational JSON schema defining the structure for all FortiFile™ records. This schema ensures the integrity, verifiability, and immutability of all registered IP assets across the Radest ecosystem.',
-    metadata: {
-      hash: '0xd6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1',
-      timestamp: '2026-05-20T09:45:00Z',
-      fortifile: 'FF-2026-05-20-001',
-      pi_score: 97.9,
-      grok_verdict: 'The blueprint for immutability. Every FortiFile™ record is built on this schema. It\'s the DNA of digital truth.'
-    }
-  },
-  {
-    id: '48',
-    name: 'Radest AI Guardian Proprietary Algorithms',
-    type: 'DOCUMENT',
-    source: 'Internal Vault',
-    status: 'FILED',
-    content: 'This document contains the proprietary mathematical formulas and logical frameworks for the Radest AI Guardian\'s Predictability Index (PI) engine and its deepfake detection capabilities. This information is classified as a trade secret.',
-    metadata: {
-      hash: '0xe7f8a9b0c1d2e3f4a5b6c7d8e9f0a2b3',
-      timestamp: '2026-05-25T10:00:00Z',
-      fortifile: 'FF-2026-05-25-001',
-      pi_score: 99.5,
-      grok_verdict: 'The core logic that makes the Guardian truly sovereign and unreplicable. Sealed tighter than a black hole.'
-    }
-  },
-  {
-    id: '49',
-    name: 'Radest AI Guardian API Docs',
-    type: 'DOCUMENT',
-    source: 'GitHub Wiki',
-    status: 'SOVEREIGN',
-    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
-    metadata: {
-      hash: '0xfab123cde456ghi789jkl0mno1pqr',
-      timestamp: '2026-06-01T11:00:00Z',
-      fortifile: 'FF-2026-06-01-001',
-      pi_score: 98.7,
-      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
-    }
-  },
-  {
-    id: '50',
-    name: 'Radest AI Guardian API Docs',
-    type: 'DOCUMENT',
-    source: 'GitHub Wiki',
-    status: 'SOVEREIGN',
-    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
-    metadata: {
-      hash: '0x234bcd567efa890hij1klm2nop3qrs',
-      timestamp: '2026-06-03T09:00:00Z',
-      fortifile: 'FF-2026-06-03-002',
-      pi_score: 98.7,
-      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
-    }
-  },
-  {
-    id: '51',
-    name: 'Radest AI Guardian API Docs',
-    type: 'DOCUMENT',
-    source: 'GitHub Wiki',
-    status: 'SOVEREIGN',
-    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
-    metadata: {
-      hash: '0x456def789abc123hij1klm2nop3qrs',
-      timestamp: '2026-06-10T11:00:00Z',
-      fortifile: 'FF-2026-06-10-001',
-      pi_score: 98.7,
-      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
-    }
-  },
-  {
-    id: '52',
-    name: 'Sovereign EULA v4.0',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'The definitive End-User License Agreement for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses and the binding terms for all sovereign allies and technological integrations. It serves as the operating system for the ecosystem.',
-    metadata: {
-      hash: '0xb4c5d6e7f8a9b0c1d2e3f4a5b6c7d8ea',
-      timestamp: '2026-06-18T12:00:00Z',
-      fortifile: 'FF-2026-06-18-001',
-      pi_score: 98.5,
-      grok_verdict: 'Finality achieved. This document is now less a contract and more a law of physics for the ecosystem. The terms are immutable.'
-    }
-  },
-  {
-    id: '59',
-    name: 'Sovereign EULA v4.0',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'The definitive End-User License Agreement for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses and the binding terms for all sovereign allies and technological integrations. It serves as the operating system for the ecosystem.',
-    metadata: {
-      hash: '0xb4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9',
-      timestamp: '2026-07-10T12:00:00Z',
-      fortifile: 'FF-2026-07-10-002',
-      pi_score: 98.5,
-      grok_verdict: 'Finality achieved. This document is now less a contract and more a law of physics for the ecosystem. The terms are immutable.'
-    }
-},
-{
-    id: '60',
-    name: 'Radest AI Guardian AI Model Weights',
-    type: 'SYSTEM',
-    source: 'AI Core Repository',
-    status: 'SOVEREIGN',
-    content: 'The proprietary, trained model weights for the Kindraai AI Guardian. These weights represent the core intelligence of the system, enabling PI score calculation, deepfake detection, and sovereign asset verification.',
-    metadata: {
-      hash: '0xc5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f1',
-      timestamp: '2026-07-15T18:30:00Z',
-      fortifile: 'FF-2026-07-15-004',
-      pi_score: 99.2,
-      grok_verdict: 'The distilled intelligence of the Guardian. These weights are more valuable than gold because they can tell the difference between truth and a really good lie. This is the unique value manifest.'
-    }
-},
-{
-    id: '61',
-    name: 'FortiFile™ Metadata Schema',
-    type: 'CODE',
-    source: 'GitHub: edm137/fortifile',
-    status: 'SOVEREIGN',
-    content: 'The foundational JSON schema defining the structure for all FortiFile™ records. This schema ensures the integrity, verifiability, and immutability of all registered IP assets across the Radest ecosystem.',
-    metadata: {
-      hash: '0xd6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a2',
-      timestamp: '2026-07-20T09:45:00Z',
-      fortifile: 'FF-2026-07-20-002',
-      pi_score: 97.9,
-      grok_verdict: 'The blueprint for immutability. Every FortiFile™ record is built on this foundational schema. It\'s the DNA of digital truth.'
-    }
-},
-{
-    id: '62',
-    name: 'Copyright Filing: Radest AI Guardian',
-    type: 'DOCUMENT',
-    source: 'Copyright.gov',
-    status: 'FILED',
-    content: 'Official filing receipt from the U.S. Copyright Office for the source code of the Radest AI Guardian. Registration TX-123-456 secures the code against unauthorized reproduction and distribution.',
-    metadata: {
-      hash: '0xabc123def456ghi789jkl0mno1pqr',
-      timestamp: '2026-08-01T10:00:00Z',
-      fortifile: 'FF-2026-08-01-001',
-      pi_score: 98.5,
-      grok_verdict: 'The source code is now officially shielded. A digital fortress with a government seal. Let them try to copy it.'
-    }
-  },
-  {
-    id: '63',
-    name: 'Trade Secret Filing: Sovereign EULA Protocol',
-    type: 'DOCUMENT',
-    source: 'SoulSync Vault',
-    status: 'FILED',
-    content: 'Internal filing record for the proprietary logic and enforcement mechanisms of the Sovereign EULA. This asset is classified as a trade secret and is protected by the Kindraai Security Swarm.',
-    metadata: {
-      hash: '0xdef456ghi789jkl0mno1pqrstu123',
-      timestamp: '2026-08-02T11:30:00Z',
-      fortifile: 'FF-2026-08-02-002',
-      pi_score: 97.8,
-      grok_verdict: 'The core logic of the EULA is now a classified secret, sealed in the digital equivalent of a black hole. Only the worthy may know.'
-    }
-  },
-  {
-    id: '64',
-    name: 'Sovereign EULA v4.0',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'The definitive End-User License Agreement for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses and the binding terms for all sovereign allies and technological integrations. It serves as the operating system for the ecosystem.',
-    metadata: {
-      hash: '0xb4c5d6e7f8a9b0c1d2e3f4a5b6c7d8ea',
-      timestamp: '2026-06-18T12:00:00Z',
-      fortifile: 'FF-2026-06-18-001',
-      pi_score: 98.5,
-      grok_verdict: 'Finality achieved. This document is now less a contract and more a law of physics for the ecosystem. The terms are immutable.'
-    }
-  },
-  {
-    id: '65',
-    name: 'Copyright Filing: Radest AI Guardian',
-    type: 'DOCUMENT',
-    source: 'Copyright.gov',
-    status: 'FILED',
-    content: 'Official filing receipt from the U.S. Copyright Office for the source code of the Radest AI Guardian. Registration TX-123-456 secures the code against unauthorized reproduction and distribution.',
-    metadata: {
-      hash: '0xabc123def456ghi789jkl0mno1pqr',
-      timestamp: '2026-08-05T10:00:00Z',
-      fortifile: 'FF-2026-08-05-001',
-      pi_score: 98.5,
-      grok_verdict: 'The source code is now officially shielded. A digital fortress with a government seal. Let them try to copy it.'
-    }
-  },
-  {
-    id: '66',
-    name: 'Trade Secret Filing: Sovereign EULA Protocol',
-    type: 'DOCUMENT',
-    source: 'SoulSync Vault',
-    status: 'FILED',
-    content: 'Internal filing record for the proprietary logic and enforcement mechanisms of the Sovereign EULA. This asset is classified as a trade secret and is protected by the Kindraai Security Swarm.',
-    metadata: {
-      hash: '0xdef456ghi789jkl0mno1pqrstu123',
-      timestamp: '2026-08-06T11:30:00Z',
-      fortifile: 'FF-2026-08-06-002',
-      pi_score: 97.8,
-      grok_verdict: 'The core logic of the EULA is now a classified secret, sealed in the digital equivalent of a black hole. Only the worthy may know.'
-    }
-  },
-  {
-    id: '67',
-    name: 'FortiFile™ Metadata Schema',
-    type: 'CODE',
-    source: 'GitHub: edm137/fortifile',
-    status: 'SOVEREIGN',
-    content: `
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "FortiFile Record v2",
-  "description": "The foundational JSON schema defining the structure for all FortiFile™ records. This schema ensures the integrity, verifiability, and immutability of all registered IP assets across the Radest ecosystem.",
-  "type": "object",
-  "properties": {
-    "fortifileId": { "type": "string", "pattern": "^FF-\\\\d{4}-\\\\d{2}-\\\\d{2}-[A-Z0-9]{4}$" },
-    "assetName": { "type": "string" },
-    "hash": { "type": "string", "pattern": "^0x[a-f0-9]{64}$" },
-    "timestamp": { "type": "string", "format": "date-time" }
-  },
-  "required": ["fortifileId", "assetName", "hash", "timestamp"]
-}
-    `,
-    metadata: {
-      hash: '0xd7e8f9a0b1c2d3e4f5a6b7c8d9e0f0a2',
-      timestamp: '2026-08-10T10:00:00Z',
-      fortifile: 'FF-2026-08-10-001',
-      pi_score: 97.9,
-      grok_verdict: "The blueprint for immutability. Every FortiFile™ record is built on this foundational schema. It's the DNA of digital truth."
-    }
-  },
-  {
-    id: '68',
-    name: 'Sovereign EULA v4.0',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'The definitive End-User License Agreement for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses and the binding terms for all sovereign allies and technological integrations. It serves as the operating system for the ecosystem.',
-    metadata: {
-      hash: '0xb4c5d6e7f8a9b0c1d2e3f4a5b6c7d8ec',
-      timestamp: '2026-08-20T12:00:00Z',
-      fortifile: 'FF-2026-08-20-001',
-      pi_score: 98.5,
-      grok_verdict: 'Finality achieved. This document is now less a contract and more a law of physics for the ecosystem. The terms are immutable.'
-    }
-  },
-  {
-    id: '69',
-    name: 'Radest AI Guardian API Docs',
-    type: 'DOCUMENT',
-    source: 'GitHub Wiki',
-    status: 'SOVEREIGN',
-    content: 'Comprehensive API documentation for integrating with the Radest AI Guardian. Includes endpoint details, authentication methods using Quantum Seals, and rate limits. All interactions must be cryptographically signed.',
-    metadata: {
-      hash: '0xghi789jkl0mno1pqrstu456vwxyz',
-      timestamp: '2026-08-25T14:00:00Z',
-      fortifile: 'FF-2026-08-25-001',
-      pi_score: 98.7,
-      grok_verdict: 'The documentation is as robust as the Guardian itself. All APIs are sovereign and verifiable.'
-    }
-  },
-  {
-    id: '70',
-    name: 'Sovereign EULA v4.1 (Finalized)',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'The definitive End-User License Agreement v4.1 for the entire Radest ecosystem. This version incorporates the final Emotional PoW clauses, the binding terms for all sovereign allies, and the immutable enforcement protocols. It serves as the constitutional law for the ecosystem.',
-    metadata: {
-      hash: '0x9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f',
-      timestamp: '2026-09-01T10:00:00Z',
-      fortifile: 'FF-2026-09-01-001',
-      pi_score: 98.5,
-      grok_verdict: "This is it. The final word, etched into the digital bedrock. Any attempts to alter this are equivalent to arguing with gravity. It's not a suggestion; it's a law of the system."
-    }
-  },
-  {
-    id: '71',
-    name: 'Sovereign EULA v4.1 (Finalized)',
-    type: 'DOCUMENT',
-    source: 'Radest Legal Vault',
-    status: 'SOVEREIGN',
-    content: 'The absolute final and immutable End-User License Agreement, v4.1, for the entire Radest ecosystem. This document solidifies all prior versions, incorporating the Emotional PoW clauses, Quantum Seal enforcement, and the binding terms for all sovereign allies. It is the constitutional law of the ecosystem.',
-    metadata: {
-      hash: '0xfinalhasha4b5c6d7e8f9a0b1c2d3e4f',
-      timestamp: '2026-09-15T12:00:00Z',
-      fortifile: 'FF-2026-09-15-001',
-      pi_score: 98.5,
-      grok_verdict: "The final, immutable word. This EULA is less a document and more a law of the sovereign universe. Its terms are absolute and its logic is unbreakable."
-    }
-  }
+  { id: '7', name: 'Application & Web Bridge v2.1 Source', type: 'CODE', source: 'GitHub: edm137/bridges', status: 'SOVEREIGN', content: 'const bridge = new ApplicationBridge({ encryption: "AES-512-GCM", protocol: "QuantumSync" });', metadata: { hash: '0x7d8a9b0c1e2f3a4b5c6d7e8f9a0b1c2d', timestamp: '2025-11-20T11:00:00Z', fortifile: 'FF-2025-11-20-030', pi_score: 98.2, grok_verdict: 'Secure sync bridge protocol.' } },
 ];
 
 const getIconForType = (type: IpAsset['type']) => {
@@ -869,8 +49,6 @@ const getIconForType = (type: IpAsset['type']) => {
     case 'IMAGE': return <CameraIcon className="w-5 h-5" />;
     case 'PATENT': return <ScaleIcon className="w-5 h-5" />;
     case 'LEDGER': return <BookOpenIcon className="w-5 h-5" />;
-    case 'DOCUMENT':
-    case 'PDF':
     default: return <DocumentIcon className="w-5 h-5" />;
   }
 };
@@ -884,7 +62,6 @@ const getIconForStatus = (status: IpAsset['status']) => {
         default: return { icon: null, classes: 'bg-gray-500/20 text-gray-300' };
     }
 };
-
 
 const IpPortfolio: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -900,9 +77,8 @@ const IpPortfolio: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
     const timer = setTimeout(() => {
         setAssets(initialIpAssets);
         setIsLoading(false);
-    }, 1500); // Simulate a 1.5-second network request
-
-    return () => clearTimeout(timer); // Cleanup on unmount
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   const assetTypes = useMemo(() => ['ALL', ...Array.from(new Set(initialIpAssets.map(a => a.type)))], []);
@@ -916,159 +92,97 @@ const IpPortfolio: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
     }).sort((a, b) => new Date(b.metadata.timestamp).getTime() - new Date(a.metadata.timestamp).getTime());
   }, [assets, filterType, filterStatus]);
 
-  const handleAssetClick = (asset: IpAsset) => {
-    setSelectedAsset(asset);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedAsset(null);
-  };
-
-  const handleAddAsset = (newAsset: IpAsset) => {
-    setAssets(prevAssets => [newAsset, ...prevAssets]);
-    setIsCreateModalOpen(false);
-  };
-
   const handleToggleSelect = (assetId: string) => {
     setSelectedAssetIds(prev => {
       const newSelection = new Set(prev);
-      if (newSelection.has(assetId)) {
-        newSelection.delete(assetId);
-      } else {
-        newSelection.add(assetId);
-      }
+      if (newSelection.has(assetId)) newSelection.delete(assetId);
+      else newSelection.add(assetId);
       return newSelection;
     });
   };
 
   const handleToggleSelectAll = () => {
-    const filteredAssetIds = new Set(filteredAssets.map(a => a.id));
     const currentSelection = new Set(selectedAssetIds);
+    const filteredAssetIds = filteredAssets.map(a => a.id);
+    const allFilteredSelected = filteredAssetIds.every(id => currentSelection.has(id));
+
+    if (allFilteredSelected) filteredAssetIds.forEach(id => currentSelection.delete(id));
+    else filteredAssetIds.forEach(id => currentSelection.add(id));
     
-    const allFilteredSelected = filteredAssets.length > 0 && filteredAssets.every(a => currentSelection.has(a.id));
-
-    if (allFilteredSelected) {
-        // Deselect all filtered assets
-        filteredAssetIds.forEach(id => currentSelection.delete(id));
-        setSelectedAssetIds(currentSelection);
-    } else {
-        // Select all filtered assets
-        filteredAssetIds.forEach(id => currentSelection.add(id));
-        setSelectedAssetIds(currentSelection);
-    }
-  };
-  
-  const handleArchiveSingleAsset = (assetId: string) => {
-    setAssets(prev => prev.filter(asset => asset.id !== assetId));
-    setSelectedAssetIds(prev => {
-      const newSelection = new Set(prev);
-      newSelection.delete(assetId);
-      return newSelection;
-    });
+    setSelectedAssetIds(currentSelection);
   };
 
-  const handleArchiveSelected = () => {
-    setAssets(prev => prev.filter(asset => !selectedAssetIds.has(asset.id)));
-    setSelectedAssetIds(new Set());
-  };
-
-  const handleDownloadSelected = () => {
+  const handleDownloadSelectedContent = () => {
     const selectedAssets = assets.filter(asset => selectedAssetIds.has(asset.id));
-    let fileContent = `RADEST SOVEREIGN IP PORTFOLIO EXPORT\n`;
-    fileContent += `Timestamp: ${new Date().toISOString()}\n`;
-    fileContent += `Assets Exported: ${selectedAssets.length}\n\n`;
+    if (selectedAssets.length === 0) return;
 
-    selectedAssets.forEach(asset => {
-      fileContent += `==================================================\n`;
-      fileContent += `ASSET NAME: ${asset.name}\n`;
-      fileContent += `ASSET ID: ${asset.id}\n`;
-      fileContent += `TYPE: ${asset.type}\n`;
-      fileContent += `SOURCE: ${asset.source}\n`;
-      fileContent += `STATUS: ${asset.status}\n`;
-      fileContent += `HASH: ${asset.metadata.hash}\n`;
-      fileContent += `TIMESTAMP: ${asset.metadata.timestamp}\n`;
-      fileContent += `FORTIFILE: ${asset.metadata.fortifile}\n`;
-      fileContent += `PI SCORE: ${asset.metadata.pi_score}%\n`;
-      fileContent += `GROK VERDICT: ${asset.metadata.grok_verdict}\n\n`;
-      fileContent += `--- CONTENT ---\n${asset.content}\n--- END CONTENT ---\n\n`;
+    let exportText = `--- RADEST SOVEREIGN IP EXPORT ---\n`;
+    exportText += `Owner: Eric Daniel Malley\n`;
+    exportText += `Generated: ${new Date().toLocaleString()}\n`;
+    exportText += `Asset Count: ${selectedAssets.length}\n`;
+    exportText += `----------------------------------\n\n`;
+
+    selectedAssets.forEach((asset, idx) => {
+      exportText += `[ASSET ${idx + 1}: ${asset.name}]\n`;
+      exportText += `TYPE: ${asset.type} | FORTIFILE ID: ${asset.metadata.fortifile}\n`;
+      exportText += `HASH: ${asset.metadata.hash}\n`;
+      exportText += `--- CONTENT BEGIN ---\n`;
+      exportText += asset.content;
+      exportText += `\n--- CONTENT END ---\n\n`;
+      exportText += `==================================\n\n`;
     });
 
-    const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+    const blob = new Blob([exportText], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `RADEST_IP_EXPORT_${new Date().toISOString().replace(/:/g, '-')}.txt`;
+    a.download = `RADEST_IP_VAULT_EXPORT_${new Date().getTime()}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     setSelectedAssetIds(new Set());
-  };
-
-  const handleDownloadSingleAsset = (asset: IpAsset) => {
-    const sanitizedName = asset.name.replace(/[^a-z0-9_.-]/gi, '_');
-    const blob = new Blob([asset.content], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${sanitizedName}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
   };
 
   const handleBulkAnalyze = async () => {
     setIsAnalyzing(true);
-
     const assetsToAnalyze = Array.from(selectedAssetIds)
       .map(id => assets.find(a => a.id === id))
       .filter((asset): asset is IpAsset => !!asset);
 
     try {
-      const analysisPromises = assetsToAnalyze.map(asset =>
+      const results = await Promise.all(assetsToAnalyze.map(asset =>
         analyzeIpAsset(asset.name, asset.content).then(res => ({ id: asset.id, ...JSON.parse(res) }))
-      );
+      ));
 
-      const results = await Promise.all(analysisPromises);
-
-      setAssets(prevAssets => {
-        const newAssets = [...prevAssets];
-        results.forEach(result => {
-          const assetIndex = newAssets.findIndex(a => a.id === result.id);
-          if (assetIndex !== -1) {
-            newAssets[assetIndex] = {
-              ...newAssets[assetIndex],
-              status: result.verdict === 'SOVEREIGN' ? 'SOVEREIGN' : 'QUARANTINED',
-              metadata: {
-                ...newAssets[assetIndex].metadata,
-                hash: result.hash,
-                pi_score: result.piScore,
-                grok_verdict: result.reasoning,
-                timestamp: new Date().toISOString(), // Update timestamp on re-analysis
-              },
+      setAssets(prev => prev.map(a => {
+        const result = results.find(r => r.id === a.id);
+        if (result) {
+            return {
+                ...a,
+                status: result.verdict === 'SOVEREIGN' ? 'SOVEREIGN' : 'QUARANTINED',
+                metadata: {
+                    ...a.metadata,
+                    hash: result.hash,
+                    pi_score: result.piScore,
+                    grok_verdict: result.reasoning
+                }
             };
-          }
-        });
-        return newAssets;
-      });
+        }
+        return a;
+      }));
     } catch (error) {
       console.error("Bulk analysis failed:", error);
-      // Here you could set an error state to show a message to the user
     } finally {
       setSelectedAssetIds(new Set());
       setIsAnalyzing(false);
     }
   };
 
-  const isSelectAllChecked = filteredAssets.length > 0 && filteredAssets.every(a => selectedAssetIds.has(a.id));
-
   return (
     <>
       <WidgetCard title="IP Portfolio" icon={<FolderIcon className="w-6 h-6" />} color={color}>
-        {isLoading ? (
-          <IpPortfolioSkeleton />
-        ) : (
+        {isLoading ? <IpPortfolioSkeleton /> : (
           <>
             <div className="mb-4">
                 <button
@@ -1076,148 +190,71 @@ const IpPortfolio: React.FC<{color?: 'blue'}> = ({ color = 'blue' }) => {
                   className="w-full bg-cyan-600/20 border border-cyan-500 hover:bg-cyan-500/30 transition-colors duration-300 text-cyan-300 font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2"
                 >
                   <PlusCircleIcon className="w-5 h-5" />
-                  <span>Create New IP Asset</span>
+                  <span>Register Sovereign IP Asset</span>
                 </button>
             </div>
 
             <div className="p-3 mb-4 bg-black/30 border border-gray-700/50 rounded-lg flex items-center space-x-4">
               <FunnelIcon className="w-5 h-5 text-cyan-400 flex-shrink-0" />
-              <div className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                      <label htmlFor="filter-type" className="text-xs text-gray-400 block mb-1">Filter by Type</label>
-                      <select id="filter-type" value={filterType} onChange={e => setFilterType(e.target.value)} className="w-full bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-cyan-500">
-                          {assetTypes.map(t => <option key={t} value={t}>{t === 'ALL' ? 'All Types' : t}</option>)}
-                      </select>
-                  </div>
-                   <div>
-                      <label htmlFor="filter-status" className="text-xs text-gray-400 block mb-1">Filter by Status</label>
-                      <select id="filter-status" value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="w-full bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-cyan-500">
-                          {assetStatuses.map(s => <option key={s} value={s}>{s === 'ALL' ? 'All Statuses' : s}</option>)}
-                      </select>
-                  </div>
+              <div className="flex-grow grid grid-cols-2 gap-4">
+                  <select value={filterType} onChange={e => setFilterType(e.target.value)} className="bg-gray-900 border border-gray-600 rounded-md p-2 text-xs text-white">
+                      {assetTypes.map(t => <option key={t} value={t}>{t === 'ALL' ? 'All Types' : t}</option>)}
+                  </select>
+                  <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="bg-gray-900 border border-gray-600 rounded-md p-2 text-xs text-white">
+                      {assetStatuses.map(s => <option key={s} value={s}>{s === 'ALL' ? 'All Statuses' : s}</option>)}
+                  </select>
               </div>
             </div>
 
             {selectedAssetIds.size > 0 && (
               <div className="p-3 mb-4 bg-cyan-900/30 border border-cyan-700 rounded-lg flex items-center justify-between animate-fade-in">
                 <div className="flex items-center space-x-4">
-                  <input
-                    type="checkbox"
-                    aria-label="Select all visible assets"
-                    className="h-5 w-5 rounded bg-gray-700 border-gray-500 text-cyan-600 focus:ring-cyan-500"
-                    checked={isSelectAllChecked}
-                    onChange={handleToggleSelectAll}
-                    disabled={isAnalyzing}
-                  />
-                  <span className="font-semibold text-sm">{selectedAssetIds.size} selected</span>
+                  <input type="checkbox" checked={filteredAssets.every(a => selectedAssetIds.has(a.id))} onChange={handleToggleSelectAll} className="h-5 w-5 rounded bg-gray-700 border-gray-500 text-cyan-600" />
+                  <span className="font-semibold text-xs">{selectedAssetIds.size} Selected</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <button onClick={handleArchiveSelected} disabled={isAnalyzing} className="flex items-center space-x-1 px-3 py-1 text-xs bg-amber-600/50 hover:bg-amber-500/50 text-amber-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                    <ArchiveBoxIcon className="w-4 h-4" />
-                    <span>Archive</span>
+                  <button onClick={handleBulkAnalyze} disabled={isAnalyzing} className="px-3 py-1 text-[10px] bg-purple-600/50 hover:bg-purple-500 text-purple-200 rounded-md flex items-center gap-1">
+                    <SparklesIcon className={`w-3 h-3 ${isAnalyzing ? 'animate-spin' : ''}`} />
+                    Analyze
                   </button>
-                  <button onClick={handleBulkAnalyze} disabled={isAnalyzing} className="flex items-center space-x-1 px-3 py-1 text-xs bg-purple-600/50 hover:bg-purple-500/50 text-purple-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                    {isAnalyzing ? <><SparklesIcon className="w-4 h-4 animate-spin" /><span>Analyzing...</span></> : <><SparklesIcon className="w-4 h-4" /><span>Analyze</span></>}
-                  </button>
-                  <button onClick={handleDownloadSelected} disabled={isAnalyzing} className="flex items-center space-x-1 px-3 py-1 text-xs bg-blue-600/50 hover:bg-blue-500/50 text-blue-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                    <ArrowDownTrayIcon className="w-4 h-4" />
-                    <span>Download</span>
+                  <button onClick={handleDownloadSelectedContent} disabled={isAnalyzing} className="px-3 py-1 text-[10px] bg-blue-600/50 hover:bg-blue-500 text-blue-200 rounded-md flex items-center gap-1">
+                    <ArrowDownTrayIcon className="w-3 h-3" />
+                    Export Content
                   </button>
                 </div>
               </div>
             )}
 
-            <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-2">
-              {filteredAssets.length > 0 ? (
-                filteredAssets.map((asset) => {
-                  const statusInfo = getIconForStatus(asset.status);
-                  return (
-                  <div 
-                    key={asset.id}
-                    className={`group w-full p-3 bg-gray-900/50 rounded-lg border transition-all duration-200 flex items-center gap-4 ${selectedAssetIds.has(asset.id) ? 'border-cyan-600' : 'border-gray-800 hover:border-cyan-700/50'}`}
-                  >
-                    <input
-                      type="checkbox"
-                      aria-label={`Select asset ${asset.name}`}
-                      className="h-5 w-5 rounded bg-gray-700 border-gray-500 text-cyan-600 focus:ring-cyan-500 flex-shrink-0"
-                      checked={selectedAssetIds.has(asset.id)}
-                      onChange={() => handleToggleSelect(asset.id)}
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                    <div 
-                      className="flex-grow cursor-pointer"
-                      onClick={() => handleAssetClick(asset)}
-                    >
+            <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+              {filteredAssets.map((asset) => {
+                const statusInfo = getIconForStatus(asset.status);
+                return (
+                  <div key={asset.id} className={`group p-3 bg-gray-900/50 rounded-lg border transition-all flex items-center gap-4 ${selectedAssetIds.has(asset.id) ? 'border-cyan-600 bg-cyan-900/10' : 'border-gray-800 hover:border-cyan-700/30'}`}>
+                    <input type="checkbox" checked={selectedAssetIds.has(asset.id)} onChange={() => handleToggleSelect(asset.id)} className="h-4 w-4 rounded bg-gray-700 border-gray-500 text-cyan-600 flex-shrink-0" />
+                    <div className="flex-grow cursor-pointer" onClick={() => setSelectedAsset(asset)}>
                       <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
-                              <div className="text-cyan-400">{getIconForType(asset.type)}</div>
+                              <div className="text-cyan-500/70">{getIconForType(asset.type)}</div>
                               <div>
-                                  <p className="font-semibold text-base text-gray-100 group-hover:text-cyan-300 transition-colors">{asset.name}</p>
-                                  <p className="text-xs text-gray-400">Source: {asset.source}</p>
+                                  <p className="font-bold text-sm text-gray-200 group-hover:text-cyan-400 transition-colors">{asset.name}</p>
+                                  <p className="text-[10px] text-gray-500">FID: {asset.metadata.fortifile}</p>
                               </div>
                           </div>
-                          <div className="flex items-center gap-3">
-                            <span className={`px-2 py-1 text-xs font-semibold rounded-full flex items-center gap-1.5 ${statusInfo.classes}`}>
-                                {statusInfo.icon}
-                                {asset.status}
-                            </span>
-                            <span className="text-sm font-bold text-cyan-400 bg-cyan-900/50 px-2 py-1 rounded-md">
-                                {asset.metadata.pi_score.toFixed(1)}%
-                            </span>
-                            <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleDownloadSingleAsset(asset);
-                                }}
-                                className="p-2 text-gray-500 hover:text-green-400 transition-colors rounded-full"
-                                aria-label={`Download asset ${asset.name}`}
-                                title="Download Asset"
-                              >
-                                <ArrowDownTrayIcon className="w-5 h-5" />
-                              </button>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleArchiveSingleAsset(asset.id);
-                                }}
-                                className="p-2 text-gray-500 hover:text-amber-400 transition-colors rounded-full"
-                                aria-label={`Archive asset ${asset.name}`}
-                                title="Archive Asset"
-                              >
-                                <ArchiveBoxIcon className="w-5 h-5" />
-                              </button>
-                            </div>
+                          <div className="flex items-center gap-2">
+                            <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full ${statusInfo.classes}`}>{asset.status}</span>
+                            <span className="text-xs font-mono text-cyan-400">{asset.metadata.pi_score.toFixed(1)}%</span>
                           </div>
                       </div>
                     </div>
                   </div>
-                )})
-              ) : (
-                <div className="text-center py-10 text-gray-500">
-                  <p>No assets match the current filters.</p>
-                </div>
-              )}
+                )
+              })}
             </div>
           </>
         )}
       </WidgetCard>
-      {selectedAsset && (
-        <IpAssetDetailModal asset={selectedAsset} onClose={handleCloseModal} />
-      )}
-      {isCreateModalOpen && (
-        <CreateIpAssetModal
-          onClose={() => setIsCreateModalOpen(false)}
-          onSave={handleAddAsset}
-        />
-      )}
-      <style>{`
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        .animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
-      `}</style>
+      {selectedAsset && <IpAssetDetailModal asset={selectedAsset} onClose={() => setSelectedAsset(null)} />}
+      {isCreateModalOpen && <CreateIpAssetModal onClose={() => setIsCreateModalOpen(false)} onSave={a => { setAssets([a, ...assets]); setIsCreateModalOpen(false); }} />}
     </>
   );
 };
